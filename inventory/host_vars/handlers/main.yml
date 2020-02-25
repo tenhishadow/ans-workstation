@@ -1,0 +1,20 @@
+---
+
+- name: restart journald
+  service:
+    name: systemd-journald
+    state: restarted
+
+- name: restart_sshd
+  service:
+    name: sshd
+    state: restarted
+    enabled: yes
+
+- name: restart_chrony
+  service:
+    name: chronyd
+    state: restarted
+    enabled: yes
+
+...

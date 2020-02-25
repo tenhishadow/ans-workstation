@@ -1,0 +1,40 @@
+---
+
+journald_config:
+  "Storage=": "Storage=persistent"
+  "Compress=": "Compress=yes"
+  "Seal=": "Seal=yes"
+  "SystemMaxUse=": "SystemMaxUse=10M"
+
+sshd_config:
+  Port: '22'
+  AddressFamily: 'any'
+  Protocol: '2'
+  UseDNS: 'no'
+  SyslogFacility: 'AUTHPRIV'
+  # Authentication:
+  LoginGraceTime: '1m'
+  StrictModes: 'yes'
+  MaxAuthTries: '20'
+  MaxSessions: '100'
+  PermitRootLogin: 'no'
+  PubkeyAuthentication: 'yes'
+  IgnoreRhosts: 'yes'
+  PasswordAuthentication: 'yes'
+  PermitEmptyPasswords: 'no'
+  ClientAliveInterval: '7200'
+  AllowAgentForwarding: 'yes'
+  AllowTcpForwarding: 'yes'
+
+# time related
+common_timezone: "Europe/Moscow"
+chrony_pkg_state: present
+chrony_service_state: started
+chrony_service_enabled: yes
+chrony_config_server:
+  - "3.ru.pool.ntp.org"
+  - "2.ru.pool.ntp.org"
+  - "1.ru.pool.ntp.org"
+chrony_config_logdir: "/var/log/chrony"
+
+...

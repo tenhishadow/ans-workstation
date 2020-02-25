@@ -1,0 +1,16 @@
+---
+
+- hosts: this_host
+  become: false
+  connection: local
+  gather_facts: true
+  tasks:
+    - name: add vars depends on distr
+      include_vars: "{{ ansible_os_family|lower }}.yml"
+
+    - name: include tasks for configuring time
+      include_tasks: tasks/time.yml
+      when:
+        - ansible_virtualization_type != 'openvz'
+
+...
