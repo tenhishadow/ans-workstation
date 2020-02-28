@@ -1,0 +1,5 @@
+- name: blacklist camera
+  become: true
+  kernel_blacklist:
+    name: uvcvideo
+    state: present

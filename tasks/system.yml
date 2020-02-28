@@ -1,6 +1,7 @@
 ---
 
 - name: configure sysctl
+  become: yes
   sysctl:
     name: "{{ item.key }}"
     value: "{{ item.value }}"
@@ -13,6 +14,7 @@
   - configure_sysctl|bool
 
 - name: managing journald config
+  become: yes
   lineinfile:
     path: "/etc/systemd/journald.conf"
     regexp: "^{{ item.key }}"
@@ -24,16 +26,19 @@
   - ansible_service_mgr == "systemd"
 
 - name: configure /etc/motd
+  become: yes
   template:
     src: "templates/motd.j2"
     dest: "/etc/motd"
 
 - name: configure /etc/issue
+  become: yes
   template:
     src: "templates/issue.j2"
     dest: "/etc/issue"
 
 - name: configure sshd
+  become: yes
   lineinfile:
     path: /etc/ssh/sshd_config
     regexp: "^{{ item.key }}"

@@ -1,5 +1,8 @@
 ---
 
+motd_message: "o_O"
+issue_message: "o_O"
+
 journald_config:
   "Storage=": "Storage=persistent"
   "Compress=": "Compress=yes"
@@ -36,5 +39,12 @@ chrony_config_server:
   - "2.ru.pool.ntp.org"
   - "1.ru.pool.ntp.org"
 chrony_config_logdir: "/var/log/chrony"
+
+configure_sysctl: yes
+sysctl_params:
+  vm.swappiness: '10'
+  net.ipv6.conf.default.disable_ipv6: '1'
+  net.ipv6.conf.lo.disable_ipv6: '1'
+  net.ipv6.conf.all.disable_ipv6: '1'
 
 ...

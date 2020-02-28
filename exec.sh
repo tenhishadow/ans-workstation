@@ -28,6 +28,6 @@ pip install -r "${SCRIPT_DIR}/requirements.txt"
 
 fn_mitogen
 
-# ansible-playbook \
-  # -i "${SCRIPT_DIR}/inventory" \
-  # "${SCRIPT_DIR}/playbook.yml"
+LC_ALL=C ansible-playbook \
+  -i "${SCRIPT_DIR}/inventory" \
+  "${SCRIPT_DIR}/playbook.yml"
