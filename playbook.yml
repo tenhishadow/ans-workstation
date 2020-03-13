@@ -41,5 +41,12 @@
         name: chronyd
         state: restarted
         enabled: yes
+    - name: sshd_agent_user
+      systemd:
+        scope: user
+        name: ssh-agent.service
+        state: restarted
+        enabled: yes
+        daemon_reload: yes
 
 ...
