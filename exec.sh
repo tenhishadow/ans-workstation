@@ -30,4 +30,5 @@ fn_mitogen
 
 LC_ALL=C ansible-playbook \
   -i "${SCRIPT_DIR}/inventory" \
-  "${SCRIPT_DIR}/playbook.yml"
+  "${SCRIPT_DIR}/playbook.yml" \
+  --skip-tags install_all_packages
