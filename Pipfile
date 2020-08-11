@@ -3,8 +3,6 @@ name = "pypi"
 url = "https://pypi.org/simple"
 verify_ssl = true
 
-[dev-packages]
-
 [packages]
 ansible = "==2.9.2"
 ansible-lint = "==4.2.0"
@@ -18,5 +16,5 @@ Jinja2 = "==2.11.1"
 MarkupSafe = "==1.1.1"
 PyYAML = "==5.3"
 
-[requires]
-python_version = "3.8"
+[scripts]
+install = "ansible-playbook playbook.yml"
