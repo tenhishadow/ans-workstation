@@ -10,12 +10,14 @@
       tags:
         - time
         - sys
+        - install_packages
 
     - name: add vars depends on distr
       include_vars:  "{{ ansible_os_family|lower }}-packages.yml"
       tags:
         - time
         - sys
+        - install_packages
 
     - name: install package list
       become: yes
@@ -23,7 +25,7 @@
         name: "{{ packages_unsorted }}"
         state: present
       tags:
-        - install_all_packages
+        - install_packages
 
     - name: include tasks for system configuration
       import_tasks: tasks/system.yml

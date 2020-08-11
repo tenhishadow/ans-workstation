@@ -18,3 +18,4 @@ PyYAML = "==5.3"
 
 [scripts]
 install = "ansible-playbook playbook.yml"
+install_packages = "ansible-playbook playbook.yml -t install_packages"
