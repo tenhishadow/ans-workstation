@@ -4,18 +4,8 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [packages]
-ansible = "==2.9.2"
-ansible-lint = "==4.2.0"
-cffi = "==1.13.2"
-cryptography = "==2.8"
-mitogen = "==0.2.9"
-pycparser = "==2.19"
-"ruamel.yaml" = "==0.16.7"
-six = "==1.14.0"
-Jinja2 = "==2.11.1"
-MarkupSafe = "==1.1.1"
-PyYAML = "==5.3"
+ansible = "2.9.9"
 
 [scripts]
-install = "ansible-playbook playbook.yml"
+install = "ansible-playbook playbook.yml --diff"
 install_packages = "ansible-playbook playbook.yml -t install_packages"
