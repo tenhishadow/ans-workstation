@@ -24,4 +24,12 @@
   notify:
     - sshd_agent_user
 
+- name: start/enable in playbook
+  systemd:
+    scope: user
+    name: ssh-agent.service
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
+
 ...

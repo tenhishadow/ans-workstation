@@ -13,7 +13,7 @@
 
 - name: disable ntpd if exist
   become: yes
-  ignore_errors: "yes" # because this service could be not presented
+  ignore_errors: yes # because this service could be not presented
   service:
     name: ntpd
     state: stopped
@@ -32,7 +32,7 @@
     dest: "{{ chrony_config_location }}"
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
     backup: yes
   notify:
     - restart_chrony

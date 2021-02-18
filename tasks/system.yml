@@ -11,7 +11,7 @@
     sysctl_file: "/etc/sysctl.d/999-ansible.conf"
   with_dict: "{{ sysctl_params }}"
   when:
-  - configure_sysctl|bool
+    - configure_sysctl|bool
 
 - name: managing journald config
   become: yes
@@ -23,7 +23,7 @@
   with_dict: "{{ journald_config }}"
   notify: restart journald
   when:
-  - ansible_service_mgr == "systemd"
+    - ansible_service_mgr == "systemd"
 
 - name: configure /etc/motd
   become: yes
@@ -46,7 +46,7 @@
     state: present
     owner: root
     group: root
-    mode: 0600
+    mode: '0600'
     backup: yes
     validate: '/usr/sbin/sshd -T -f %s'
   with_dict: "{{ sshd_config }}"
