@@ -10,10 +10,10 @@ rules:
   brackets: enable
   colons: enable
   commas: enable
-  comments:
-    level: warning
-  comments-indentation:
-    level: warning
+  comments: disable
+    # level: warning
+  comments-indentation: disable
+    # level: warning
   document-end: enable
   document-start:
     level: warning
@@ -22,13 +22,13 @@ rules:
   hyphens: enable
   indentation: enable
   key-duplicates: enable
-  key-ordering: disable
+  # key-ordering: enabled
   line-length: disable
   new-line-at-end-of-file: enable
   new-lines: enable
   octal-values: enable
   quoted-strings: disable
   trailing-spaces: enable
-  truthy: disabled
+  truthy: disable
 
 ...

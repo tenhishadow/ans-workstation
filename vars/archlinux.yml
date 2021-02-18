@@ -1,12 +1,13 @@
 ---
 
-chrony_tzdata_package: "tzdata"
-common_timezone: "Europe/Minsk"
+chrony_config_driftfile: "/var/lib/chrony/drift"
+chrony_config_location: /etc/chrony.conf
+chrony_config_pool: ru.pool.ntp.org
 chrony_pkg: "chrony"
 chrony_pkg_state: "present"
 chrony_service: "chronyd"
-chrony_config_location: /etc/chrony.conf
-chrony_config_pool: ru.pool.ntp.org
-chrony_config_driftfile: "/var/lib/chrony/drift"
+chrony_tzdata_package: "tzdata"
+
+common_timezone: "Europe/Minsk"
 
 ...

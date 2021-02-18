@@ -5,7 +5,8 @@ verify_ssl = true
 
 [packages]
 ansible = "2.9.9"
+yamllint = "*"
 
 [scripts]
 install = "ansible-playbook playbook.yml --diff"
-install_packages = "ansible-playbook playbook.yml -t install_packages"
+pkg = "ansible-playbook playbook.yml -t install_packages --diff"
