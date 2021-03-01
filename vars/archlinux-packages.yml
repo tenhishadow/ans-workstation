@@ -84,9 +84,14 @@ packages_sorted:
   - task
   - terminus-font
   # - docker - replace with podman
+  - buildah
+  - podman
+  - podman-compose
+  - podman-docker
   - make
   - awesome-terminal-fonts
   - jq
+  - yq
   - shellcheck
   - ranger
   - atool               # ranger deps - for previews of archives
@@ -102,6 +107,9 @@ packages_sorted:
   - python-chardet      # ranger deps - in case of encoding detection problems
   - transmission-cli    # ranger deps - for viewing bittorrent information
   - w3m                 # ranger deps - for previews of images and html pages
+  - kitty               # term
+  - alacritty           # term
+
   #: }}}
 
 ...
