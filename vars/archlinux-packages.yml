@@ -109,6 +109,7 @@ packages_sorted:
   - w3m                 # ranger deps - for previews of images and html pages
   - kitty               # term
   - alacritty           # term
+  - xclip               # command line interface to X selections (clipboard)
 
   #: }}}
 
