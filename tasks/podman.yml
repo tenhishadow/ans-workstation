@@ -1,0 +1,12 @@
+---
+
+- name: manage podman rootless
+  lineinfile:
+    path: "{{ item }}"
+    line: "{{ ansible_user_id }}:10000:65536"
+  become: yes
+  loop:
+    - /etc/subuid
+    - /etc/subgid
+
+...
