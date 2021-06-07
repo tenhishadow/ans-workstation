@@ -66,6 +66,7 @@ packages_sorted:
   - tigervnc
   - virtualbox
   - whois
+  - dmidecode
   #: }}}
 
   #: utils {{{
@@ -83,11 +84,12 @@ packages_sorted:
   - code
   - task
   - terminus-font
-  # - docker - replace with podman
-  - buildah
-  - podman
-  - podman-compose
-  - podman-docker
+  - docker
+  - docker-compose
+  # - buildah
+  # - podman
+  # - podman-compose
+  # - podman-docker
   - make
   - awesome-terminal-fonts
   - jq
@@ -110,6 +112,16 @@ packages_sorted:
   - kitty               # term
   - alacritty           # term
   - xclip               # command line interface to X selections (clipboard)
+  - github-cli          # github cli <3
+  - aws-cli
+  - aws-sam-cli-bin
+  - ttf-ibm-plex        # good font to use
+  - kustomize           # Template-free customization of Kubernetes YAML manifests
+  - python-pre-commit   # https://pre-commit.com/#usage
+  - terraform
+  - terraform-docs-bin
+  - tflint-bin
+  - wireshark-cli
 
   #: }}}
 
