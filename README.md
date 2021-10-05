@@ -1,2 +1,4 @@
 # ans-workstation
-just for me
+
+Special repo for configuring workstation with Ansible
+Only Archlinux is supported
