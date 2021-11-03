@@ -122,6 +122,8 @@ packages_sorted:
   - terraform-docs-bin
   - tflint-bin
   - wireshark-cli
+  - python-pylint
+  - flameshot # really best for screenshots!
 
   #: }}}
 
