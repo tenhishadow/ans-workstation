@@ -28,8 +28,15 @@
   systemd:
     scope: user
     name: ssh-agent.service
-    state: restarted
+    state: started
     enabled: yes
     daemon_reload: yes
+
+- name: install pip packages
+  pip:
+    name: "{{ pip_packages }}"
+    extra_args: "--local"
+  tags:
+    - pip
 
 ...

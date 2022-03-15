@@ -9,4 +9,13 @@
     - /etc/subuid
     - /etc/subgid
 
+- name: shut up podman
+  become: yes
+  copy:
+    content: ''
+    dest: /etc/containers/nodocker
+    owner: root
+    group: root
+    mode: "a=r"
+
 ...

@@ -1,0 +1,13 @@
+---
+
+- name: "{{ansible_os_family}} - manage package src"
+  become: yes
+  cron:
+    user: root
+    name: reflector
+    job: 'reflector --protocol https --latest 10 --sort rate --save /etc/pacman.d/mirrorlist >/dev/null 2>/dev/null'
+    special_time: daily
+  ignore_errors: true  # if cron not presented
+  no_log: true         # it doesnt matter#
+
+...

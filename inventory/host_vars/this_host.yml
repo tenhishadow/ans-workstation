@@ -47,4 +47,19 @@ sysctl_params:
   net.ipv6.conf.lo.disable_ipv6: '1'
   net.ipv6.conf.all.disable_ipv6: '1'
 
+pip_packages:
+  - ansible-lint
+  - cmakelint
+  - dockerlint
+  - jenkins-job-linter
+  - jinjalint
+  - jslint
+  - jsonlint
+  - piplint
+  - pymarkdownlint
+  - salt-lint
+  - sqlint
+  - systemdlint
+  - yamllint
+
 ...

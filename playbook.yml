@@ -32,6 +32,11 @@
       tags:
         - sys
 
+    - name: include tasks for system configuration | distr
+      include_tasks: tasks/{{ ansible_os_family|lower }}-tasks.yml
+      tags:
+        - sys
+
     - name: include tasks for notebook configuration
       import_tasks: tasks/notebook.yml
       tags:
