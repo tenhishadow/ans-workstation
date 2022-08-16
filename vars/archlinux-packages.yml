@@ -36,6 +36,10 @@ packages_sorted:
 
   #: system {{{
   - bash-completion
+  - bash-language-server
+  - bash-bats-support
+  - bash-bats-assert
+  - bash-bats
   - bind-tools
   - coreutils
   - cracklib
@@ -114,13 +118,12 @@ packages_sorted:
   - xclip               # command line interface to X selections (clipboard)
   - github-cli          # github cli <3
   - aws-cli
-  - aws-sam-cli-bin
   - ttf-ibm-plex        # good font to use
   - kustomize           # Template-free customization of Kubernetes YAML manifests
   - python-pre-commit   # https://pre-commit.com/#usage
   - terraform
-  - terraform-docs-bin
-  - tflint-bin
+  # - terraform-docs-bin
+  # - tflint-bin
   - wireshark-cli
   - python-pylint
   - flameshot # really best for screenshots!
