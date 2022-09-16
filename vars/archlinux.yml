@@ -8,6 +8,6 @@ chrony_pkg_state: "present"
 chrony_service: "chronyd"
 chrony_tzdata_package: "tzdata"
 
-common_timezone: "Europe/Minsk"
+common_timezone: "Europe/Warsaw"
 
 ...

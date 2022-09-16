@@ -122,11 +122,14 @@ packages_sorted:
   - kustomize           # Template-free customization of Kubernetes YAML manifests
   - python-pre-commit   # https://pre-commit.com/#usage
   - terraform
+  - packer
   # - terraform-docs-bin
   # - tflint-bin
   - wireshark-cli
   - python-pylint
   - flameshot # really best for screenshots!
+  # message
+  - telegram-desktop
 
   #: }}}
 

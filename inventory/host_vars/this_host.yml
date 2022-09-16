@@ -30,7 +30,7 @@ sshd_config:
   AllowTcpForwarding: 'yes'
 
 # time related
-common_timezone: "Europe/Moscow"
+common_timezone: "Europe/Warsaw"
 chrony_pkg_state: present
 chrony_service_state: started
 chrony_service_enabled: yes
@@ -48,18 +48,6 @@ sysctl_params:
   net.ipv6.conf.all.disable_ipv6: '1'
 
 pip_packages:
-  - ansible-lint
-  - cmakelint
-  - dockerlint
-  - jenkins-job-linter
-  - jinjalint
-  - jslint
-  - jsonlint
-  - piplint
-  - pymarkdownlint
-  - salt-lint
-  - sqlint
-  - systemdlint
   - yamllint
 
 ...

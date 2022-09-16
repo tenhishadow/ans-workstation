@@ -47,11 +47,6 @@
       tags:
         - time
 
-    - name: include tasks for configuring podman
-      import_tasks: tasks/podman.yml
-      tags:
-        - podman
-
   handlers:
     - name: restart journald
       service:

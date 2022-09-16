@@ -33,11 +33,4 @@
     enabled: yes
     daemon_reload: yes
 
-- name: install pip packages
-  pip:
-    name: "{{ pip_packages }}"
-    extra_args: "--local"
-  tags:
-    - pip
-
 ...
