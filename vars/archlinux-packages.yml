@@ -1,137 +1,94 @@
 --- # vim::foldmethod=marker
 
 packages_sorted:
+  #: media {{{
+  - cvlc
+  - feh
+  - gst-plugins-bad
+  - gst-plugins-base
+  - gst-plugins-base-libs
+  - gst-plugins-good
+  - gst-plugins-ugly
+  #: }}}
+
+  #: network {{{
+  - ca-certificates
+  - ca-certificates-mozilla
+  - ca-certificates-utils
+  - curl
+  - iodine # Tunnel IPv4 data through a DNS server
+  - ptunnel # http://www.cs.uit.no/~daniels/PingTunnel/
+  - speedtest-cli
+  - sstp-client
+  - strongswan
+  - tcpdump
+  - thunderbird
+  - wget
   - openssh
-  # #: office {{{
-  # - nextcloud-client
-  # - libreoffice
-  # - okular
-  # #: }}}
-  #
-  # #: media {{{
-  # - gwenview
-  # - krita
-  # - gimp
-  # - vlc
-  # #: }}}
-  #
-  # #: network {{{
-  # - ca-certificates
-  # - ca-certificates-mozilla
-  # - ca-certificates-utils
-  # - chromium
-  # - curl
-  # - discord
-  # - firefox
-  # - iodine # Tunnel IPv4 data through a DNS server
-  # - opera
-  # - ptunnel # http://www.cs.uit.no/~daniels/PingTunnel/
-  # - qbittorrent
-  # - speedtest-cli
-  # - sstp-client
-  # - strongswan
-  # - tcpdump
-  # - thunderbird
-  # - wget
-  # #: }}}
-  #
-  # #: system {{{
-  # - bash-completion
-  # - bash-language-server
-  # - bash-bats-support
-  # - bash-bats-assert
-  # - bash-bats
-  # - bind-tools
-  # - coreutils
-  # - cracklib
-  # - cryptsetup
-  # - dosfstools
-  # - e2fsprogs
-  # - feh
-  # - freerdp
-  # - geoip2-database
-  # - gnu-netcat
-  # - gnupg
-  # - gnutls
-  # - gzip
-  # - lsof
-  # - man-pages
-  # - mc
-  # - mdf2iso
-  # - mtools
-  # - nmap
-  # - pigz
-  # - reflector
-  # - remmina
-  # - salt
-  # - screen
-  # - scrot
-  # - sysstat
-  # - tcl
-  # - tigervnc
-  # - virtualbox
-  # - whois
-  # - dmidecode
-  # #: }}}
-  #
-  # #: utils {{{
-  # - gst-plugins-bad
-  # - gst-plugins-base
-  # - gst-plugins-base-libs
-  # - gst-plugins-good
-  # - gst-plugins-ugly
-  # - htop
-  # - keepassxc
-  # #: }}}
-  #
-  # #: dev {{{
-  # - vim
-  # - code
-  # - task
-  # - terminus-font
-  # - docker
-  # - docker-compose
-  # # - buildah
-  # # - podman
-  # # - podman-compose
-  # # - podman-docker
-  # - make
-  # - awesome-terminal-fonts
-  # - jq
-  # - yq
-  # - shellcheck
-  # - ranger
-  # - atool               # ranger deps - for previews of archives
-  # - elinks              # ranger deps - for previews of html pages
-  # - ffmpegthumbnailer   # ranger deps - for video previews
-  # - highlight           # ranger deps - for syntax highlighting of code
-  # - libcaca             # ranger deps - for ASCII-art image previews
-  # - lynx                # ranger deps - for previews of html pages
-  # - mediainfo           # ranger deps - for viewing information about media files
-  # - odt2txt             # ranger deps - for OpenDocument texts
-  # - perl-image-exiftool # ranger deps - for viewing information about media files
-  # - poppler             # ranger deps - for pdf previews
-  # - python-chardet      # ranger deps - in case of encoding detection problems
-  # - transmission-cli    # ranger deps - for viewing bittorrent information
-  # - w3m                 # ranger deps - for previews of images and html pages
-  # - kitty               # term
-  # - alacritty           # term
-  # - xclip               # command line interface to X selections (clipboard)
-  # - github-cli          # github cli <3
-  # - aws-cli
-  # - ttf-ibm-plex        # good font to use
-  # - kustomize           # Template-free customization of Kubernetes YAML manifests
-  # - python-pre-commit   # https://pre-commit.com/#usage
-  # - terraform
-  # - packer
-  # # - terraform-docs-bin
-  # # - tflint-bin
-  # - wireshark-cli
-  # - python-pylint
-  # - flameshot # really best for screenshots!
-  # # message
-  # - telegram-desktop
-  #
-  # #: }}}
+  - iptraf-ng
+  #: }}}
+
+  #: system {{{
+  - bash-completion
+  - bash-language-server
+  - bash-bats-support
+  - bash-bats-assert
+  - bash-bats
+  - bind-tools
+  - coreutils
+  - cracklib
+  - cryptsetup
+  - dosfstools
+  - e2fsprogs
+  - freerdp
+  - geoip2-database
+  - gnu-netcat
+  - gnupg
+  - gnutls
+  - gzip
+  - lsof
+  - man-pages
+  - mc
+  - nmap
+  - pigz
+  - reflector
+  - remmina
+  - salt
+  - screen
+  - scrot
+  - sysstat
+  - tcl
+  - tigervnc
+  - whois
+  - dmidecode
+  - htop
+  #: }}}
+
+  #: utils {{{
+  - keepassxc
+  #: }}}
+
+  #: dev {{{
+  - vim
+  - code
+  - task
+  - terminus-font
+  - docker
+  - docker-compose
+  - make
+  - awesome-terminal-fonts
+  - jq
+  - yq
+  - shellcheck
+  - kitty               # term
+  - xclip               # command line interface to X selections (clipboard)
+  - github-cli          # github cli <3
+  - aws-cli
+  - ttf-ibm-plex        # good font to use
+  - kustomize           # Template-free customization of Kubernetes YAML manifests
+  - python-pre-commit   # https://pre-commit.com/#usage
+  - terraform
+  - packer
+  #: }}}
 
 ...
