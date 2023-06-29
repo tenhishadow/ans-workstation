@@ -7,21 +7,13 @@
   tasks:
     - name: add vars depends on distr
       include_vars: "{{ ansible_os_family|lower }}.yml"
+      loop:
+        - "{{ ansible_os_family|lower }}.yml"
+        - "{{ ansible_os_family|lower }}-packages.yml"
       tags:
         - time
         - sys
         - install_packages
-
-    - name: add vars depends on distr
-      include_vars: "{{ ansible_os_family|lower }}-packages.yml"
-      tags:
-        - time
-        - sys
-        - install_packages
-
-    - name: Display all facts
-      debug:
-        var: ansible_facts
 
     - name: install package list
       become: yes
