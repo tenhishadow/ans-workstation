@@ -1,9 +1,9 @@
 ---
 
 - hosts: this_host
-  become: false
+  become: yes
   connection: local
-  gather_facts: true
+  gather_facts: yes
   tasks:
     - name: add vars depends on distr
       include_vars: "{{ ansible_os_family|lower }}.yml"
@@ -18,6 +18,10 @@
         - time
         - sys
         - install_packages
+
+    - name: Display all facts
+      debug:
+        var: ansible_facts
 
     # - name: install package list
     #   become: yes
