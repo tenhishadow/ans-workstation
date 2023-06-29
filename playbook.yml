@@ -43,6 +43,8 @@
 
     - name: include tasks for notebook configuration
       import_tasks: tasks/notebook.yml
+      when:
+        - ansible_facts['virtualization_type'] != 'docker'
       tags:
         - sys
 
