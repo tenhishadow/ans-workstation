@@ -13,7 +13,7 @@ jobs:
       - run:
           name: deps | isntall
           command: |
-            pacman -Sy base base-devel
+            pacman -Sy --noconfirm base base-devel
             pacman -Sy --noconfirm python-pipenv python-setuptools
             pipenv install
       - run:
