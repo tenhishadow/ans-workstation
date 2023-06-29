@@ -3,11 +3,6 @@
 packages_sorted:
   #: media {{{
   - feh
-  - gst-plugins-bad
-  - gst-plugins-base
-  - gst-plugins-base-libs
-  - gst-plugins-good
-  - gst-plugins-ugly
   #: }}}
 
   #: network {{{
@@ -61,6 +56,7 @@ packages_sorted:
   - whois
   - dmidecode
   - htop
+  - gawk
   #: }}}
 
   #: utils {{{
