@@ -2,7 +2,6 @@
 
 packages_sorted:
   #: media {{{
-  - cvlc
   - feh
   - gst-plugins-bad
   - gst-plugins-base
