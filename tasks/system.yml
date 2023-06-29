@@ -51,6 +51,8 @@
     backup: yes
     validate: '/usr/sbin/sshd -T -f %s'
   with_dict: "{{ sshd_config }}"
+  when:
+    - ansible_facts['virtualization_type'] != 'docker'
   notify: restart_sshd
   tags: sshd
 
