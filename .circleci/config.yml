@@ -13,7 +13,9 @@ jobs:
       - checkout
       - run:
           name: deps | isntall
-          command: pacman -Sy --noconfirm python-pipenv python-setuptools
+          command: |
+            pacman -Sy --noconfirm python-pipenv python-setuptools
+            pipenv install
       - run:
           name: exec
           command: pipenv run install
