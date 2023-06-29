@@ -50,6 +50,8 @@
 
     - name: include tasks for configuring time
       import_tasks: tasks/time.yml
+      when:
+        - ansible_facts['virtualization_type'] != 'docker'
       tags:
         - time
 
