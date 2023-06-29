@@ -35,6 +35,7 @@
 
 - name: Build and install yay
   shell: makepkg -si --noconfirm
+  become: no
   args:
     chdir: /tmp/yay
     creates: /usr/bin/yay
