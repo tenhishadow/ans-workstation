@@ -19,13 +19,13 @@
         - sys
         - install_packages
 
-    - name: install package list
-      become: yes
-      package:
-        name: "{{ packages_sorted }}"
-        state: present
-      tags:
-        - install_packages
+    # - name: install package list
+    #   become: yes
+    #   package:
+    #     name: "{{ packages_sorted }}"
+    #     state: present
+    #   tags:
+    #     - install_packages
 
     - name: include tasks for system configuration
       import_tasks: tasks/system.yml
