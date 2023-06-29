@@ -1,0 +1,21 @@
+---
+
+version: 2.1
+
+orbs:
+  python: circleci/python@1.5.0
+
+jobs:
+  ansible_exec:
+    docker:
+      - image: archlinux:latest
+    steps:
+      - checkout
+      - run:
+          name: test
+          command: uptime
+
+workflows:
+  ansible_exec:
+    jobs:
+      - ansible_exec
