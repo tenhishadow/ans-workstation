@@ -9,5 +9,7 @@
     special_time: daily
   ignore_errors: true  # if cron not presented
   no_log: true         # it doesnt matter#
+  when:
+    - ansible_facts['virtualization_type'] != 'docker'
 
 ...
