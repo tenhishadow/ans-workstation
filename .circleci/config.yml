@@ -12,10 +12,15 @@ jobs:
     steps:
       - checkout
       - run:
-          name: test
-          command: uptime
+          name: deps | isntall
+          command: pacman -Sy --noconfirm python-pipenv python-setuptools
+      - run:
+          name: exec
+          command: pipenv run install
 
 workflows:
   ansible_exec:
     jobs:
       - ansible_exec
+
+...
