@@ -12,4 +12,32 @@
   when:
     - ansible_facts['virtualization_type'] != 'docker'
 
+
+- name: Check if yay is in /usr/bin/yay
+  stat:
+    path: /usr/bin/yay
+  register: yay_bin
+  changed_when: false
+
+- name: Install dependencies
+  pacman:
+    name:
+      - base-devel
+      - git
+    state: present
+  when: yay_path.rc != 0 and not yay_bin.stat.exists
+
+- name: Clone yay from GitHub
+  git:
+    repo: 'https://aur.archlinux.org/yay.git'
+    dest: '/tmp/yay'
+  when: yay_path.rc != 0 and not yay_bin.stat.exists
+
+- name: Build and install yay
+  shell: makepkg -si --noconfirm
+  args:
+    chdir: /tmp/yay
+    creates: /usr/bin/yay
+  when: yay_path.rc != 0 and not yay_bin.stat.exists
+
 ...

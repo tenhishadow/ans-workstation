@@ -15,6 +15,11 @@
         - sys
         - install_packages
 
+    - name: include tasks for system configuration | distr
+      include_tasks: tasks/{{ ansible_os_family|lower }}-tasks.yml
+      tags:
+        - sys
+
     - name: install package list
       become: yes
       pacman:
@@ -28,10 +33,6 @@
       tags:
         - sys
 
-    - name: include tasks for system configuration | distr
-      include_tasks: tasks/{{ ansible_os_family|lower }}-tasks.yml
-      tags:
-        - sys
 
     - name: include tasks for notebook configuration
       import_tasks: tasks/notebook.yml
