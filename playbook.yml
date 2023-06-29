@@ -17,7 +17,7 @@
 
     - name: install package list
       become: yes
-      package:
+      pacman:
         name: "{{ packages_sorted }}"
         state: present
       tags:
