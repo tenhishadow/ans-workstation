@@ -24,6 +24,7 @@
     name:
       - base-devel
       - git
+      - sudo
     state: present
   when: not yay_bin.stat.exists
 
