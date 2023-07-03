@@ -59,11 +59,6 @@
     repo: 'https://aur.archlinux.org/yay.git'
     dest: "{{ tempdir.path }}"
   when: not yay_bin.stat.exists
-  register: command_output
-  ignore_errors: yes
-- name: Debug shell command output
-  debug:
-    var: command_output.stdout_lines
 
 - name: yay | install
   become: yes

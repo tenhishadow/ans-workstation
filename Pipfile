@@ -8,5 +8,5 @@ ansible = "*"
 yamllint = "*"
 
 [scripts]
-install = "ansible-playbook playbook.yml --diff"
+install = "ansible-playbook playbook.yml --diff -vvvv"
 pkg     = "ansible-playbook playbook.yml -t install_packages --diff"
