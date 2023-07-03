@@ -60,7 +60,7 @@
 - name: yay | install
   become: yes
   become_user: "{{ yay_install_user }}"
-  shell: "makepkg -si --noconfirm"
+  shell: "makepkg --install --noconfirm"
   args:
     chdir: "{{ tempdir.path }}"
     creates: /usr/bin/yay
