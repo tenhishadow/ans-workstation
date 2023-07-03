@@ -52,6 +52,13 @@
     # recursive: yes
   when: not yay_bin.stat.exists
 
+- name: TESt
+  become: yes
+  become_user: "{{ yay_install_user }}"
+  shell: 'ls -lha'
+  args:
+    chdir: "{{ tempdir.path }}"
+
 - name: yay | clone repo
   become: yes
   become_user: "{{ yay_install_user }}"
