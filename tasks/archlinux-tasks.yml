@@ -19,23 +19,39 @@
   register: yay_bin
   changed_when: false
 
-- name: Install dependencies
-  pacman:
-    name:
-      - base-devel
-      - git
-    state: present
+
+###
+- name: define temp user for installing yay
+  set_fact:
+    yay_install_user: "temp_usr_{{ random(seed=inventory_hostname) }}"
+  when: not yay_bin.stat.exists
+- name: create a user for installing yay
+  user:
+    name: "{{ yay_install_user }}"
   when: not yay_bin.stat.exists
 
+###
+
+# - name: Install dependencies
+#   pacman:
+#     name:
+#       - base-devel
+#       - git
+#     state: present
+#   when: not yay_bin.stat.exists
+
 - name: Clone yay from GitHub
+  become: yes
+  become_user: "{{ yay_install_user }}"
   git:
     repo: 'https://aur.archlinux.org/yay.git'
     dest: '/tmp/yay'
   when: not yay_bin.stat.exists
 
 - name: Build and install yay
+  become: yes
+  become_user: "{{ yay_install_user }}"
   shell: makepkg -si --noconfirm
-  become: no
   args:
     chdir: /tmp/yay
     creates: /usr/bin/yay
