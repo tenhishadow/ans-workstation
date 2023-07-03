@@ -44,17 +44,19 @@
   register: tempdir
   when: not yay_bin.stat.exists
 
-- name: yay | clone repo
-  git:
-    repo: 'https://aur.archlinux.org/yay.git'
-    dest: "{{ tempdir.path }}"
-  when: not yay_bin.stat.exists
-
 - name: yay | chown to temp user
   file:
     path: "{{ tempdir.path }}"
     owner: "{{ yay_install_user }}"
     # recursive: yes
+  when: not yay_bin.stat.exists
+
+- name: yay | clone repo
+  become: yes
+  become_user: "{{ yay_install_user }}"
+  git:
+    repo: 'https://aur.archlinux.org/yay.git'
+    dest: "{{ tempdir.path }}"
   when: not yay_bin.stat.exists
 
 - name: yay | install
