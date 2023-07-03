@@ -65,6 +65,12 @@
     chdir: "{{ tempdir.path }}"
     creates: /usr/bin/yay
   when: not yay_bin.stat.exists
+  register: command_output
+  ignore_errors: yes
+
+- name: Debug shell command output
+  debug:
+    var: command_output.stdout_lines
 
 - name: yay | cleanup user
   user:
