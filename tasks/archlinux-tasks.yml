@@ -23,22 +23,14 @@
 ###
 - name: define temp user for installing yay
   set_fact:
-    yay_install_user: "temp_usr_{{ random(seed=inventory_hostname) }}"
+    yay_install_user: "yay_install_usr_{{ lookup('password', '/dev/null chars=ascii_letters,digits length=15') }}"
   when: not yay_bin.stat.exists
+
 - name: create a user for installing yay
   user:
     name: "{{ yay_install_user }}"
+    create_home: no
   when: not yay_bin.stat.exists
-
-###
-
-# - name: Install dependencies
-#   pacman:
-#     name:
-#       - base-devel
-#       - git
-#     state: present
-#   when: not yay_bin.stat.exists
 
 - name: Clone yay from GitHub
   become: yes
@@ -56,5 +48,20 @@
     chdir: /tmp/yay
     creates: /usr/bin/yay
   when: not yay_bin.stat.exists
+
+- name: remove temp user
+  user:
+    name: "{{ yay_install_user }}"
+    state: absent
+  when: not yay_bin.stat.exists
+
+# - name: Install dependencies
+#   pacman:
+#     name:
+#       - base-devel
+#       - git
+#     state: present
+#   when: not yay_bin.stat.exists
+
 
 ...
