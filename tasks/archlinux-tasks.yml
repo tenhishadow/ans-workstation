@@ -13,14 +13,20 @@
     - ansible_facts['virtualization_type'] != 'docker'
 
 
-- name: Check if yay is in /usr/bin/yay
+- name: yay | check if installed
   stat:
     path: /usr/bin/yay
   register: yay_bin
   changed_when: false
 
+- name: yay | install system deps
+  pacman:
+    name:
+      - base-devel
+      - git
+    state: present
+  when: not yay_bin.stat.exists
 
-###
 - name: yay | define temp user for installing yay
   set_fact:
     yay_install_user: "yay_install_usr_{{ lookup('password', '/dev/null chars=ascii_letters,digits length=15') }}"
@@ -36,6 +42,7 @@
   tempfile:
     state: directory
   register: tempdir
+  when: not yay_bin.stat.exists
 
 - name: yay | clone repo
   git:
@@ -70,14 +77,8 @@
   file:
     path: "{{ tempdir.path }}"
     state: absent
+  when: not yay_bin.stat.exists
 
-# - name: Install dependencies
-#   pacman:
-#     name:
-#       - base-devel
-#       - git
-#     state: present
-#   when: not yay_bin.stat.exists
 
 
 ...
