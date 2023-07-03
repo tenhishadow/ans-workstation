@@ -53,8 +53,7 @@
 - name: yay | chown to temp user
   file:
     path: "{{ tempdir.path }}"
-    owner: "{{ random_username }}"
-    group: "{{ random_username }}"
+    owner: "{{ yay_install_user }}"
     state: directory
   when: not yay_bin.stat.exists
 
@@ -78,7 +77,6 @@
     path: "{{ tempdir.path }}"
     state: absent
   when: not yay_bin.stat.exists
-
 
 
 ...
