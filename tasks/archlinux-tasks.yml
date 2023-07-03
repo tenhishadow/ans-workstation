@@ -21,39 +21,55 @@
 
 
 ###
-- name: define temp user for installing yay
+- name: yay | define temp user for installing yay
   set_fact:
     yay_install_user: "yay_install_usr_{{ lookup('password', '/dev/null chars=ascii_letters,digits length=15') }}"
   when: not yay_bin.stat.exists
 
-- name: create a user for installing yay
+- name: yay | create a user for installing yay
   user:
     name: "{{ yay_install_user }}"
     create_home: no
   when: not yay_bin.stat.exists
 
-- name: Clone yay from GitHub
-  become: yes
-  become_user: "{{ yay_install_user }}"
+- name: yay | create temp dir
+  tempfile:
+    state: directory
+  register: tempdir
+
+- name: yay | clone repo
   git:
     repo: 'https://aur.archlinux.org/yay.git'
-    dest: '/tmp/yay'
+    dest: "{{ tempdir.path }}"
   when: not yay_bin.stat.exists
 
-- name: Build and install yay
+- name: yay | chown to temp user
+  file:
+    path: "{{ tempdir.path }}"
+    owner: "{{ random_username }}"
+    group: "{{ random_username }}"
+    state: directory
+  when: not yay_bin.stat.exists
+
+- name: yay | install
   become: yes
   become_user: "{{ yay_install_user }}"
-  shell: makepkg -si --noconfirm
+  shell: "makepkg -si --noconfirm"
   args:
-    chdir: /tmp/yay
+    chdir: "{{ tempdir.path }}"
     creates: /usr/bin/yay
   when: not yay_bin.stat.exists
 
-- name: remove temp user
+- name: yay | cleanup user
   user:
     name: "{{ yay_install_user }}"
     state: absent
   when: not yay_bin.stat.exists
+
+- name: yay | cleanup | dir
+  file:
+    path: "{{ tempdir.path }}"
+    state: absent
 
 # - name: Install dependencies
 #   pacman:
