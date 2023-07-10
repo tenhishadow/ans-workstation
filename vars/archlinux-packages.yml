@@ -68,7 +68,7 @@ packages_sorted:
   - code
   - task
   - terminus-font
-  # - docker
+  # - docker #         "docker: /usr/bin/docker-init exists in filesystem",
   # - docker-compose
   - make
   - awesome-terminal-fonts
