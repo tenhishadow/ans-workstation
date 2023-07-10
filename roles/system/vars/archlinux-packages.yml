@@ -1,6 +1,6 @@
 --- # vim::foldmethod=marker
 
-packages_sorted:
+packages:
   #: media {{{
   - feh
   #: }}}
