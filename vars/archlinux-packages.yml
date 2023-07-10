@@ -68,8 +68,8 @@ packages_sorted:
   - code
   - task
   - terminus-font
-  - docker
-  - docker-compose
+  # - docker
+  # - docker-compose
   - make
   - awesome-terminal-fonts
   - jq
