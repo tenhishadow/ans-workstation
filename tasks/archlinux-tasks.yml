@@ -1,10 +1,5 @@
 ---
 
-- name: install package list
-  become: yes
-  pacman:
-    name: "{{ packages_sorted }}"
-    state: present
 
 - name: Ensure tzdata package is installed
   become: yes
