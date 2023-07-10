@@ -4,14 +4,17 @@
   become: yes
   connection: local
   gather_facts: yes
-  tasks:
-    - name: "vars | include for {{ ansible_os_family|lower }}"
-      include_vars: "{{ item }}"
-      loop:
-        - "{{ ansible_os_family|lower }}.yml"
-        - "{{ ansible_os_family|lower }}-packages.yml"
   roles:
     - system
+  tasks:
+    - name: dotfiles | clone
+      git:
+        repo: 'https://github.com/tenhishadow/dotfiles.git'
+        dest: "{{ ansible_env.HOME }}/.dotfiles"
+        clone: yes
+        update: yes
+    - name: dotfiles | exec
+      import_playbook: "{{ ansible_env.HOME }}/.dotfiles/playbook_install.yml"
   #
   #   - name: "tasks | system | {{ ansible_os_family|lower }}"
   #     include_tasks: "tasks/{{ ansible_os_family|lower }}-tasks.yml"
