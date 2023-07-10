@@ -13,84 +13,83 @@
     - ansible_facts['virtualization_type'] != 'docker'
 
 
-- name: yay | check if installed
-  stat:
-    path: /usr/bin/yay
-  register: yay_bin
-  changed_when: false
-
-- name: yay | install system deps
-  pacman:
-    name:
-      - base-devel
-      - git
-      - sudo
-    state: present
-  when: not yay_bin.stat.exists
-
-- name: yay | define temp user for installing yay
-  set_fact:
-    yay_install_user: "yay_install_usr_{{ lookup('password', '/dev/null chars=ascii_letters,digits length=15') }}"
-  when: not yay_bin.stat.exists
-
-- name: yay | create a user for installing yay
-  user:
-    name: "{{ yay_install_user }}"
-    create_home: no
-  when: not yay_bin.stat.exists
-
-- name: yay | create temp dir
-  tempfile:
-    state: directory
-  register: tempdir
-  when: not yay_bin.stat.exists
-
-- name: yay | chown to temp user
-  file:
-    path: "{{ tempdir.path }}"
-    owner: "{{ yay_install_user }}"
-    # recursive: yes
-  when: not yay_bin.stat.exists
-
-- name: TESt
-  become: yes
-  become_user: "{{ yay_install_user }}"
-  shell: 'ls -lha'
-  args:
-    chdir: "{{ tempdir.path }}"
-
-- name: yay | clone repo
-  become: yes
-  become_user: "{{ yay_install_user }}"
-  git:
-    repo: 'https://aur.archlinux.org/yay.git'
-    dest: "{{ tempdir.path }}"
-  when: not yay_bin.stat.exists
-
-- name: yay | install
-  become: yes
-  become_user: "{{ yay_install_user }}"
-  shell: "makepkg --install --noconfirm"
-  args:
-    chdir: "{{ tempdir.path }}"
-    creates: /usr/bin/yay
-  when: not yay_bin.stat.exists
-  # register: command_output
-  # ignore_errors: yes
-
-
-- name: yay | cleanup user
-  user:
-    name: "{{ yay_install_user }}"
-    state: absent
-  when: not yay_bin.stat.exists
-
-- name: yay | cleanup | dir
-  file:
-    path: "{{ tempdir.path }}"
-    state: absent
-    recursive: yes
-  when: not yay_bin.stat.exists
-
+# - name: yay | check if installed
+#   stat:
+#     path: /usr/bin/yay
+#   register: yay_bin
+#   changed_when: false
+#
+# - name: yay | install system deps
+#   pacman:
+#     name:
+#       - base-devel
+#       - git
+#       - sudo
+#     state: present
+#   when: not yay_bin.stat.exists
+#
+# - name: yay | define temp user for installing yay
+#   set_fact:
+#     yay_install_user: "yay_install_usr_{{ lookup('password', '/dev/null chars=ascii_letters,digits length=15') }}"
+#   when: not yay_bin.stat.exists
+#
+# - name: yay | create a user for installing yay
+#   user:
+#     name: "{{ yay_install_user }}"
+#     create_home: no
+#   when: not yay_bin.stat.exists
+#
+# - name: yay | create temp dir
+#   tempfile:
+#     state: directory
+#   register: tempdir
+#   when: not yay_bin.stat.exists
+#
+# - name: yay | chown to temp user
+#   file:
+#     path: "{{ tempdir.path }}"
+#     owner: "{{ yay_install_user }}"
+#     # recursive: yes
+#   when: not yay_bin.stat.exists
+#
+# - name: TESt
+#   become: yes
+#   become_user: "{{ yay_install_user }}"
+#   shell: 'ls -lha'
+#   args:
+#     chdir: "{{ tempdir.path }}"
+#
+# - name: yay | clone repo
+#   become: yes
+#   become_user: "{{ yay_install_user }}"
+#   git:
+#     repo: 'https://aur.archlinux.org/yay.git'
+#     dest: "{{ tempdir.path }}"
+#   when: not yay_bin.stat.exists
+#
+# - name: yay | install
+#   become: yes
+#   become_user: "{{ yay_install_user }}"
+#   shell: "makepkg --install --noconfirm"
+#   args:
+#     chdir: "{{ tempdir.path }}"
+#     creates: /usr/bin/yay
+#   when: not yay_bin.stat.exists
+#   # register: command_output
+#   # ignore_errors: yes
+#
+#
+# - name: yay | cleanup user
+#   user:
+#     name: "{{ yay_install_user }}"
+#     state: absent
+#   when: not yay_bin.stat.exists
+#
+# - name: yay | cleanup | dir
+#   file:
+#     path: "{{ tempdir.path }}"
+#     state: absent
+#     recursive: yes
+#   when: not yay_bin.stat.exists
 
 ...
