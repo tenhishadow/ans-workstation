@@ -78,7 +78,7 @@ packages_sorted:
   - kitty               # term
   - xclip               # command line interface to X selections (clipboard)
   - github-cli          # github cli <3
-  - aws-cli
+  - aws-cli-v2
   - ttf-ibm-plex        # good font to use
   - kustomize           # Template-free customization of Kubernetes YAML manifests
   - python-pre-commit   # https://pre-commit.com/#usage
