@@ -1,7 +1,15 @@
 ---
 
-- name: install package list
+- name: "vars | include for {{ ansible_os_family|lower }}"
+  include_vars: "{{ item }}"
+  loop:
+    - "{{ ansible_os_family|lower }}.yml"
+    - "{{ ansible_os_family|lower }}-packages.yml"
+
+- name: packages | install
   become: yes
   package:
-    name: "{{ packages_sorted }}"
+    name: "{{ packages }}"
     state: present
+
+...
