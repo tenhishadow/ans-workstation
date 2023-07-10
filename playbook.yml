@@ -1,20 +1,24 @@
 ---
 
 - hosts: this_host
-  become: yes
   connection: local
   gather_facts: yes
-  roles:
-    - system
+  # roles:
+  #   - system
   tasks:
     - name: dotfiles | clone
       git:
         repo: 'https://github.com/tenhishadow/dotfiles.git'
-        dest: "{{ ansible_env.HOME }}/.dotfiles"
+        dest: "{{ ansible_user_dir }}/.dotfiles"
         clone: yes
         update: yes
-    - name: dotfiles | exec
-      import_playbook: "{{ ansible_env.HOME }}/.dotfiles/playbook_install.yml"
+    - name: install dotfiles
+      shell:
+        cmd: "pipenv install && pipenv run configs"
+        chdir: "{{ ansible_user_dir }}/.dotfiles"
+
+# - name: dotfiles | exec
+#   import_playbook: "{{ ansible_user_dir }}/.dotfiles/playbook_install.yml"
   #
   #   - name: "tasks | system | {{ ansible_os_family|lower }}"
   #     include_tasks: "tasks/{{ ansible_os_family|lower }}-tasks.yml"
