@@ -5,48 +5,21 @@
   connection: local
   gather_facts: yes
   tasks:
-    - name: add vars depends on distr
+    - name: "vars | include for {{ ansible_os_family|lower }}"
       include_vars: "{{ item }}"
       loop:
         - "{{ ansible_os_family|lower }}.yml"
         - "{{ ansible_os_family|lower }}-packages.yml"
-      tags:
-        - time
-        - sys
-        - install_packages
 
-    - name: include tasks for system configuration | distr
-      include_tasks: tasks/{{ ansible_os_family|lower }}-tasks.yml
-      tags:
-        - sys
+    - name: "tasks | system | {{ ansible_os_family|lower }}"
+      include_tasks: "tasks/{{ ansible_os_family|lower }}-tasks.yml"
 
-    - name: install package list
-      become: yes
-      pacman:
-        name: "{{ packages_sorted }}"
-        state: present
-      tags:
-        - install_packages
-
-    - name: include tasks for system configuration
-      import_tasks: tasks/system.yml
-      tags:
-        - sys
-
-
-    - name: include tasks for notebook configuration
-      import_tasks: tasks/notebook.yml
-      when:
-        - ansible_facts['virtualization_type'] != 'docker'
-      tags:
-        - sys
-
-    - name: include tasks for configuring time
-      import_tasks: tasks/time.yml
-      when:
-        - ansible_facts['virtualization_type'] != 'docker'
-      tags:
-        - time
+    # - name: include tasks for notebook configuration
+    #   import_tasks: tasks/notebook.yml
+    #   when:
+    #     - ansible_facts['virtualization_type'] != 'docker'
+    #   tags:
+    #     - sys
 
   handlers:
     - name: restart journald

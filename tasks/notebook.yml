@@ -7,23 +7,23 @@
     state: present
   failed_when: no
 
-- name: create dir for systemd user's unitfiles
-  file:
-    path: "{{ ansible_user_dir }}/.config/systemd/user/"
-    state: directory
-  when:
-    - ansible_service_mgr == "systemd"
-
-- name: create user systemd service for ssh-agent
-  become: yes
-  template:
-    src: "templates/ssh-agent.service.j2"
-    dest: "{{ ansible_user_dir }}/.config/systemd/user/ssh-agent.service"
-    backup: yes
-  when:
-    - ansible_service_mgr == "systemd"
-  notify:
-    - sshd_agent_user
+# - name: create dir for systemd user's unitfiles
+#   file:
+#     path: "{{ ansible_user_dir }}/.config/systemd/user/"
+#     state: directory
+#   when:
+#     - ansible_service_mgr == "systemd"
+#
+# - name: create user systemd service for ssh-agent
+#   become: yes
+#   template:
+#     src: "templates/ssh-agent.service.j2"
+#     dest: "{{ ansible_user_dir }}/.config/systemd/user/ssh-agent.service"
+#     backup: yes
+#   when:
+#     - ansible_service_mgr == "systemd"
+#   notify:
+#     - sshd_agent_user
 
 # - name: start/enable in playbook
 #   systemd:
