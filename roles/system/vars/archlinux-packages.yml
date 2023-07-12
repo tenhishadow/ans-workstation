@@ -71,6 +71,7 @@ packages:
   # - docker #         "docker: /usr/bin/docker-init exists in filesystem",
   # - docker-compose
   - make
+  - cmake
   - awesome-terminal-fonts
   - jq
   - yq
