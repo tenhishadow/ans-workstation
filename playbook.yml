@@ -3,19 +3,19 @@
 - hosts: this_host
   connection: local
   gather_facts: yes
-  # roles:
-  #   - system
-  tasks:
-    - name: dotfiles | clone
-      git:
-        repo: 'https://github.com/tenhishadow/dotfiles.git'
-        dest: "{{ ansible_user_dir }}/.dotfiles"
-        clone: yes
-        update: yes
-    - name: install dotfiles
-      shell:
-        cmd: "pipenv install && pipenv run configs"
-        chdir: "{{ ansible_user_dir }}/.dotfiles"
+  roles:
+    - system
+  # tasks:
+  #   - name: dotfiles | clone
+  #     git:
+  #       repo: 'https://github.com/tenhishadow/dotfiles.git'
+  #       dest: "{{ ansible_user_dir }}/.dotfiles"
+  #       clone: yes
+  #       update: yes
+  #   - name: install dotfiles
+  #     shell:
+  #       cmd: "pipenv install && pipenv run configs"
+  #       chdir: "{{ ansible_user_dir }}/.dotfiles"
 
 # - name: dotfiles | exec
 #   import_playbook: "{{ ansible_user_dir }}/.dotfiles/playbook_install.yml"
