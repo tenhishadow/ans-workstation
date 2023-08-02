@@ -86,6 +86,7 @@ packages:
   - python-pre-commit   # https://pre-commit.com/#usage
   - terraform
   - packer
+  - hadolint-bin # test
   #: }}}
 
 ...
