@@ -6,5 +6,8 @@ skip_list:
   - fqcn[action]
   - var-naming[no-role-prefix]
   - name[play]
+  - ignore-errors
+  - latest[git]
+  - no-changed-when
 
 ...

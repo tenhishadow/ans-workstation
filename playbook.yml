@@ -4,16 +4,23 @@
   gather_facts: true
   roles:
     - system
-  # tasks:
-  #   - name: dotfiles | clone
-  #     git:
-  #       repo: https://github.com/tenhishadow/dotfiles.git
-  #       dest: "{{ ansible_user_dir }}/.dotfiles"
-  #       clone: true
-  #       update: true
-  #   - name: install dotfiles
-  #     shell:
-  #       cmd: pipenv install && pipenv run configs
-  #       chdir: "{{ ansible_user_dir }}/.dotfiles"
+  tasks:
+    - name: check dotfile repo
+      stat:
+        path: "{{ ansible_user_dir }}/.dotfiles"
+      register: dotfiles
 
+    - name: dotfiles | clone
+      git:
+        repo: https://github.com/tenhishadow/dotfiles.git
+        dest: "{{ ansible_user_dir }}/.dotfiles"
+      when:
+        - not dotfiles.stat.exists
+
+    - name: install dotfiles
+      shell:
+        cmd: pipenv install && pipenv run configs
+        chdir: "{{ ansible_user_dir }}/.dotfiles"
+      when:
+        - not dotfiles.stat.exists
 ...

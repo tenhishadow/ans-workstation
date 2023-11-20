@@ -30,12 +30,18 @@
   template:
     src: templates/motd.j2
     dest: /etc/motd
+    owner: root
+    group: root
+    mode: u-rw,g=r,o=r
 
 - name: configure /etc/issue
   become: true
   template:
     src: templates/issue.j2
     dest: /etc/issue
+    owner: root
+    group: root
+    mode: u-rw,g=r,o=r
 
 - name: configure sshd
   become: true
@@ -55,7 +61,7 @@
   notify: restart_sshd
   tags: sshd
 
-- name: "{{ansible_os_family}} - manage package src"
+- name: arch | configure reflector cron job
   become: true
   cron:
     user: root
