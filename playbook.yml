@@ -2,9 +2,19 @@
 - hosts: this_host
   connection: local
   gather_facts: true
-  roles:
-    - system
-  # tasks:
+  # roles:
+  #   - system
+  tasks:
+    - name: Create a new user
+      become: yes
+      user:
+        name: user2
+        state: present
+
+    - name: Switch to user2 and run a command
+      become: yes
+      become_user: user2
+      command: whoami
   #   - name: check dotfile repo
   #     stat:
   #       path: "{{ ansible_user_dir }}/.dotfiles"
