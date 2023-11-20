@@ -112,8 +112,7 @@
 - name: TESt
   become_user: "{{ yay_install_user }}"
   become: yes
-  become_method: sudo
-  become_exe: "sudo su - /bin/bash -c"
+  become_method: su
   ansible.builtin.command: ls -lha
   args:
     chdir: "{{ tempdir.path }}"
