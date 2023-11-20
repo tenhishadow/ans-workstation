@@ -1,0 +1,45 @@
+---
+- name: Ensure tzdata package is installed
+  become: true
+  package:
+    name: "{{ chrony_tzdata_package }}"
+    state: present
+
+- name: set timezone to {{ common_timezone }}
+  become: true
+  timezone:
+    name: "{{ common_timezone }}"
+
+- name: disable ntpd if exist
+  become: true
+  ignore_errors: true # because this service could be not presented
+  service:
+    name: ntpd
+    state: stopped
+    enabled: false
+
+- name: install chrony package
+  become: true
+  package:
+    name: "{{ chrony_pkg }}"
+    state: "{{ chrony_pkg_state }}"
+
+- name: Copy the chrony.conf template file
+  become: true
+  template:
+    src: templates/chrony.conf.j2
+    dest: "{{ chrony_config_location }}"
+    owner: root
+    group: root
+    mode: "0644"
+    backup: true
+  notify:
+    - restart_chrony
+
+- name: start and enable chronyd anyway
+  become: true
+  service:
+    name: "{{ chrony_service }}"
+    state: started
+    enabled: true
+...

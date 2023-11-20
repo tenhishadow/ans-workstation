@@ -1,11 +1,10 @@
 ---
-
 - name: blacklist camera
-  become: yes
+  become: true
   kernel_blacklist:
     name: uvcvideo
     state: present
-  failed_when: no
+  failed_when: false
 
 # - name: create dir for systemd user's unitfiles
 #   file:

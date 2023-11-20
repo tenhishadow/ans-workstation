@@ -1,5 +1,4 @@
 ---
-
 - hosts: this_host
   connection: local
   gather_facts: true
@@ -8,13 +7,13 @@
   tasks:
     - name: dotfiles | clone
       git:
-        repo: 'https://github.com/tenhishadow/dotfiles.git'
+        repo: https://github.com/tenhishadow/dotfiles.git
         dest: "{{ ansible_user_dir }}/.dotfiles"
-        clone: yes
-        update: yes
+        clone: true
+        update: true
     - name: install dotfiles
       shell:
-        cmd: "pipenv install && pipenv run configs"
+        cmd: pipenv install && pipenv run configs
         chdir: "{{ ansible_user_dir }}/.dotfiles"
 
 # - name: dotfiles | exec

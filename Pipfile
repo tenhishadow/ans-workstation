@@ -1,13 +1,13 @@
 [[source]]
-name = "pypi"
-url = "https://pypi.org/simple"
-verify_ssl = true
+name         = "pypi"
+url          = "https://pypi.org/simple"
+verify_ssl   = true
 
 [packages]
-ansible = "*"
-yamllint = "*"
+ansible      = "*"
+yamllint     = "*"
 ansible-lint = "*"
 
 [scripts]
-install = "ansible-playbook playbook.yml --diff -vvvv"
-pkg     = "ansible-playbook playbook.yml -t install_packages --diff"
+install      = "ansible-playbook playbook.yml --diff -vvvv"
+pkg          = "ansible-playbook playbook.yml -t install_packages --diff"
