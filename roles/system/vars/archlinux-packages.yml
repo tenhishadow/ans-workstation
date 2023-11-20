@@ -62,6 +62,7 @@ packages:
 
   #: utils {{{
   - keepassxc
+  - nextcloud-client
   #: }}}
 
   #: dev {{{
