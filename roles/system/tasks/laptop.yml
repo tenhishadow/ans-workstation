@@ -39,4 +39,5 @@
     daemon_reload: true
   when:
     - ansible_env.CI != 'true'
+    - ansible_env.CI is defined
 ...
