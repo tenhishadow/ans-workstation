@@ -107,7 +107,6 @@
   file:
     path: "{{ tempdir.path }}"
     owner: "{{ yay_install_user }}"
-    recursive: yes
   when: not yay_bin.stat.exists
 #
 - name: TESt
