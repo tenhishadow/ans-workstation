@@ -1,6 +1,6 @@
 ---
-- name: Configure host
-  hosts: this_host
+
+- hosts: this_host
   connection: local
   gather_facts: true
   roles:
