@@ -4,60 +4,16 @@
   gather_facts: true
   roles:
     - system
-  tasks:
-    - name: dotfiles | clone
-      git:
-        repo: https://github.com/tenhishadow/dotfiles.git
-        dest: "{{ ansible_user_dir }}/.dotfiles"
-        clone: true
-        update: true
-    - name: install dotfiles
-      shell:
-        cmd: pipenv install && pipenv run configs
-        chdir: "{{ ansible_user_dir }}/.dotfiles"
-
-# - name: dotfiles | exec
-#   import_playbook: "{{ ansible_user_dir }}/.dotfiles/playbook_install.yml"
-#
-#   - name: "tasks | system | {{ ansible_os_family|lower }}"
-#     include_tasks: "tasks/{{ ansible_os_family|lower }}-tasks.yml"
-#
-#   # - name: include tasks for notebook configuration
-#   #   import_tasks: tasks/notebook.yml
-#   #   when:
-#   #     - ansible_facts['virtualization_type'] != 'docker'
-#   #   tags:
-#   #     - sys
-#
-# handlers:
-#   - name: restart journald
-#     service:
-#       name: systemd-journald
-#       state: restarted
-#     when:
-#       - ansible_facts['virtualization_type'] != 'docker'
-#   - name: restart_sshd
-#     service:
-#       name: sshd
-#       state: restarted
-#       enabled: yes
-#     when:
-#       - ansible_facts['virtualization_type'] != 'docker'
-#   - name: restart_chrony
-#     service:
-#       name: chronyd
-#       state: restarted
-#       enabled: yes
-#     when:
-#       - ansible_facts['virtualization_type'] != 'docker'
-#   - name: sshd_agent_user
-#     systemd:
-#       scope: user
-#       name: ssh-agent.service
-#       state: restarted
-#       enabled: yes
-#       daemon_reload: yes
-#     when:
-#       - ansible_facts['virtualization_type'] != 'docker'
+  # tasks:
+  #   - name: dotfiles | clone
+  #     git:
+  #       repo: https://github.com/tenhishadow/dotfiles.git
+  #       dest: "{{ ansible_user_dir }}/.dotfiles"
+  #       clone: true
+  #       update: true
+  #   - name: install dotfiles
+  #     shell:
+  #       cmd: pipenv install && pipenv run configs
+  #       chdir: "{{ ansible_user_dir }}/.dotfiles"
 
 ...

@@ -1,5 +1,4 @@
 ---
-
 - name: configure sysctl
   become: true
   sysctl:
