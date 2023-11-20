@@ -37,4 +37,6 @@
     state: started
     enabled: true
     daemon_reload: true
+  when:
+    - ansible_env.CI != 'true'
 ...
