@@ -10,11 +10,11 @@
   file:
     path: "{{ ansible_user_dir }}/.config/systemd/user/"
     state: directory
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_id }}"
     mode: u=rwx,g-,o-
-  when:
-    - lookup('env', 'CI') != 'true'
+  # when:
+  #   - lookup('env', 'CI') != 'true'
 
 - name: create user systemd service for ssh-agent
   become: true
@@ -22,8 +22,8 @@
     src: templates/ssh-agent.service.j2
     dest: "{{ ansible_user_dir }}/.config/systemd/user/ssh-agent.service"
     backup: true
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_id }}"
     mode: u=rw,g=rw,o-
   when:
     - ansible_service_mgr == "systemd"
@@ -37,6 +37,6 @@
     state: started
     enabled: true
     daemon_reload: true
-  when:
-    - lookup('env', 'CI') != 'true'
+  # when:
+  #   - lookup('env', 'CI') != 'true'
 ...
