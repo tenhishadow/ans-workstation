@@ -9,6 +9,8 @@
   become: true
   timezone:
     name: "{{ common_timezone }}"
+  when:
+    - ansible_env.CI != 'true'
 
 - name: disable ntpd if exist
   become: true
