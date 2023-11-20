@@ -14,7 +14,7 @@
     group: "{{ ansible_user }}"
     mode: u=rwx,g-,o-
   when:
-    - ansible_service_mgr == "systemd"
+    - lookup('env', 'CI') != 'true'
 
 - name: create user systemd service for ssh-agent
   become: true
@@ -38,6 +38,5 @@
     enabled: true
     daemon_reload: true
   when:
-    - ansible_env.CI != 'true'
-    - ansible_env.CI is defined
+    - lookup('env', 'CI') != 'true'
 ...

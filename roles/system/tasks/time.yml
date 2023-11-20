@@ -10,8 +10,7 @@
   timezone:
     name: "{{ common_timezone }}"
   when:
-    - ansible_env.CI != 'true'
-    - ansible_env.CI is defined
+    - lookup('env', 'CI') != 'true'
 
 - name: disable ntpd if exist
   become: true
@@ -46,6 +45,5 @@
     state: started
     enabled: true
   when:
-    - ansible_env.CI != 'true'
-    - ansible_env.CI is defined
+    - lookup('env', 'CI') != 'true'
 ...

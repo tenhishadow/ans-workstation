@@ -14,8 +14,7 @@
     state: restarted
     enabled: true
   when:
-    - ansible_env.CI != 'true'
-    - ansible_env.CI is defined
+    - lookup('env', 'CI') != 'true'
 - name: sshd_agent_user
   systemd:
     scope: user
