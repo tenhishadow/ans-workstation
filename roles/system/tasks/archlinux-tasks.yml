@@ -1,65 +1,65 @@
 ---
-# - name: configure sysctl
-#   become: true
-#   sysctl:
-#     name: "{{ item.key }}"
-#     value: "{{ item.value }}"
-#     sysctl_set: true
-#     state: present
-#     reload: true
-#     sysctl_file: /etc/sysctl.d/999-ansible.conf
-#   with_dict: "{{ sysctl_params }}"
-#   when:
-#     - configure_sysctl|bool
-#     - ansible_facts['virtualization_type'] != 'docker'
-#
-# - name: managing journald config
-#   become: true
-#   lineinfile:
-#     path: /etc/systemd/journald.conf
-#     regexp: ^{{ item.key }}
-#     line: "{{ item.value }}"
-#     state: present
-#   with_dict: "{{ journald_config }}"
-#   notify: restart journald
-#   when:
-#     - ansible_service_mgr == "systemd"
-#
-# - name: configure /etc/motd
-#   become: true
-#   template:
-#     src: templates/motd.j2
-#     dest: /etc/motd
-#     owner: root
-#     group: root
-#     mode: u-rw,g=r,o=r
-#
-# - name: configure /etc/issue
-#   become: true
-#   template:
-#     src: templates/issue.j2
-#     dest: /etc/issue
-#     owner: root
-#     group: root
-#     mode: u-rw,g=r,o=r
-#
-# - name: configure sshd
-#   become: true
-#   lineinfile:
-#     path: /etc/ssh/sshd_config
-#     regexp: ^{{ item.key }}
-#     line: "{{ item.key }} {{ item.value }}"
-#     state: present
-#     owner: root
-#     group: root
-#     mode: "0600"
-#     backup: true
-#     validate: /usr/sbin/sshd -T -f %s
-#   with_dict: "{{ sshd_config }}"
-#   when:
-#     - ansible_facts['virtualization_type'] != 'docker'
-#   notify: restart_sshd
-#   tags: sshd
+- name: configure sysctl
+  become: true
+  sysctl:
+    name: "{{ item.key }}"
+    value: "{{ item.value }}"
+    sysctl_set: true
+    state: present
+    reload: true
+    sysctl_file: /etc/sysctl.d/999-ansible.conf
+  with_dict: "{{ sysctl_params }}"
+  when:
+    - configure_sysctl|bool
+    - ansible_facts['virtualization_type'] != 'docker'
+
+- name: managing journald config
+  become: true
+  lineinfile:
+    path: /etc/systemd/journald.conf
+    regexp: ^{{ item.key }}
+    line: "{{ item.value }}"
+    state: present
+  with_dict: "{{ journald_config }}"
+  notify: restart journald
+  when:
+    - ansible_service_mgr == "systemd"
+
+- name: configure /etc/motd
+  become: true
+  template:
+    src: templates/motd.j2
+    dest: /etc/motd
+    owner: root
+    group: root
+    mode: u-rw,g=r,o=r
+
+- name: configure /etc/issue
+  become: true
+  template:
+    src: templates/issue.j2
+    dest: /etc/issue
+    owner: root
+    group: root
+    mode: u-rw,g=r,o=r
+
+- name: configure sshd
+  become: true
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: ^{{ item.key }}
+    line: "{{ item.key }} {{ item.value }}"
+    state: present
+    owner: root
+    group: root
+    mode: "0600"
+    backup: true
+    validate: /usr/sbin/sshd -T -f %s
+  with_dict: "{{ sshd_config }}"
+  when:
+    - ansible_facts['virtualization_type'] != 'docker'
+  notify: restart_sshd
+  tags: sshd
 
 - name: arch | configure reflector cron job
   become: true
@@ -71,51 +71,51 @@
   ignore_errors: true # if cron not presented
   no_log: true # it doesnt matter
 
-- name: yay | check if installed
-  stat:
-    path: /usr/bin/yay
-  register: yay_bin
-  changed_when: false
-
-- name: yay | install system deps
-  pacman:
-    name:
-      - base-devel
-      - git
-      - sudo
-    state: present
-  when: not yay_bin.stat.exists
+# - name: yay | check if installed
+#   stat:
+#     path: /usr/bin/yay
+#   register: yay_bin
+#   changed_when: false
 #
-- name: yay | define temp user for installing yay
-  set_fact:
-    yay_install_user: yay_install_usr_{{ lookup('password', '/dev/null chars=ascii_letters,digits length=15') }}
-  when: not yay_bin.stat.exists
-
-- name: yay | create a user for installing yay
-  user:
-    name: "{{ yay_install_user }}"
-    create_home: false
-  when: not yay_bin.stat.exists
-
-- name: yay | create temp dir
-  tempfile:
-    state: directory
-  register: tempdir
-  when: not yay_bin.stat.exists
-
-- name: yay | chown to temp user
-  file:
-    path: "{{ tempdir.path }}"
-    owner: "{{ yay_install_user }}"
-  when: not yay_bin.stat.exists
+# - name: yay | install system deps
+#   pacman:
+#     name:
+#       - base-devel
+#       - git
+#       - sudo
+#     state: present
+#   when: not yay_bin.stat.exists
+# #
+# - name: yay | define temp user for installing yay
+#   set_fact:
+#     yay_install_user: yay_install_usr_{{ lookup('password', '/dev/null chars=ascii_letters,digits length=15') }}
+#   when: not yay_bin.stat.exists
 #
-- name: TESt
-  become_user: "{{ yay_install_user }}"
-  become: yes
-  become_method: sudo
-  ansible.builtin.command: whoami
-  # args:
-  #   chdir: "{{ tempdir.path }}"
+# - name: yay | create a user for installing yay
+#   user:
+#     name: "{{ yay_install_user }}"
+#     create_home: false
+#   when: not yay_bin.stat.exists
+#
+# - name: yay | create temp dir
+#   tempfile:
+#     state: directory
+#   register: tempdir
+#   when: not yay_bin.stat.exists
+#
+# - name: yay | chown to temp user
+#   file:
+#     path: "{{ tempdir.path }}"
+#     owner: "{{ yay_install_user }}"
+#   when: not yay_bin.stat.exists
+# #
+# - name: TESt
+#   become_user: "{{ yay_install_user }}"
+#   become: yes
+#   become_method: sudo
+#   ansible.builtin.command: whoami
+# args:
+#   chdir: "{{ tempdir.path }}"
 #
 # - name: yay | clone repo
 #   become: yes

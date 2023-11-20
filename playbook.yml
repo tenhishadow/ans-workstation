@@ -2,35 +2,25 @@
 - hosts: this_host
   connection: local
   gather_facts: true
-  # roles:
-  #   - system
+  roles:
+    - system
   tasks:
-    - name: Create a new user
-      become: yes
-      user:
-        name: user2
-        state: present
+    - name: check dotfile repo
+      stat:
+        path: "{{ ansible_user_dir }}/.dotfiles"
+      register: dotfiles
 
-    - name: Switch to user2 and run a command
-      become: yes
-      become_user: user2
-      command: whoami
-  #   - name: check dotfile repo
-  #     stat:
-  #       path: "{{ ansible_user_dir }}/.dotfiles"
-  #     register: dotfiles
-  #
-  #   - name: dotfiles | clone
-  #     git:
-  #       repo: https://github.com/tenhishadow/dotfiles.git
-  #       dest: "{{ ansible_user_dir }}/.dotfiles"
-  #     when:
-  #       - not dotfiles.stat.exists
-  #
-  #   - name: install dotfiles
-  #     shell:
-  #       cmd: pipenv install && pipenv run configs
-  #       chdir: "{{ ansible_user_dir }}/.dotfiles"
-  #     when:
-  #       - not dotfiles.stat.exists
+    - name: dotfiles | clone
+      git:
+        repo: https://github.com/tenhishadow/dotfiles.git
+        dest: "{{ ansible_user_dir }}/.dotfiles"
+      when:
+        - not dotfiles.stat.exists
+
+    - name: install dotfiles
+      shell:
+        cmd: pipenv install && pipenv run configs
+        chdir: "{{ ansible_user_dir }}/.dotfiles"
+      when:
+        - not dotfiles.stat.exists
 ...
