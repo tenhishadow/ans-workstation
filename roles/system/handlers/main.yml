@@ -13,6 +13,8 @@
     name: chronyd
     state: restarted
     enabled: true
+  when:
+    - ansible_env.CI != 'true'
 - name: sshd_agent_user
   systemd:
     scope: user
