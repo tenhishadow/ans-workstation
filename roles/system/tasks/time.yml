@@ -44,4 +44,6 @@
     name: "{{ chrony_service }}"
     state: started
     enabled: true
+  when:
+    - ansible_env.CI != 'true'
 ...
