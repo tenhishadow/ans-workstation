@@ -111,8 +111,10 @@
   when: not yay_bin.stat.exists
 #
 - name: TESt
-  become: true
   become_user: "{{ yay_install_user }}"
+  become: yes
+  become_method: sudo
+  become_exe: "sudo su - /bin/bash -c"
   ansible.builtin.command: ls -lha
   args:
     chdir: "{{ tempdir.path }}"
