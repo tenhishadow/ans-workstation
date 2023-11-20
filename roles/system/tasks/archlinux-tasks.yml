@@ -86,36 +86,36 @@
     state: present
   when: not yay_bin.stat.exists
 #
-# - name: yay | define temp user for installing yay
-#   set_fact:
-#     yay_install_user: "yay_install_usr_{{ lookup('password', '/dev/null chars=ascii_letters,digits length=15') }}"
-#   when: not yay_bin.stat.exists
+- name: yay | define temp user for installing yay
+  set_fact:
+    yay_install_user: yay_install_usr_{{ lookup('password', '/dev/null chars=ascii_letters,digits length=15') }}
+  when: not yay_bin.stat.exists
+
+- name: yay | create a user for installing yay
+  user:
+    name: "{{ yay_install_user }}"
+    create_home: false
+  when: not yay_bin.stat.exists
+
+- name: yay | create temp dir
+  tempfile:
+    state: directory
+  register: tempdir
+  when: not yay_bin.stat.exists
+
+- name: yay | chown to temp user
+  file:
+    path: "{{ tempdir.path }}"
+    owner: "{{ yay_install_user }}"
+    # recursive: yes
+  when: not yay_bin.stat.exists
 #
-# - name: yay | create a user for installing yay
-#   user:
-#     name: "{{ yay_install_user }}"
-#     create_home: no
-#   when: not yay_bin.stat.exists
-#
-# - name: yay | create temp dir
-#   tempfile:
-#     state: directory
-#   register: tempdir
-#   when: not yay_bin.stat.exists
-#
-# - name: yay | chown to temp user
-#   file:
-#     path: "{{ tempdir.path }}"
-#     owner: "{{ yay_install_user }}"
-#     # recursive: yes
-#   when: not yay_bin.stat.exists
-#
-# - name: TESt
-#   become: yes
-#   become_user: "{{ yay_install_user }}"
-#   shell: 'ls -lha'
-#   args:
-#     chdir: "{{ tempdir.path }}"
+- name: TESt
+  become: true
+  become_user: "{{ yay_install_user }}"
+  ansible.builtin.command: ls -lha
+  args:
+    chdir: "{{ tempdir.path }}"
 #
 # - name: yay | clone repo
 #   become: yes
