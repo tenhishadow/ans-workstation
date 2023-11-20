@@ -37,6 +37,6 @@
     state: started
     enabled: true
     daemon_reload: true
-  # when:
-  #   - lookup('env', 'CI') != 'true'
+  when:
+    - lookup('env', 'CI') != 'true'
 ...
