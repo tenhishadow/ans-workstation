@@ -1,7 +1,10 @@
-# this is just a comment
+---
+
 skip_list:
   - name[casing]
   - fqcn[action-core]
   - fqcn[action]
   - var-naming[no-role-prefix]
+  - name[play]
 
+...
