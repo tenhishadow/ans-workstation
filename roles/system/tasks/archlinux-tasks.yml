@@ -113,9 +113,9 @@
   become_user: "{{ yay_install_user }}"
   become: yes
   become_method: su
-  ansible.builtin.command: ls -lha
-  args:
-    chdir: "{{ tempdir.path }}"
+  ansible.builtin.command: whoami
+  # args:
+  #   chdir: "{{ tempdir.path }}"
 #
 # - name: yay | clone repo
 #   become: yes
