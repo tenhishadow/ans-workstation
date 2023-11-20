@@ -11,7 +11,12 @@
     name: "{{ packages }}"
     state: present
 
-- name: Time | configure
+# - name: Time | configure
+#   ansible.builtin.include_tasks:
+#     file: time.yml
+
+- name: OS-related configuration
   ansible.builtin.include_tasks:
-    file: time.yml
+    file: "{{ ansible_os_family | lower }}-tasks.yml"
+
 ...
