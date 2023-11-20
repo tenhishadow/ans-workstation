@@ -9,6 +9,6 @@ yamllint     = "*"
 ansible-lint = "*"
 
 [scripts]
-install      = "ansible-playbook playbook.yml --diff -vvvv"
+install      = "ansible-playbook playbook.yml --diff"
 pkg          = "ansible-playbook playbook.yml -t install_packages --diff"
 setup        = "ansible localhost -m setup"

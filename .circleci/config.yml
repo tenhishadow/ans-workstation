@@ -23,7 +23,7 @@ jobs:
           command: pipenv run setup
       - run:
           name: exec
-          command: pipenv run install
+          command: pipenv run install -vvv
 
 workflows:
   ansible_exec:
