@@ -1,12 +1,7 @@
----
-
-exclude_paths:
-  - mitogen_ansible
-  - test
+# this is just a comment
 skip_list:
-  - ansible_lint_skip
-  - '401'
-use_default_rules: yes
-verbosity: 1
+  - name[casing]
+  - fqcn[action-core]
+  - fqcn[action]
+  - var-naming[no-role-prefix]
 
-...

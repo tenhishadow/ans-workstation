@@ -1,15 +1,13 @@
 ---
-
-- name: "vars | include for {{ ansible_os_family|lower }}"
-  include_vars: "{{ item }}"
+- name: Vars | include for {{ ansible_os_family | lower }}
+  ansible.builtin.include_vars: "{{ item }}"
   loop:
-    - "{{ ansible_os_family|lower }}.yml"
-    - "{{ ansible_os_family|lower }}-packages.yml"
+    - "{{ ansible_os_family | lower }}.yml"
+    - "{{ ansible_os_family | lower }}-packages.yml"
 
-- name: packages | install
-  become: yes
-  package:
+- name: Packages | install
+  become: true
+  ansible.builtin.package:
     name: "{{ packages }}"
     state: present
-
 ...
