@@ -112,7 +112,7 @@
 - name: TESt
   become_user: "{{ yay_install_user }}"
   become: yes
-  become_method: su
+  become_method: sudo
   ansible.builtin.command: whoami
   # args:
   #   chdir: "{{ tempdir.path }}"
