@@ -11,11 +11,16 @@ jobs:
     steps:
       - checkout
       - run:
-          name: deps | isntall
-          command: |
-            pacman -Sy --noconfirm base base-devel
-            pacman -Sy --noconfirm python-pipenv python-setuptools
-            pipenv install
+          name: deps | system | install
+          command: >-
+            pacman -Sy --noconfirm
+            base base-devel python-pipenv python-setuptools
+      - run:
+          name: deps | python | install
+          command: pipenv install
+      - run:
+          name: setup
+          command: pipenv run setup
       - run:
           name: exec
           command: pipenv run install
