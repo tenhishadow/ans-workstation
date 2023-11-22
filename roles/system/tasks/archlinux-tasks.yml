@@ -1,6 +1,7 @@
 ---
 
 - name: start/enable cron
+  become: yes
   systemd_service:
     state: started
     daemon_reload: true
