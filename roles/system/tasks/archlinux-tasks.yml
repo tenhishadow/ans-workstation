@@ -1,14 +1,10 @@
 ---
 
-- name: cron | install
-  package:
-    name: cronie
-
 - name: start/enable cron
   systemd_service:
     state: started
     daemon_reload: true
-    name: cronie
+    name: "{{ cron_package }}"
     enabled: true
   when:
     - lookup('env', 'CI') != 'true'
