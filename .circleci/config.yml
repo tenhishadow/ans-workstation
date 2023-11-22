@@ -2,20 +2,32 @@
 
 version: 2.1
 
-orbs:
-  python: circleci/python@1.5.0
-
 jobs:
   ansible_exec:
     docker:
       - image: archlinux:latest
+    environment:
+      ANSIBLE_FORCE_COLOR: 'True'
     steps:
       - checkout
       - run:
-          name: test
-          command: uptime
+          name: deps | system | install
+          command: >-
+            pacman -Sy --noconfirm
+            base base-devel python-pipenv python-setuptools
+      - run:
+          name: deps | python | install
+          command: pipenv install
+      - run:
+          name: setup
+          command: pipenv run setup
+      - run:
+          name: exec
+          command: pipenv run install -vvv
 
 workflows:
   ansible_exec:
     jobs:
       - ansible_exec
+
+...

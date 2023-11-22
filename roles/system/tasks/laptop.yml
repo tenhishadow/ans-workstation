@@ -1,25 +1,30 @@
 ---
-
 - name: blacklist camera
-  become: yes
+  become: true
   kernel_blacklist:
     name: uvcvideo
     state: present
-  failed_when: no
+  failed_when: false
 
 - name: create dir for systemd user's unitfiles
   file:
     path: "{{ ansible_user_dir }}/.config/systemd/user/"
     state: directory
-  when:
-    - ansible_service_mgr == "systemd"
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_id }}"
+    mode: u=rwx,g-,o-
+  # when:
+  #   - lookup('env', 'CI') != 'true'
 
 - name: create user systemd service for ssh-agent
-  become: yes
+  become: true
   template:
-    src: "templates/ssh-agent.service.j2"
+    src: templates/ssh-agent.service.j2
     dest: "{{ ansible_user_dir }}/.config/systemd/user/ssh-agent.service"
-    backup: yes
+    backup: true
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_id }}"
+    mode: u=rw,g=rw,o-
   when:
     - ansible_service_mgr == "systemd"
   notify:
@@ -30,14 +35,8 @@
     scope: user
     name: ssh-agent.service
     state: started
-    enabled: yes
-    daemon_reload: yes
-
-- name: install pip packages
-  pip:
-    name: "{{ pip_packages }}"
-    extra_args: "--local"
-  tags:
-    - pip
-
+    enabled: true
+    daemon_reload: true
+  when:
+    - lookup('env', 'CI') != 'true'
 ...

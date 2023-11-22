@@ -1,0 +1,25 @@
+---
+- name: restart journald
+  service:
+    name: systemd-journald
+    state: restarted
+- name: restart_sshd
+  service:
+    name: sshd
+    state: restarted
+    enabled: true
+- name: restart_chrony
+  service:
+    name: chronyd
+    state: restarted
+    enabled: true
+  when:
+    - lookup('env', 'CI') != 'true'
+- name: sshd_agent_user
+  systemd:
+    scope: user
+    name: ssh-agent.service
+    state: restarted
+    enabled: true
+    daemon_reload: true
+...

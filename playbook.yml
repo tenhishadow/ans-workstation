@@ -1,78 +1,34 @@
 ---
-
 - hosts: this_host
-  become: false
   connection: local
   gather_facts: true
+  roles:
+    - system
   tasks:
-    - name: add vars depends on distr
-      include_vars: "{{ ansible_os_family|lower }}.yml"
-      tags:
-        - time
-        - sys
-        - install_packages
+    - name: dotfiles | check already presented
+      stat:
+        path: "{{ ansible_user_dir }}/.dotfiles"
+      register: dotfiles
+      # FIXME add place a file to notify it's installed e.g. ~/.dotfiles_installed
 
-    - name: add vars depends on distr
-      include_vars: "{{ ansible_os_family|lower }}-packages.yml"
-      tags:
-        - time
-        - sys
-        - install_packages
+    - name: dotfiles | clone
+      git:
+        repo: https://github.com/tenhishadow/dotfiles.git
+        dest: "{{ ansible_user_dir }}/.dotfiles"
+      when:
+        - not dotfiles.stat.exists
 
-    - name: install package list
-      become: yes
-      package:
-        name: "{{ packages_sorted }}"
-        state: present
-      tags:
-        - install_packages
+    - name: dotfiles | install
+      shell:
+        cmd: pipenv install && pipenv run configs
+        chdir: "{{ ansible_user_dir }}/.dotfiles"
+      when:
+        - not dotfiles.stat.exists
 
-    - name: include tasks for system configuration
-      import_tasks: tasks/system.yml
-      tags:
-        - sys
-
-    - name: include tasks for system configuration | distr
-      include_tasks: tasks/{{ ansible_os_family|lower }}-tasks.yml
-      tags:
-        - sys
-
-    - name: include tasks for notebook configuration
-      import_tasks: tasks/notebook.yml
-      tags:
-        - sys
-
-    - name: include tasks for configuring time
-      import_tasks: tasks/time.yml
-      tags:
-        - time
-
-    - name: include tasks for configuring podman
-      import_tasks: tasks/podman.yml
-      tags:
-        - podman
-
-  handlers:
-    - name: restart journald
-      service:
-        name: systemd-journald
-        state: restarted
-    - name: restart_sshd
-      service:
-        name: sshd
-        state: restarted
-        enabled: yes
-    - name: restart_chrony
-      service:
-        name: chronyd
-        state: restarted
-        enabled: yes
-    - name: sshd_agent_user
-      systemd:
-        scope: user
-        name: ssh-agent.service
-        state: restarted
-        enabled: yes
-        daemon_reload: yes
-
+    - name: dotfiles | cronjob for update
+      cron:
+        name: dotfiles updates
+        job: "cd {{ ansible_user_dir }}/.dotfiles && git pull"
+        special_time: hourly
+      ignore_errors: true # if cron not presented
 ...

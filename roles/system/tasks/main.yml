@@ -1,0 +1,25 @@
+---
+- name: Vars | include for {{ ansible_os_family | lower }}
+  ansible.builtin.include_vars: "{{ item }}"
+  loop:
+    - "{{ ansible_os_family | lower }}.yml"
+    - "{{ ansible_os_family | lower }}-packages.yml"
+
+- name: Packages | install
+  become: true
+  ansible.builtin.package:
+    name: "{{ packages }}"
+    state: present
+
+- name: Time | configure
+  ansible.builtin.include_tasks:
+    file: time.yml
+
+- name: OS-related configuration
+  ansible.builtin.include_tasks:
+    file: "{{ ansible_os_family | lower }}-tasks.yml"
+
+- name: laptop-related configuration
+  ansible.builtin.include_tasks:
+    file: laptop.yml
+...

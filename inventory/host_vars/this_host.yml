@@ -30,14 +30,14 @@ sshd_config:
   AllowTcpForwarding: 'yes'
 
 # time related
-common_timezone: "Europe/Moscow"
+common_timezone: "Europe/Warsaw"
 chrony_pkg_state: present
 chrony_service_state: started
 chrony_service_enabled: yes
 chrony_config_server:
-  - "3.ru.pool.ntp.org"
-  - "2.ru.pool.ntp.org"
-  - "1.ru.pool.ntp.org"
+  - "3.pool.ntp.org"
+  - "2.pool.ntp.org"
+  - "1.pool.ntp.org"
 chrony_config_logdir: "/var/log/chrony"
 
 configure_sysctl: yes
@@ -48,18 +48,6 @@ sysctl_params:
   net.ipv6.conf.all.disable_ipv6: '1'
 
 pip_packages:
-  - ansible-lint
-  - cmakelint
-  - dockerlint
-  - jenkins-job-linter
-  - jinjalint
-  - jslint
-  - jsonlint
-  - piplint
-  - pymarkdownlint
-  - salt-lint
-  - sqlint
-  - systemdlint
   - yamllint
 
 ...

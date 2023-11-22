@@ -1,0 +1,94 @@
+---
+# vim::foldmethod=marker
+
+packages:
+  #: media {{{
+  - feh
+  #: }}}
+
+  #: network {{{
+  - ca-certificates
+  - ca-certificates-mozilla
+  - ca-certificates-utils
+  - curl
+  - iodine # Tunnel IPv4 data through a DNS server
+  - ptunnel # http://www.cs.uit.no/~daniels/PingTunnel/
+  - speedtest-cli
+  - sstp-client
+  - strongswan
+  - tcpdump
+  - thunderbird
+  - wget
+  - openssh
+  - iptraf-ng
+  #: }}}
+
+  #: system {{{
+  - bash-completion
+  - bash-language-server
+  - bash-bats-support
+  - bash-bats-assert
+  - bash-bats
+  - bind-tools
+  - coreutils
+  - cracklib
+  - cryptsetup
+  - dosfstools
+  - e2fsprogs
+  - freerdp
+  - geoip2-database
+  - gnu-netcat
+  - gnupg
+  - gnutls
+  - gzip
+  - lsof
+  - man-pages
+  - mc
+  - nmap
+  - pigz
+  - reflector
+  - remmina
+  - salt
+  - screen
+  - scrot
+  - sysstat
+  - tcl
+  - tigervnc
+  - whois
+  - dmidecode
+  - htop
+  - gawk
+  - "{{ cron_package }}"
+  #: }}}
+
+  #: utils {{{
+  - keepassxc
+  - nextcloud-client
+  #: }}}
+
+  #: dev {{{
+  - vim
+  - code
+  - task
+  - terminus-font
+  # - docker #         "docker: /usr/bin/docker-init exists in filesystem",
+  # - docker-compose
+  - make
+  - cmake
+  - awesome-terminal-fonts
+  - jq
+  - yq
+  - shellcheck
+  - kitty # term
+  - xclip # command line interface to X selections (clipboard)
+  - github-cli # github cli <3
+  - git
+  - aws-cli-v2
+  - ttf-ibm-plex # good font to use
+  - kustomize # Template-free customization of Kubernetes YAML manifests
+  - python-pre-commit # https://pre-commit.com/#usage
+  - terraform
+  - packer
+  #: }}}
+
+...
