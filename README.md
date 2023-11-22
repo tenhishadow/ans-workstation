@@ -9,7 +9,7 @@ Only Archlinux is supported
 
 _INSTALL_DIR="$HOME/.ans-workstation" \
   && yay -Sy --noconfirm python-pipenv python-setuptools \
-  && git clone https://github.com/tenhishadow/ans-workstation.git -b featur/extend-dotfiles $_INSTALL_DIR \
+  && git clone https://github.com/tenhishadow/ans-workstation.git $_INSTALL_DIR \
   && cd $_INSTALL_DIR \
   && pipenv install \
   && pipenv run install
