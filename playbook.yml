@@ -24,11 +24,4 @@
         chdir: "{{ ansible_user_dir }}/.dotfiles"
       when:
         - not dotfiles.stat.exists
-
-    - name: dotfiles | cronjob for update
-      cron:
-        name: dotfiles updates
-        job: "cd {{ ansible_user_dir }}/.dotfiles && git pull"
-        special_time: hourly
-      ignore_errors: true # if cron not presented
 ...
