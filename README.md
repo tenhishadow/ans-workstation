@@ -6,6 +6,12 @@ Special repository for configuring workstation with Ansible
 Only Archlinux is supported
 
 ```bash
-yay -Sy --noconfirm python-pipenv python-setuptools; \
-  pipenv run install
+
+_INSTALL_DIR="$HOME/.ans-workstation" \
+  && yay -Sy --noconfirm python-pipenv python-setuptools \
+  && git clone https://github.com/tenhishadow/ans-workstation.git -b featur/extend-dotfiles $_INSTALL_DIR \
+  && cd $_INSTALL_DIR \
+  && pipenv install \
+  && pipenv run install
+
 ```

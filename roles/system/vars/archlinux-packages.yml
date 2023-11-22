@@ -58,7 +58,7 @@ packages:
   - dmidecode
   - htop
   - gawk
-  - {{ cron_package }}
+  - "{{ cron_package }}"
   #: }}}
 
   #: utils {{{
