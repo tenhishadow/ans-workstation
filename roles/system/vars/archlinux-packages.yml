@@ -23,6 +23,20 @@ packages:
   - iptraf-ng
   #: }}}
 
+  #: network {{{
+  - ca-certioficates
+  ## messages
+  - element-desktop
+  - telegram-desktop
+  - mattermost
+  # - zoom # AUR
+  # - slack-desktop # AUR
+  ## browsers
+  - firefox
+  - opera
+  # - brave-bin # AUR
+  #: }}}
+
   #: system {{{
   - bash-completion
   - bash-language-server
@@ -58,6 +72,7 @@ packages:
   - dmidecode
   - htop
   - gawk
+  - base-devel
   - "{{ cron_package }}"
   #: }}}
 
@@ -67,12 +82,15 @@ packages:
   #: }}}
 
   #: dev {{{
+  - terminus-font
   - vim
   - code
   - task
-  - terminus-font
+  - tea
   # - docker #         "docker: /usr/bin/docker-init exists in filesystem",
   # - docker-compose
+  - kubectl
+  - k9s
   - make
   - cmake
   - awesome-terminal-fonts
@@ -89,6 +107,7 @@ packages:
   - python-pre-commit # https://pre-commit.com/#usage
   - terraform
   - packer
+  - terragrunt
   #: }}}
 
 ...
