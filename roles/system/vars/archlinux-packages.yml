@@ -24,7 +24,6 @@ packages:
   #: }}}
 
   #: network {{{
-  - ca-certioficates
   ## messages
   - element-desktop
   - telegram-desktop
