@@ -1,5 +1,6 @@
 ---
 
+cron_package: cronie
 chrony_config_driftfile: /var/lib/chrony/drift
 chrony_config_location: /etc/chrony.conf
 chrony_config_pool: pool.ntp.org

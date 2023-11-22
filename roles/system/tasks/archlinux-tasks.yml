@@ -1,4 +1,19 @@
 ---
+
+- name: cron | install
+  package:
+    name: cronie
+
+- name: start/enable cron
+  systemd_service:
+    state: started
+    daemon_reload: true
+    name: cronie
+    enabled: true
+  when:
+    - lookup('env', 'CI') != 'true'
+    - ansible_service_mgr == "systemd"
+
 - name: configure sysctl
   become: true
   sysctl:
