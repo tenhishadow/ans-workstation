@@ -6,6 +6,24 @@ packages:
   - feh
   #: }}}
 
+  #: monitoring {{{
+  - monit
+  - speedtest-cli
+  - tcpdump
+  - iptraf-ng
+  - iftop
+  - iperf3
+  - lm_sensors
+  - smartmontools
+  - sysstat
+  - dmidecode
+  - htop
+  - iotop
+  - nmon
+  - lsof
+  - bashtop
+  #: }}}
+
   #: network {{{
   - ca-certificates
   - ca-certificates-mozilla
@@ -13,14 +31,12 @@ packages:
   - curl
   - iodine # Tunnel IPv4 data through a DNS server
   - ptunnel # http://www.cs.uit.no/~daniels/PingTunnel/
-  - speedtest-cli
   - sstp-client
   - strongswan
-  - tcpdump
   - thunderbird
   - wget
   - openssh
-  - iptraf-ng
+  - gnu-netcat
   #: }}}
 
   #: network {{{
@@ -50,11 +66,9 @@ packages:
   - e2fsprogs
   - freerdp
   - geoip2-database
-  - gnu-netcat
   - gnupg
   - gnutls
   - gzip
-  - lsof
   - man-pages
   - mc
   - nmap
@@ -64,12 +78,9 @@ packages:
   - salt
   - screen
   - scrot
-  - sysstat
   - tcl
   - tigervnc
   - whois
-  - dmidecode
-  - htop
   - gawk
   - base-devel
   - "{{ cron_package }}"
