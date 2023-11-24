@@ -20,7 +20,7 @@
 
     - name: dotfiles | install
       shell:
-        cmd: pipenv install && pipenv run configs
+        cmd: pipenv install && pipenv run install
         chdir: "{{ ansible_user_dir }}/.dotfiles"
       when:
         - not dotfiles.stat.exists

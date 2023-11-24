@@ -15,6 +15,10 @@
   ansible.builtin.include_tasks:
     file: time.yml
 
+- name: OS-common configuration
+  ansible.builtin.include_tasks:
+    file: "system.yml"
+
 - name: OS-related configuration
   ansible.builtin.include_tasks:
     file: "{{ ansible_os_family | lower }}-tasks.yml"
