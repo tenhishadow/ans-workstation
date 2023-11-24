@@ -16,8 +16,8 @@
     name: "{{ ntp_service }}"
     state: restarted
     enabled: true
-  # when:
-  #   - lookup('env', 'CI') != 'true'
+  when:
+    - lookup('env', 'CI') != 'true'
 - name: sshd_agent_user
   systemd:
     scope: user
