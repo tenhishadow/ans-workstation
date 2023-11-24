@@ -26,6 +26,8 @@
   service:
     name: systemd-vconsole-setup.service
     state: restarted
+  when:
+    - lookup('env', 'CI') != 'true'
 
 - name: sshd_agent_user
   systemd:
