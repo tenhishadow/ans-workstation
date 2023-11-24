@@ -2,7 +2,7 @@
 - name: tzdata | Ensure tzdata package is installed
   become: true
   package:
-    name: "{{ chrony_tzdata_package }}"
+    name: "{{ tzdata_package }}"
     state: present
 
 - name: tzdata | set timezone to {{ common_timezone }}
