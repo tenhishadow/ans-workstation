@@ -1,47 +1,42 @@
 ---
-- name: Ensure tzdata package is installed
+- name: tzdata | Ensure tzdata package is installed
   become: true
   package:
-    name: "{{ chrony_tzdata_package }}"
+    name: "{{ tzdata_package }}"
     state: present
 
-- name: set timezone to {{ common_timezone }}
+- name: tzdata | set timezone to {{ common_timezone }}
   become: true
   timezone:
     name: "{{ common_timezone }}"
-  when:
-    - lookup('env', 'CI') != 'true'
 
-- name: disable ntpd if exist
+- name: ntp | disable old daemons
   become: true
   ignore_errors: true # because this service could be not presented
-  service:
-    name: ntpd
+  systemd_service:
+    name: "{{ item }}"
     state: stopped
-    enabled: false
+    masked: yes
+  loop:
+    - ntpd
+    - chronie
 
-- name: install chrony package
-  become: true
-  package:
-    name: "{{ chrony_pkg }}"
-    state: "{{ chrony_pkg_state }}"
-
-- name: Copy the chrony.conf template file
+- name: ntp | configure timesyncd
   become: true
   template:
-    src: templates/chrony.conf.j2
-    dest: "{{ chrony_config_location }}"
-    owner: root
-    group: root
-    mode: "0644"
     backup: true
+    src: templates/timesyncd.conf.j2
+    dest: /etc/systemd/timesyncd.conf
+    owner: "{{ configs.owner }}"
+    group: "{{ configs.group }}"
+    mode: "{{ configs.mode }}"
   notify:
-    - restart_chrony
+    - restart_ntp
 
-- name: start and enable chronyd anyway
+- name: ntp | start and enable during play
   become: true
   service:
-    name: "{{ chrony_service }}"
+    name: "{{ ntp_service }}"
     state: started
     enabled: true
   when:
