@@ -5,9 +5,9 @@
   template:
     src: templates/pacman.conf.j2
     dest: /etc/pacman.conf
-    owner: root
-    group: root
-    mode: u-rw,g=r,o=r
+    owner: "{{ configs.owner }}"
+    group: "{{ configs.group }}"
+    mode: "{{ configs.mode }}"
 
 - name: configure | reflector job
   become: true

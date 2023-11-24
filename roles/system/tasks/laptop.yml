@@ -22,7 +22,7 @@
     backup: true
     owner: "{{ ansible_user_id }}"
     group: "{{ ansible_user_id }}"
-    mode: u=rw,g=rw,o-
+    mode: u=rw,g=r,o-
   when:
     - ansible_service_mgr == "systemd"
   notify:

@@ -6,9 +6,9 @@
     backup: true
     src: templates/locale.gen.j2
     dest: /etc/locale.gen
-    owner: root
-    group: root
-    mode: u-rw,g=rw,o=r
+    owner: "{{ configs.owner }}"
+    group: "{{ configs.group }}"
+    mode: "{{ configs.mode }}"
   notify:
     - systemd-vconsole-setup
 
@@ -18,9 +18,9 @@
     backup: true
     src: templates/locale.conf.j2
     dest: /etc/locale.conf
-    owner: root
-    group: root
-    mode: u-rw,g=rw,o=r
+    owner: "{{ configs.owner }}"
+    group: "{{ configs.group }}"
+    mode: "{{ configs.mode }}"
   notify:
     - systemd-vconsole-setup
 
@@ -35,9 +35,9 @@
     backup: true
     src: templates/vconsole.conf.j2
     dest: /etc/vconsole.conf
-    owner: root
-    group: root
-    mode: u-rw,g=rw,o=r
+    owner: "{{ configs.owner }}"
+    group: "{{ configs.group }}"
+    mode: "{{ configs.mode }}"
   notify:
     - systemd-vconsole-setup
 
@@ -47,9 +47,9 @@
     backup: true
     src: templates/motd.j2
     dest: /etc/motd
-    owner: root
-    group: root
-    mode: u-rw,g=r,o=r
+    owner: "{{ configs.owner }}"
+    group: "{{ configs.group }}"
+    mode: "{{ configs.mode }}"
 
 - name: configure /etc/issue
   become: true
@@ -57,9 +57,9 @@
     backup: true
     src: templates/issue.j2
     dest: /etc/issue
-    owner: root
-    group: root
-    mode: u-rw,g=r,o=r
+    owner: "{{ configs.owner }}"
+    group: "{{ configs.group }}"
+    mode: "{{ configs.mode }}"
 
 - name: start/enable cron
   become: yes
@@ -92,9 +92,9 @@
     backup: true
     src: templates/journald.conf.j2
     dest: /etc/systemd/journald.conf
-    owner: root
-    group: root
-    mode: u-rw,g=r,o=r
+    owner: "{{ configs.owner }}"
+    group: "{{ configs.group }}"
+    mode: "{{ configs.mode }}"
   notify: restart journald
   when:
     - ansible_service_mgr == "systemd"
@@ -107,8 +107,8 @@
     regexp: ^{{ item.key }}
     line: "{{ item.key }} {{ item.value }}"
     state: present
-    owner: root
-    group: root
+    owner: "{{ configs.owner }}"
+    group: "{{ configs.group }}"
     mode: "0600"
     validate: /usr/sbin/sshd -T -f %s
   with_dict: "{{ sshd_config }}"

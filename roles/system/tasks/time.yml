@@ -24,12 +24,12 @@
 - name: ntp | configure timesyncd
   become: true
   template:
+    backup: true
     src: templates/timesyncd.conf.j2
     dest: /etc/systemd/timesyncd.conf
-    owner: root
-    group: root
-    mode: "0644"
-    backup: true
+    owner: "{{ configs.owner }}"
+    group: "{{ configs.group }}"
+    mode: "{{ configs.mode }}"
   notify:
     - restart_ntp
 
