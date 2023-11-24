@@ -13,8 +13,6 @@
     owner: "{{ ansible_user_id }}"
     group: "{{ ansible_user_id }}"
     mode: u=rwx,g-,o-
-  # when:
-  #   - lookup('env', 'CI') != 'true'
 
 - name: create user systemd service for ssh-agent
   become: true
@@ -25,6 +23,7 @@
     owner: "{{ ansible_user_id }}"
     group: "{{ ansible_user_id }}"
     mode: u=rw,g=rw,o-
+    validate: systemd-analyze verify %s
   when:
     - ansible_service_mgr == "systemd"
   notify:
