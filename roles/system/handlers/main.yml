@@ -21,6 +21,12 @@
   when:
     - lookup('env', 'CI') != 'true'
 
+- name: systemd-vconsole-setup
+  become: yes
+  service:
+    name: systemd-vconsole-setup.service
+    state: restarted
+
 - name: sshd_agent_user
   systemd:
     scope: user

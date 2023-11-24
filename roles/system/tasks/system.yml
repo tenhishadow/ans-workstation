@@ -15,6 +15,17 @@
     group: root
     mode: u-rw,g=r,o=r
 
+- name: vconsole | configure
+  become: yes
+  template:
+    src: templates/vconsole.conf.j2
+    dest: /etc/vconsole.conf
+    owner: root
+    group: root
+    mode: u-rw,g=r,o=r
+  notify:
+    - systemd-vconsole-setup
+
 - name: configure | /etc/motd
   become: true
   template:
