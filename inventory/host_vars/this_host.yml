@@ -4,10 +4,9 @@ motd_message: "o_O"
 issue_message: "o_O"
 
 journald_config:
-  "Storage=": "Storage=persistent"
-  "Compress=": "Compress=yes"
-  "Seal=": "Seal=yes"
-  "SystemMaxUse=": "SystemMaxUse=10M"
+  Storage: "persistent"
+  Compress: "yes"
+  SystemMaxUse: "50M"
 
 sshd_config:
   Port: '22'
