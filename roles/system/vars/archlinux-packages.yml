@@ -118,6 +118,8 @@ packages:
   - terraform
   - packer
   - terragrunt
+  - ugrep # better grep
+  - fzf # https://github.com/junegunn/fzf/tree/master
   #: }}}
 
 ...
