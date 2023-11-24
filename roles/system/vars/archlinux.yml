@@ -1,13 +1,22 @@
 ---
 
-cron_package: cronie
-chrony_config_driftfile: /var/lib/chrony/drift
-chrony_config_location: /etc/chrony.conf
-chrony_config_pool: pool.ntp.org
-chrony_pkg: chrony
-chrony_pkg_state: present
-chrony_service: chronyd
-chrony_tzdata_package: tzdata
+tzdata_package: tzdata
 
 common_timezone: Europe/Warsaw
+
+ntp_service: systemd-timesyncd
+
+ntp_main:
+  - 2.europe.pool.ntp.org
+  - 3.europe.pool.ntp.org
+  - 1.lu.pool.ntp.org
+  - 2.ch.pool.ntp.org
+  - 3.ch.pool.ntp.org
+ntp_fallback:
+  - pool.ntp.org
+  - 2.arch.pool.ntp.org
+  - 0.arch.pool.ntp.org
+  - 3.arch.pool.ntp.org
+  - 1.arch.pool.ntp.org
+
 ...

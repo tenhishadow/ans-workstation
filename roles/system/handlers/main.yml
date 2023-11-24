@@ -10,14 +10,14 @@
     name: sshd
     state: restarted
     enabled: true
-- name: restart_chrony
+- name: restart_ntp
   become: yes
   service:
-    name: chronyd
+    name: "{{ ntp_service }}"
     state: restarted
     enabled: true
-  when:
-    - lookup('env', 'CI') != 'true'
+  # when:
+  #   - lookup('env', 'CI') != 'true'
 - name: sshd_agent_user
   systemd:
     scope: user
