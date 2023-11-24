@@ -9,6 +9,8 @@
     owner: root
     group: root
     mode: u-rw,g=rw,o=r
+  notify:
+    - systemd-vconsole-setup
 
 - name: locale | configure
   become: yes
@@ -19,6 +21,8 @@
     owner: root
     group: root
     mode: u-rw,g=rw,o=r
+  notify:
+    - systemd-vconsole-setup
 
 - name: locale | generate
   become: yes
