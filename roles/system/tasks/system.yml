@@ -1,34 +1,46 @@
 ---
 
+- name: locale | configure gen
+  become: yes
+  template:
+    backup: true
+    src: templates/locale.gen.j2
+    dest: /etc/locale.gen
+    owner: root
+    group: root
+    mode: u-rw,g=rw,o=r
+
 - name: locale | generate
   become: yes
-  locale_gen:
-    name: "{{ item }}"
-  loop: "{{ locales }}"
+  command: locale-gen
+  changed_when: no
 
 - name: locale | configure
   become: yes
   template:
+    backup: true
     src: templates/locale.conf.j2
-    dest: /etc/locale.gen
+    dest: /etc/locale.conf
     owner: root
     group: root
-    mode: u-rw,g=r,o=r
+    mode: u-rw,g=rw,o=r
 
 - name: vconsole | configure
   become: yes
   template:
+    backup: true
     src: templates/vconsole.conf.j2
     dest: /etc/vconsole.conf
     owner: root
     group: root
-    mode: u-rw,g=r,o=r
+    mode: u-rw,g=rw,o=r
   notify:
     - systemd-vconsole-setup
 
 - name: configure | /etc/motd
   become: true
   template:
+    backup: true
     src: templates/motd.j2
     dest: /etc/motd
     owner: root
@@ -38,6 +50,7 @@
 - name: configure /etc/issue
   become: true
   template:
+    backup: true
     src: templates/issue.j2
     dest: /etc/issue
     owner: root
@@ -72,6 +85,7 @@
 - name: configure | systemd-journald
   become: true
   template:
+    backup: true
     src: templates/journald.conf.j2
     dest: /etc/systemd/journald.conf
     owner: root
@@ -84,6 +98,7 @@
 - name: configure sshd
   become: true
   lineinfile:
+    backup: true
     path: /etc/ssh/sshd_config
     regexp: ^{{ item.key }}
     line: "{{ item.key }} {{ item.value }}"
@@ -91,7 +106,6 @@
     owner: root
     group: root
     mode: "0600"
-    backup: true
     validate: /usr/sbin/sshd -T -f %s
   with_dict: "{{ sshd_config }}"
   when:
