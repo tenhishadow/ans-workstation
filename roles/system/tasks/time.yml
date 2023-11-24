@@ -9,8 +9,8 @@
   become: true
   timezone:
     name: "{{ common_timezone }}"
-  when:
-    - lookup('env', 'CI') != 'true'
+  # when:
+  #   - lookup('env', 'CI') != 'true'
 
 - name: ntp | disable old daemons
   become: true

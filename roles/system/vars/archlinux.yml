@@ -1,5 +1,7 @@
 ---
 
+cron_package: cronie
+
 tzdata_package: tzdata
 
 common_timezone: Europe/Warsaw
