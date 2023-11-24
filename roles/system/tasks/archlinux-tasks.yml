@@ -1,5 +1,14 @@
 ---
 
+- name: configure pacman
+  become: true
+  template:
+    src: templates/pacman.conf.j2
+    dest: /etc/pacman.conf
+    owner: root
+    group: root
+    mode: u-rw,g=r,o=r
+
 - name: start/enable cron
   become: yes
   systemd_service:
