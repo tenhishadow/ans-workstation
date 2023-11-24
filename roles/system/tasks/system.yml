@@ -1,5 +1,20 @@
 ---
 
+- name: locale | generate
+  become: yes
+  locale_gen:
+    name: "{{ item }}"
+  loop: "{{ locales }}"
+
+- name: locale | configure
+  become: yes
+  template:
+    src: templates/locale.conf.j2
+    dest: /etc/locale.gen
+    owner: root
+    group: root
+    mode: u-rw,g=r,o=r
+
 - name: configure | /etc/motd
   become: true
   template:
