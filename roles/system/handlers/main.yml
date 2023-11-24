@@ -1,14 +1,17 @@
 ---
 - name: restart journald
+  become: yes
   service:
     name: systemd-journald
     state: restarted
 - name: restart_sshd
+  become: yes
   service:
     name: sshd
     state: restarted
     enabled: true
 - name: restart_chrony
+  become: yes
   service:
     name: chronyd
     state: restarted

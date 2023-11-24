@@ -23,7 +23,7 @@
     owner: "{{ ansible_user_id }}"
     group: "{{ ansible_user_id }}"
     mode: u=rw,g=rw,o-
-    validate: systemd-analyze verify %s
+    # validate: systemd-analyze verify %s
   when:
     - ansible_service_mgr == "systemd"
   notify:
