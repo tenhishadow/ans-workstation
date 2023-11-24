@@ -83,7 +83,6 @@ packages:
   - whois
   - gawk
   - base-devel
-  - "{{ cron_package }}"
   #: }}}
 
   #: utils {{{
