@@ -28,6 +28,8 @@
   become: yes
   command: locale-gen
   changed_when: no
+  when:
+    - lookup('env', 'CI') != 'true'
 
 - name: vconsole | configure
   become: yes
