@@ -92,7 +92,6 @@ packages:
   #: }}}
 
   #: dev {{{
-  - terminus-font
   - vim
   - code
   - task
@@ -103,7 +102,6 @@ packages:
   - k9s
   - make
   - cmake
-  - awesome-terminal-fonts
   - jq
   - yq
   - shellcheck
@@ -112,7 +110,6 @@ packages:
   - github-cli # github cli <3
   - git
   - aws-cli-v2
-  - ttf-ibm-plex # good font to use
   - kustomize # Template-free customization of Kubernetes YAML manifests
   - python-pre-commit # https://pre-commit.com/#usage
   - terraform
@@ -122,4 +119,9 @@ packages:
   - fzf # https://github.com/junegunn/fzf/tree/master
   #: }}}
 
+  #: dev {{{
+  - ttf-ibm-plex  # CLI
+  - ttf-opensans  # GUI
+  - terminus-font
+  #: }}}
 ...
