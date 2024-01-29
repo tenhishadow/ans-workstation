@@ -23,6 +23,10 @@ locales:
   - en_US
   - pl_PL
   - ru_RU
+  - uk_UA
+  - de_DE
+  - cs_CZ
+  - fr_FR
 
 configs:
   owner: root
