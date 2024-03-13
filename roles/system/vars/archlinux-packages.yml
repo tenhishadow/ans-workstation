@@ -48,7 +48,6 @@ packages:
   # - slack-desktop # AUR
   ## browsers
   - firefox
-  - opera
   # - brave-bin # AUR
   #: }}}
 
