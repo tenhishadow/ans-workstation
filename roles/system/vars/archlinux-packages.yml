@@ -105,7 +105,7 @@ packages:
   - xclip # command line interface to X selections (clipboard)
   - github-cli # github cli <3
   - git
-  - aws-cli-v2
+  - aws-cli
   - kustomize # Template-free customization of Kubernetes YAML manifests
   - python-pre-commit # https://pre-commit.com/#usage
   - terraform
