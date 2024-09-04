@@ -26,4 +26,3 @@
 - name: laptop-related configuration
   ansible.builtin.include_tasks:
     file: laptop.yml
-...

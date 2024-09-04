@@ -24,4 +24,3 @@
         chdir: "{{ ansible_user_dir }}/.dotfiles"
       when:
         - not dotfiles.stat.exists
-...

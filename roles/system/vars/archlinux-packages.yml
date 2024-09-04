@@ -116,8 +116,7 @@ packages:
   #: }}}
 
   #: dev {{{
-  - ttf-ibm-plex  # CLI
-  - ttf-opensans  # GUI
+  - ttf-ibm-plex # CLI
+  - ttf-opensans # GUI
   - terminus-font
   #: }}}
-...

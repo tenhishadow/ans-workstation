@@ -37,4 +37,3 @@
     daemon_reload: true
   when:
     - lookup('env', 'CI') != 'true'
-...

@@ -1,5 +1,4 @@
 ---
-
 - name: configure | pacman
   become: true
   template:
@@ -98,4 +97,3 @@
 #     recursive: yes
 #   when: not yay_bin.stat.exists
 
-...

@@ -41,4 +41,3 @@
     enabled: true
   when:
     - lookup('env', 'CI') != 'true'
-...

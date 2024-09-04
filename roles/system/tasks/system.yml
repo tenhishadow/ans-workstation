@@ -1,5 +1,4 @@
 ---
-
 - name: locale | configure gen
   become: yes
   template:
@@ -118,4 +117,3 @@
     - ansible_facts['virtualization_type'] != 'docker'
   notify: restart_sshd
   tags: sshd
-...
