@@ -1,13 +1,12 @@
 ---
-
 version: 2.1
 
 jobs:
   ansible_exec:
     docker:
-      - image: archlinux:latest
+      - image: archlinux:latest # checkov:skip=CKV_CIRCLECIPIPELINES_1
     environment:
-      ANSIBLE_FORCE_COLOR: 'True'
+      ANSIBLE_FORCE_COLOR: "True"
     steps:
       - checkout
       - run:
@@ -29,5 +28,3 @@ workflows:
   ansible_exec:
     jobs:
       - ansible_exec
-
-...

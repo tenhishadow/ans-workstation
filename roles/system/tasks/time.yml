@@ -16,7 +16,7 @@
   systemd_service:
     name: "{{ item }}"
     state: stopped
-    masked: yes
+    masked: true
   loop:
     - ntpd
     - chronie
@@ -41,4 +41,3 @@
     enabled: true
   when:
     - lookup('env', 'CI') != 'true'
-...

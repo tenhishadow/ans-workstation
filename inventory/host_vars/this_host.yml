@@ -1,38 +1,35 @@
 ---
-
-motd_message: "o_O"
-issue_message: "o_O"
+motd_message: o_O
+issue_message: o_O
 
 journald_config:
-  storage: "persistent"
+  storage: persistent
   compress: "yes"
-  systemmaxuse: "50M"
+  systemmaxuse: 50M
 
 sshd_config:
-  Port: '22'
-  AddressFamily: 'any'
-  Protocol: '2'
-  UseDNS: 'no'
-  SyslogFacility: 'AUTHPRIV'
+  Port: "22"
+  AddressFamily: any
+  Protocol: "2"
+  UseDNS: "no"
+  SyslogFacility: AUTHPRIV
   # Authentication:
-  LoginGraceTime: '1m'
-  StrictModes: 'yes'
-  MaxAuthTries: '20'
-  MaxSessions: '100'
-  PermitRootLogin: 'no'
-  PubkeyAuthentication: 'yes'
-  IgnoreRhosts: 'yes'
-  PasswordAuthentication: 'yes'
-  PermitEmptyPasswords: 'no'
-  ClientAliveInterval: '7200'
-  AllowAgentForwarding: 'yes'
-  AllowTcpForwarding: 'yes'
+  LoginGraceTime: 1m
+  StrictModes: "yes"
+  MaxAuthTries: "20"
+  MaxSessions: "100"
+  PermitRootLogin: "no"
+  PubkeyAuthentication: "yes"
+  IgnoreRhosts: "yes"
+  PasswordAuthentication: "yes"
+  PermitEmptyPasswords: "no"
+  ClientAliveInterval: "7200"
+  AllowAgentForwarding: "yes"
+  AllowTcpForwarding: "yes"
 
-configure_sysctl: yes
+configure_sysctl: true
 sysctl_params:
-  vm.swappiness: '10'
-  net.ipv6.conf.default.disable_ipv6: '1'
-  net.ipv6.conf.lo.disable_ipv6: '1'
-  net.ipv6.conf.all.disable_ipv6: '1'
-
-...
+  vm.swappiness: "10"
+  net.ipv6.conf.default.disable_ipv6: "1"
+  net.ipv6.conf.lo.disable_ipv6: "1"
+  net.ipv6.conf.all.disable_ipv6: "1"

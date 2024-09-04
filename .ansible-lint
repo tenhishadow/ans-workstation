@@ -9,5 +9,3 @@ skip_list:
   - ignore-errors
   - latest[git]
   - no-changed-when
-
-...

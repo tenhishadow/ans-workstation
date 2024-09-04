@@ -1,31 +1,46 @@
 ---
+# https://yamllint.readthedocs.io/en/stable/rules.html#module-yamllint.rules.comments
 
 rules:
-  braces: enable
-  brackets: enable
-  colons: enable
-  commas: enable
-  comments: disable
+  braces:
+    min-spaces-inside: 0
+    max-spaces-inside: 1
+    min-spaces-inside-empty: 0
+    max-spaces-inside-empty: 0
+  brackets:
+    min-spaces-inside: 0
+    max-spaces-inside: 0
+    min-spaces-inside-empty: -1
+    max-spaces-inside-empty: -1
+  colons:
+    max-spaces-before: 0
+    max-spaces-after: -1
+  commas:
+    max-spaces-before: 0
+    min-spaces-after: 1
+    max-spaces-after: 1
+  comments:
+    level: warning
+    require-starting-space: true
+    min-spaces-from-content: 1
+    ignore-shebangs: true
   comments-indentation: disable
-  document-end: enable
-  # document-start: [level: warning]
-  empty-lines: enable
-  empty-values: enable
-  hyphens: enable
-  indentation: enable
+  document-end: disable
+  document-start: disable
+  empty-lines: disable
+  hyphens:
+    max-spaces-after: 1
+  indentation:
+    spaces: consistent
+    indent-sequences: true
+    check-multi-line-strings: false
   key-duplicates: enable
-  key-ordering: no
-  line-length: disable
+  line-length:
+    max: 400
+    allow-non-breakable-words: true
+    allow-non-breakable-inline-mappings: true
   new-line-at-end-of-file: enable
-  new-lines: enable
-  octal-values: enable
-  quoted-strings: disable
+  new-lines:
+    type: unix
   trailing-spaces: enable
   truthy: disable
-
-yaml-files:
-  - '*.yaml'
-  - '*.yml'
-  - '.yamllint'
-
-...
