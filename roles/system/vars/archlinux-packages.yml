@@ -2,11 +2,11 @@
 # vim::foldmethod=marker
 
 packages:
-  #: media {{{
+  # : media {{{
   - feh
-  #: }}}
+  # : }}}
 
-  #: monitoring {{{
+  # : monitoring {{{
   - monit
   - speedtest-cli
   - tcpdump
@@ -22,9 +22,9 @@ packages:
   - nmon
   - lsof
   - bashtop
-  #: }}}
+  # : }}}
 
-  #: network {{{
+  # : network {{{
   - ca-certificates
   - ca-certificates-mozilla
   - ca-certificates-utils
@@ -37,9 +37,9 @@ packages:
   - wget
   - openssh
   - gnu-netcat
-  #: }}}
+  # : }}}
 
-  #: network {{{
+  # : network {{{
   ## messages
   - element-desktop
   - telegram-desktop
@@ -49,9 +49,9 @@ packages:
   ## browsers
   - firefox
   # - brave-bin # AUR
-  #: }}}
+  # : }}}
 
-  #: system {{{
+  # : system {{{
   - bash-completion
   - bash-language-server
   - bind-tools
@@ -80,14 +80,14 @@ packages:
   - gawk
   - base-devel
   - "{{ cron_package }}"
-  #: }}}
+  # : }}}
 
-  #: utils {{{
+  # : utils {{{
   - keepassxc
   - nextcloud-client
-  #: }}}
+  # : }}}
 
-  #: dev {{{
+  # : dev {{{
   - vim
   - code
   - task
@@ -113,10 +113,10 @@ packages:
   - terragrunt
   - ugrep # better grep
   - fzf # https://github.com/junegunn/fzf/tree/master
-  #: }}}
+  # : }}}
 
-  #: dev {{{
+  # : dev {{{
   - ttf-ibm-plex # CLI
   - ttf-opensans # GUI
   - terminus-font
-  #: }}}
+  # : }}}

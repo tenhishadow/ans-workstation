@@ -1,6 +1,6 @@
 ---
 - name: locale | configure gen
-  become: yes
+  become: true
   template:
     backup: true
     src: templates/locale.gen.j2
@@ -12,7 +12,7 @@
     - systemd-vconsole-setup
 
 - name: locale | configure
-  become: yes
+  become: true
   template:
     backup: true
     src: templates/locale.conf.j2
@@ -24,14 +24,14 @@
     - systemd-vconsole-setup
 
 - name: locale | generate
-  become: yes
+  become: true
   command: locale-gen
-  changed_when: no
+  changed_when: false
   when:
     - lookup('env', 'CI') != 'true'
 
 - name: vconsole | configure
-  become: yes
+  become: true
   template:
     backup: true
     src: templates/vconsole.conf.j2
@@ -63,7 +63,7 @@
     mode: "{{ configs.mode }}"
 
 - name: start/enable cron
-  become: yes
+  become: true
   systemd_service:
     state: started
     daemon_reload: true

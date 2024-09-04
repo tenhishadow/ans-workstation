@@ -1,19 +1,19 @@
 ---
 - name: restart journald
-  become: yes
+  become: true
   service:
     name: systemd-journald
     state: restarted
 
 - name: restart_sshd
-  become: yes
+  become: true
   service:
     name: sshd
     state: restarted
     enabled: true
 
 - name: restart_ntp
-  become: yes
+  become: true
   service:
     name: "{{ ntp_service }}"
     state: restarted
@@ -22,7 +22,7 @@
     - lookup('env', 'CI') != 'true'
 
 - name: systemd-vconsole-setup
-  become: yes
+  become: true
   service:
     name: systemd-vconsole-setup.service
     state: restarted

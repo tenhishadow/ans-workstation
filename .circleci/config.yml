@@ -7,7 +7,7 @@ jobs:
     docker:
       - image: archlinux:latest
     environment:
-      ANSIBLE_FORCE_COLOR: 'True'
+      ANSIBLE_FORCE_COLOR: "True"
     steps:
       - checkout
       - run:
@@ -29,5 +29,3 @@ workflows:
   ansible_exec:
     jobs:
       - ansible_exec
-
-...

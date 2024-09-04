@@ -16,7 +16,7 @@
   systemd_service:
     name: "{{ item }}"
     state: stopped
-    masked: yes
+    masked: true
   loop:
     - ntpd
     - chronie

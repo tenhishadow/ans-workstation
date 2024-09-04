@@ -1,12 +1,11 @@
 ---
-name: "github-super-linter"
+name: github-super-linter
 
 permissions:
   contents: read
 
 on:
   pull_request:
-
 jobs:
   github-super-linter:
     runs-on: ubuntu-latest

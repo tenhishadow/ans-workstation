@@ -96,4 +96,3 @@
 #     state: absent
 #     recursive: yes
 #   when: not yay_bin.stat.exists
-
