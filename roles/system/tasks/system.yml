@@ -86,6 +86,7 @@
   when:
     - configure_sysctl|bool
     - ansible_facts['virtualization_type'] != 'docker'
+    - lookup('env', 'CI') != 'true' # for CirleCI
 
 - name: configure | systemd-journald
   become: true
@@ -115,5 +116,6 @@
   with_dict: "{{ sshd_config }}"
   when:
     - ansible_facts['virtualization_type'] != 'docker'
+    - lookup('env', 'CI') != 'true' # for CirleCI
   notify: restart_sshd
   tags: sshd
