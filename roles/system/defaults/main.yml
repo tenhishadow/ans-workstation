@@ -26,6 +26,7 @@ locales:
   - de_DE
   - cs_CZ
   - fr_FR
+  - C
 
 configs:
   owner: root

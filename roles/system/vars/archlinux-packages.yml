@@ -71,7 +71,7 @@ packages:
   - pigz
   - reflector
   - remmina
-  - salt
+  # - salt # moved to AUR :(
   - screen
   - scrot
   - tcl
@@ -80,6 +80,10 @@ packages:
   - gawk
   - base-devel
   - "{{ cron_package }}"
+  - imagemagick
+  - hwinfo
+  - nvme-cli
+  - fping # Utility to ping multiple hosts at once
   # : }}}
 
   # : utils {{{
@@ -113,10 +117,12 @@ packages:
   - terragrunt
   - ugrep # better grep
   - fzf # https://github.com/junegunn/fzf/tree/master
-  # : }}}
-
-  # : dev {{{
   - ttf-ibm-plex # CLI
   - ttf-opensans # GUI
   - terminus-font
+  - qrencode
+  - vault
+  - dos2unix
+  - dnsperf
+  - prettier
   # : }}}
