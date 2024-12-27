@@ -53,7 +53,6 @@ packages:
 
   # : system {{{
   - bash-completion
-  - bash-language-server
   - bind-tools
   - coreutils
   - cracklib
@@ -125,4 +124,17 @@ packages:
   - dos2unix
   - dnsperf
   - prettier
+  - bash-language-server
+  - ansible-language-server
+  - gopls
+  - rust-analyzer
+  - typescript-language-server
+  - vscode-css-languageserver
+  - vscode-html-languageserver
+  - vscode-json-languageserver
+  - yaml-language-server
+  - lua-language-server
+  - arduino-language-server
+  - eslint-language-server
+  - python-lsp-server
   # : }}}
