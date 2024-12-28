@@ -83,6 +83,7 @@ packages:
   - hwinfo
   - nvme-cli
   - fping # Utility to ping multiple hosts at once
+  - mono
   # : }}}
 
   # : utils {{{
@@ -127,6 +128,7 @@ packages:
   - bash-language-server
   - ansible-language-server
   - gopls
+  - go
   - rust-analyzer
   - typescript-language-server
   - vscode-css-languageserver
@@ -137,4 +139,11 @@ packages:
   - arduino-language-server
   - eslint-language-server
   - python-lsp-server
+  - python-pip
+  - cython
+  - jdk-openjdk
+  - openjdk-doc
+  - openjdk-src
+  - yarn
+  - npm
   # : }}}
