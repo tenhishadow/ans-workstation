@@ -53,7 +53,6 @@ packages:
 
   # : system {{{
   - bash-completion
-  - bash-language-server
   - bind-tools
   - coreutils
   - cracklib
@@ -84,6 +83,7 @@ packages:
   - hwinfo
   - nvme-cli
   - fping # Utility to ping multiple hosts at once
+  - mono
   # : }}}
 
   # : utils {{{
@@ -125,4 +125,25 @@ packages:
   - dos2unix
   - dnsperf
   - prettier
+  - bash-language-server
+  - ansible-language-server
+  - gopls
+  - go
+  - rust-analyzer
+  - typescript-language-server
+  - vscode-css-languageserver
+  - vscode-html-languageserver
+  - vscode-json-languageserver
+  - yaml-language-server
+  - lua-language-server
+  - arduino-language-server
+  - eslint-language-server
+  - python-lsp-server
+  - python-pip
+  - cython
+  - jdk-openjdk
+  - openjdk-doc
+  - openjdk-src
+  - yarn
+  - npm
   # : }}}
