@@ -93,6 +93,7 @@ packages:
 
   # : dev {{{
   - vim
+  - neovim
   - code
   - task
   - tea
