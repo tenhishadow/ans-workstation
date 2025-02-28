@@ -8,15 +8,32 @@
     group: "{{ configs.group }}"
     mode: "{{ configs.mode }}"
 
-- name: configure | reflector job
+- name: remove cron reflector job
   become: true
   cron:
+    state: absent
     user: root
     name: reflector
     job: reflector --protocol https --latest 10 --sort rate --save /etc/pacman.d/mirrorlist >/dev/null 2>/dev/null
     special_time: daily
   ignore_errors: true # if cron not presented
   no_log: true # it doesnt matter
+
+- name: reflector | config
+  become: true
+  template:
+    src:   templates/reflector.conf.j2
+    dest:  /etc/xdg/reflector/reflector.conf
+    owner: "{{ configs.owner }}"
+    group: "{{ configs.group }}"
+    mode:  "{{ configs.mode }}"
+
+- name: reflector | configure timer
+  become: true
+  systemd_service:
+    name:    reflector.timer
+    state:   started
+    enabled: true
 
 # - name: yay | check if installed
 #   stat:

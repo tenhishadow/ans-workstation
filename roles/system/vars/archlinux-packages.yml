@@ -89,11 +89,13 @@ packages:
   # : utils {{{
   - keepassxc
   - nextcloud-client
+  - rclone
   # : }}}
 
   # : dev {{{
   - vim
   - neovim
+  - python-pynvim
   - code
   - task
   - tea
@@ -147,4 +149,5 @@ packages:
   - openjdk-src
   - yarn
   - npm
+  - nerd-fonts
   # : }}}
