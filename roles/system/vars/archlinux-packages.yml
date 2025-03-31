@@ -89,11 +89,13 @@ packages:
   # : utils {{{
   - keepassxc
   - nextcloud-client
+  - rclone
   # : }}}
 
   # : dev {{{
   - vim
   - neovim
+  - python-pynvim
   - code
   - task
   - tea
@@ -139,6 +141,7 @@ packages:
   - lua-language-server
   - arduino-language-server
   - eslint-language-server
+  - systemd-language-server
   - python-lsp-server
   - python-pip
   - cython
@@ -147,4 +150,5 @@ packages:
   - openjdk-src
   - yarn
   - npm
+  - nerd-fonts
   # : }}}
