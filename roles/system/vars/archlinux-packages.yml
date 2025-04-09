@@ -130,6 +130,7 @@ packages:
   - prettier
   - bash-language-server
   - ansible-language-server
+  - pyright
   - gopls
   - go
   - rust-analyzer
