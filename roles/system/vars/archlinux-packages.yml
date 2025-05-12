@@ -84,6 +84,8 @@ packages:
   - nvme-cli
   - fping # Utility to ping multiple hosts at once
   - mono
+  - irqbalance
+  - tuned
   # : }}}
 
   # : utils {{{
@@ -99,8 +101,10 @@ packages:
   - code
   - task
   - tea
-  # - docker #         "docker: /usr/bin/docker-init exists in filesystem",
-  # - docker-compose
+  - docker
+  - docker-compose
+  - docker-buildx
+  - python-docker
   - kubectl
   - k9s
   - make

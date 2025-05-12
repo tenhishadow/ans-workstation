@@ -1,0 +1,47 @@
+- name: Ensure docker group exists
+  become: true
+  group:
+    name: docker
+    state: present
+
+- name: create docker conf dir
+  become: true
+  file:
+    path: "{{ docker_conf_dir }}"
+    state: directory
+
+- name: configure docker
+  become: true
+  template:
+    backup: true
+    src: templates/docker.json.j2
+    dest: "{{ docker_conf_dir}}/daemon.json"
+    #owner: "{{ configs.owner }}"
+    #group: "{{ configs.group }}"
+    #mode: "{{ configs.mode }}"
+  #notify: restart docker
+
+- name: Add current user to docker group
+  become: true
+  user:
+    name: "{{ ansible_user_id }}"
+    groups: docker
+    append: yes
+
+#- name: start and enable docker daemon
+#  systemd:
+#    name: docker
+#    masked: no
+#    enabled: yes
+#    state: started
+
+#- name: Add daily Docker cleanup to cron
+#  cron:
+#    name: "docker cleanup"
+#    minute: "00"
+#    hour: "02"
+#    day: "*"
+#    month: "*"
+#    weekday: "*"
+#    user: root
+#    job: "/usr/bin/docker system prune --all --force > /dev/null 2>&1"

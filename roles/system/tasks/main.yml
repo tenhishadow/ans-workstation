@@ -23,6 +23,13 @@
   ansible.builtin.include_tasks:
     file: "{{ ansible_os_family | lower }}-tasks.yml"
 
+- name: docker config
+  ansible.builtin.include_tasks:
+    file: docker.yml
+  when:
+    - ansible_facts['virtualization_type'] != 'docker'
+    - lookup('env', 'CI') != 'true' # for CirleCI
+
 - name: laptop-related configuration
   ansible.builtin.include_tasks:
     file: laptop.yml
