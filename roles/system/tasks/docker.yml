@@ -1,3 +1,4 @@
+---
 - name: Ensure docker group exists
   become: true
   group:
@@ -15,7 +16,7 @@
   template:
     backup: true
     src: templates/docker.json.j2
-    dest: "{{ docker_conf_dir}}/daemon.json"
+    dest: "{{ docker_conf_dir }}/daemon.json"
     #owner: "{{ configs.owner }}"
     #group: "{{ configs.group }}"
     #mode: "{{ configs.mode }}"
@@ -26,7 +27,7 @@
   user:
     name: "{{ ansible_user_id }}"
     groups: docker
-    append: yes
+    append: true
 
 #- name: start and enable docker daemon
 #  systemd:

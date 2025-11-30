@@ -22,17 +22,17 @@
 - name: reflector | config
   become: true
   template:
-    src:   templates/reflector.conf.j2
-    dest:  /etc/xdg/reflector/reflector.conf
+    src: templates/reflector.conf.j2
+    dest: /etc/xdg/reflector/reflector.conf
     owner: "{{ configs.owner }}"
     group: "{{ configs.group }}"
-    mode:  "{{ configs.mode }}"
+    mode: "{{ configs.mode }}"
 
 - name: reflector | configure timer
   become: true
   systemd_service:
-    name:    reflector.timer
-    state:   started
+    name: reflector.timer
+    state: started
     enabled: true
 
 # - name: yay | check if installed
