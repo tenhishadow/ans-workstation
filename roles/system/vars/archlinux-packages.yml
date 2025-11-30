@@ -156,4 +156,14 @@ packages:
   - yarn
   - npm
   - nerd-fonts
+  - ruff
+  - yamllint
+  - tflint
+  - luacheck
+  - autopep8
+  - pint
+  - biome
+  # - hadolint-bin
+  - sqlfluff
+  - python-black
   # : }}}
