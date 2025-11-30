@@ -34,7 +34,6 @@
     name: reflector.timer
     state: started
     enabled: true
-
 # - name: yay | check if installed
 #   stat:
 #     path: /usr/bin/yay

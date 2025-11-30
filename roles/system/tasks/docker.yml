@@ -28,7 +28,6 @@
     name: "{{ ansible_user_id }}"
     groups: docker
     append: true
-
 #- name: start and enable docker daemon
 #  systemd:
 #    name: docker
