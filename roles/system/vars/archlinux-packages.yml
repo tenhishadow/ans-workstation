@@ -113,6 +113,7 @@ packages:
   - kubectl
   - kubeconform
   - sops
+  - age
   - helm
   - helmfile
   - k9s
@@ -172,10 +173,19 @@ packages:
   - autopep8
   - pint
   - biome
-  # - hadolint-bin
   - sqlfluff
   - python-black
   - ansible-lint
+  - ansible
+  - bats
+  - bats-assert
+  - bats-support
+  - clang
+  - rust
+  - ripgrep
+  - ripgrep-all
+  - fd
+  - wireshark-cli
   - gitleaks
   - trivy
   - osv-scanner
