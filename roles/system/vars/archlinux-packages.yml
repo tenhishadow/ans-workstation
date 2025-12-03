@@ -64,6 +64,8 @@ packages:
   - gnupg
   - gnutls
   - gzip
+  - unzip
+  - zip
   - man-pages
   - mc
   - nmap
@@ -118,7 +120,7 @@ packages:
   - git
   - aws-cli
   - kustomize # Template-free customization of Kubernetes YAML manifests
-  - python-pre-commit # https://pre-commit.com/#usage
+  - pre-commit # https://pre-commit.com/#usage
   - terraform
   - packer
   - terragrunt
@@ -166,4 +168,6 @@ packages:
   # - hadolint-bin
   - sqlfluff
   - python-black
+  - ansible-lint
+  - gitleaks
   # : }}}
