@@ -1,9 +1,9 @@
 ---
-- name: Vars | include for {{ ansible_os_family | lower }}
+- name: Vars | include for {{ ansible.os_family | lower }}
   ansible.builtin.include_vars: "{{ item }}"
   loop:
-    - "{{ ansible_os_family | lower }}.yml"
-    - "{{ ansible_os_family | lower }}-packages.yml"
+    - "{{ ansible.os_family | lower }}.yml"
+    - "{{ ansible.os_family | lower }}-packages.yml"
 
 - name: Packages | install
   become: true
@@ -21,7 +21,7 @@
 
 - name: OS-related configuration
   ansible.builtin.include_tasks:
-    file: "{{ ansible_os_family | lower }}-tasks.yml"
+    file: "{{ ansible.os_family | lower }}-tasks.yml"
 
 - name: docker config
   ansible.builtin.include_tasks:
