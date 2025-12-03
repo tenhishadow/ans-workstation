@@ -21,7 +21,7 @@ packages:
   - iotop
   - nmon
   - lsof
-  - bashtop
+  - btop
   # : }}}
 
   # : network {{{
@@ -69,6 +69,7 @@ packages:
   - man-pages
   - mc
   - nmap
+  - mtr
   - pigz
   - reflector
   - remmina
@@ -107,7 +108,13 @@ packages:
   - docker-compose
   - docker-buildx
   - python-docker
+  - buildah
+  - skopeo
   - kubectl
+  - kubeconform
+  - sops
+  - helm
+  - helmfile
   - k9s
   - make
   - cmake
@@ -170,4 +177,6 @@ packages:
   - python-black
   - ansible-lint
   - gitleaks
+  - trivy
+  - osv-scanner
   # : }}}
