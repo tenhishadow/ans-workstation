@@ -73,6 +73,7 @@ packages:
   - pigz
   - reflector
   - remmina
+  - tzdata
   # - salt # moved to AUR :(
   - screen
   - scrot
