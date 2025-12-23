@@ -160,6 +160,7 @@ packages:
   - systemd-language-server
   - python-lsp-server
   - python-pip
+  - python-pipx
   - cython
   - jdk-openjdk
   - openjdk-doc
