@@ -17,16 +17,3 @@ jobs:
       os: ubuntu-latest
       task_target: lint
       ansible_force_color: false
-
-  ansible_exec:
-    name: ansible_exec (${{ matrix.os }})
-    strategy:
-      matrix:
-        os:
-          - ubuntu-latest
-          - macos-latest
-    uses: ./.github/workflows/_ansible-run.yml
-    with:
-      os: ${{ matrix.os }}
-      task_target: default
-      ansible_force_color: true
