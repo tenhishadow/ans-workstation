@@ -8,21 +8,21 @@
 - name: create docker conf dir
   become: true
   file:
-    path:  "{{ docker_conf_dir }}"
+    path: "{{ docker_conf_dir }}"
     state: directory
     owner: "{{ configs.owner }}"
     group: "{{ configs.group }}"
-    mode:  "{{ configs.mode }}"
+    mode: "{{ configs.mode }}"
 
 - name: configure docker
   become: true
   template:
     backup: true
-    src:    templates/docker.json.j2
-    dest:   "{{ docker_conf_dir }}/daemon.json"
-    owner:  "{{ configs.owner }}"
-    group:  "{{ configs.group }}"
-    mode:   "{{ configs.mode }}"
+    src: templates/docker.json.j2
+    dest: "{{ docker_conf_dir }}/daemon.json"
+    owner: "{{ configs.owner }}"
+    group: "{{ configs.group }}"
+    mode: "{{ configs.mode }}"
 
 - name: Add current user to docker group
   become: true
