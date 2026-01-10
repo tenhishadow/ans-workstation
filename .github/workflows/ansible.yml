@@ -12,8 +12,9 @@ on:
 jobs:
   ansible_lint:
     name: ansible_lint
-    uses: ./.github/workflows/_ansible-run.yml
+    uses: tenhishadow/github_actions_templates/taskfile.uv.yaml
     with:
       os: ubuntu-latest
       task_target: lint
       ansible_force_color: false
+
