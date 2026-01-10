@@ -168,6 +168,8 @@ packages:
   - yarn
   - npm
   - nerd-fonts
+  - starship
+  - ttf-font-nerd
   - ruff
   - yamllint
   - tflint

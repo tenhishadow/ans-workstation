@@ -1,17 +1,9 @@
----
-# https://yamllint.readthedocs.io/en/stable/rules.html#module-yamllint.rules.comments
+--- # https://yamllint.readthedocs.io/en/stable/rules.html#module-yamllint.rules.comments
 
 rules:
   braces:
-    min-spaces-inside: 0
     max-spaces-inside: 1
-    min-spaces-inside-empty: 0
-    max-spaces-inside-empty: 0
-  brackets:
-    min-spaces-inside: 0
-    max-spaces-inside: 0
-    min-spaces-inside-empty: -1
-    max-spaces-inside-empty: -1
+  brackets: disable
   colons:
     max-spaces-before: 0
     max-spaces-after: -1
@@ -21,7 +13,7 @@ rules:
     max-spaces-after: 1
   comments:
     level: warning
-    require-starting-space: true
+    require-starting-space: false
     min-spaces-from-content: 1
     ignore-shebangs: true
   comments-indentation: disable
@@ -44,3 +36,5 @@ rules:
     type: unix
   trailing-spaces: enable
   truthy: disable
+
+...
