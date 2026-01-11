@@ -15,13 +15,18 @@ tasks:
     cmds:
       - uv sync --all-extras --dev
     silent: true
-  pre-deps:
+  os-deps:
+    status:
+      - sh -c 'type -P uv'
+      - sh -c 'type -P git'
     cmd: >-
-      sudo pacman -Sy --noconfirm python-pipenv python-setuptools
-      ||
-      echo 123 && echo 333
+      yay -Sy --noconfirm uv git ||
+      sudo pacman -Sy --noconfirm uv git ||
+      pacman -Sy --noconfirm uv git
   default:
-    deps: [deps]
+    deps:
+      - deps
+      - os-deps
     cmds:
       - uv run ansible-playbook {{.playbook}}
   lint:
@@ -35,7 +40,3 @@ tasks:
   upgrade:
     cmds:
       - uv sync --upgrade
-# setup        = "ansible localhost -m setup"
-# install      = "ansible-playbook playbook_install.yml --diff"
-# configs      = "ansible-playbook playbook_install.yml --tags configs --diff"
-# pkg          = "ansible-playbook playbook_install.yml --tags pkg --diff"
