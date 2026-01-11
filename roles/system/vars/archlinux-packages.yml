@@ -21,7 +21,7 @@ packages:
   - iotop
   - nmon
   - lsof
-  - bashtop
+  - btop
   # : }}}
 
   # : network {{{
@@ -36,7 +36,7 @@ packages:
   - thunderbird
   - wget
   - openssh
-  - gnu-netcat
+  - openbsd-netcat
   # : }}}
 
   # : network {{{
@@ -64,12 +64,16 @@ packages:
   - gnupg
   - gnutls
   - gzip
+  - unzip
+  - zip
   - man-pages
   - mc
   - nmap
+  - mtr
   - pigz
   - reflector
   - remmina
+  - tzdata
   # - salt # moved to AUR :(
   - screen
   - scrot
@@ -84,6 +88,8 @@ packages:
   - nvme-cli
   - fping # Utility to ping multiple hosts at once
   - mono
+  - irqbalance
+  - tuned
   # : }}}
 
   # : utils {{{
@@ -99,9 +105,18 @@ packages:
   - code
   - task
   - tea
-  # - docker #         "docker: /usr/bin/docker-init exists in filesystem",
-  # - docker-compose
+  - docker
+  - docker-compose
+  - docker-buildx
+  - python-docker
+  - buildah
+  - skopeo
   - kubectl
+  - kubeconform
+  - sops
+  - age
+  - helm
+  - helmfile
   - k9s
   - make
   - cmake
@@ -114,7 +129,7 @@ packages:
   - git
   - aws-cli
   - kustomize # Template-free customization of Kubernetes YAML manifests
-  - python-pre-commit # https://pre-commit.com/#usage
+  - pre-commit # https://pre-commit.com/#usage
   - terraform
   - packer
   - terragrunt
@@ -145,6 +160,7 @@ packages:
   - systemd-language-server
   - python-lsp-server
   - python-pip
+  - python-pipx
   - cython
   - jdk-openjdk
   - openjdk-doc
@@ -152,4 +168,29 @@ packages:
   - yarn
   - npm
   - nerd-fonts
+  - starship
+  - ttf-font-nerd
+  - ruff
+  - yamllint
+  - tflint
+  - luacheck
+  - autopep8
+  - pint
+  - biome
+  - sqlfluff
+  - python-black
+  - ansible-lint
+  - ansible
+  - bats
+  - bats-assert
+  - bats-support
+  - clang
+  - rust
+  - ripgrep
+  - ripgrep-all
+  - fd
+  - wireshark-cli
+  - gitleaks
+  - trivy
+  - osv-scanner
   # : }}}

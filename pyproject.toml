@@ -1,0 +1,16 @@
+[project]
+name = "ans-workstation"
+version = "0.0.0"
+dependencies = [
+    "ansible-lint",
+    "ansible",
+    "jmespath",
+    "yamllint",
+]
+
+[tool.uv]
+package = false
+
+[[tool.uv.index]]
+name = "pypi"
+url = "https://pypi.org/simple"

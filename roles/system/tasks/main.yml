@@ -1,15 +1,18 @@
----
-- name: Vars | include for {{ ansible_os_family | lower }}
+- name: Vars | include for {{ ansible_facts.os_family | lower }}
   ansible.builtin.include_vars: "{{ item }}"
   loop:
-    - "{{ ansible_os_family | lower }}.yml"
-    - "{{ ansible_os_family | lower }}-packages.yml"
+    - "{{ ansible_facts.os_family | lower }}.yml"
+    - "{{ ansible_facts.os_family | lower }}-packages.yml"
+  tags:
+    - pkg
 
 - name: Packages | install
   become: true
   ansible.builtin.package:
     name: "{{ packages }}"
     state: present
+  tags:
+    - pkg
 
 - name: Time | configure
   ansible.builtin.include_tasks:
@@ -21,7 +24,14 @@
 
 - name: OS-related configuration
   ansible.builtin.include_tasks:
-    file: "{{ ansible_os_family | lower }}-tasks.yml"
+    file: "{{ ansible_facts.os_family | lower }}-tasks.yml"
+
+- name: docker config
+  ansible.builtin.include_tasks:
+    file: docker.yml
+  when:
+    - ansible_facts['virtualization_type'] != 'docker'
+    - lookup('env', 'CI') != 'true' # for CirleCI
 
 - name: laptop-related configuration
   ansible.builtin.include_tasks:

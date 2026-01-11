@@ -71,7 +71,7 @@
     enabled: true
   when:
     - lookup('env', 'CI') != 'true'
-    - ansible_service_mgr == "systemd"
+    - ansible_facts.service_mgr == "systemd"
 
 - name: configure | sysctl
   become: true
@@ -85,8 +85,8 @@
   with_dict: "{{ sysctl_params }}"
   when:
     - configure_sysctl|bool
-    - ansible_facts['virtualization_type'] != 'docker'
-    - lookup('env', 'CI') != 'true' # for CirleCI
+    - ansible_facts.virtualization_type != 'docker'
+    - lookup('env', 'CI') != 'true'
 
 - name: configure | systemd-journald
   become: true
@@ -99,7 +99,7 @@
     mode: "{{ configs.mode }}"
   notify: restart journald
   when:
-    - ansible_service_mgr == "systemd"
+    - ansible_facts.service_mgr == "systemd"
 
 - name: configure sshd
   become: true
@@ -115,7 +115,7 @@
     validate: /usr/sbin/sshd -T -f %s
   with_dict: "{{ sshd_config }}"
   when:
-    - ansible_facts['virtualization_type'] != 'docker'
+    - ansible_facts.virtualization_type != 'docker'
     - lookup('env', 'CI') != 'true' # for CirleCI
   notify: restart_sshd
   tags: sshd

@@ -13,16 +13,10 @@ jobs:
           name: deps | system | install
           command: >-
             pacman -Sy --noconfirm
-            base base-devel python-pipenv python-setuptools
-      - run:
-          name: deps | python | install
-          command: pipenv install
-      - run:
-          name: setup
-          command: pipenv run setup
+            go-task uv git
       - run:
           name: exec
-          command: pipenv run install -vvv
+          command: go-task
 
 workflows:
   ansible_exec:
