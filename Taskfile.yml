@@ -15,7 +15,7 @@ tasks:
     cmds:
       - uv sync --all-extras --dev
     silent: true
-  pre-deps:
+  os-deps:
     status:
       - sh -c 'type -P uv'
       - sh -c 'type -P git'
@@ -26,7 +26,7 @@ tasks:
   default:
     deps:
       - deps
-      - pre-deps
+      - os-deps
     cmds:
       - uv run ansible-playbook {{.playbook}}
   lint:
