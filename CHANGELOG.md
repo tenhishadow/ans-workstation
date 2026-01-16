@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/tenhishadow/ans-workstation/compare/v1.0.1...v1.0.2) (2026-01-16)
+
+
+### Miscellaneous Chores
+
+* **deps:** update pre-commit hook zizmorcore/zizmor-pre-commit to v1.21.0 ([#52](https://github.com/tenhishadow/ans-workstation/issues/52)) ([db04cfc](https://github.com/tenhishadow/ans-workstation/commit/db04cfc9e2ea4c5f34d6f648acd4b898e17c0462))
+
 ## [1.0.1](https://github.com/tenhishadow/ans-workstation/compare/v1.0.0...v1.0.1) (2026-01-11)
 
 
