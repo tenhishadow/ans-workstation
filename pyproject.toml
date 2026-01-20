@@ -2,10 +2,9 @@
 name = "ans-workstation"
 version = "1.0.2"
 dependencies = [
-    "ansible-lint",
     "ansible",
-    "jmespath",
-    "yamllint",
+    "mitogen",
+    "jmespath"
 ]
 
 [tool.uv]
