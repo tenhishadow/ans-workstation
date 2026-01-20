@@ -39,6 +39,7 @@ repos:
     rev: v1.22.0
     hooks:
       - id: zizmor
+        args: ["-c", ".zizmor.yml"]
   - repo: local
     hooks:
       - id: yaml-prettier

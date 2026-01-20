@@ -3,9 +3,9 @@
 version: "3"
 
 vars:
-  RUN_PLAYBOOK:      "uv run ansible-playbook playbook_install.yml {{.CLI_ARGS}}"
+  RUN_PLAYBOOK: "uv run ansible-playbook playbook_install.yml {{.CLI_ARGS}}"
   DEPS_OS_ARCHLINUX: "uv git"
-  MITOGEN_VARS:      "ANSIBLE_STRATEGY=serverscom.mitogen.mitogen_linear"
+  MITOGEN_VARS: "ANSIBLE_STRATEGY=serverscom.mitogen.mitogen_linear"
 
 tasks:
   deps-os:
@@ -42,4 +42,4 @@ tasks:
       .venv
   default:
     deps: [deps-galaxy]
-    cmd: '{{.MITOGEN_VARS}} {{.RUN_PLAYBOOK}}'
+    cmd: "{{.MITOGEN_VARS}} {{.RUN_PLAYBOOK}}"
