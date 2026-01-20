@@ -4,7 +4,7 @@ version: "3"
 
 vars:
   RUN_PLAYBOOK: "uv run ansible-playbook playbook_install.yml {{.CLI_ARGS}}"
-  DEPS_OS_ARCHLINUX: "uv git"
+  DEPS_OS_ARCHLINUX: "uv git sudo"
   MITOGEN_VARS: "ANSIBLE_STRATEGY=serverscom.mitogen.mitogen_linear"
 
 tasks:
@@ -12,10 +12,11 @@ tasks:
     status:
       - sh -c 'type -P uv'
       - sh -c 'type -P git'
+      - sh -c 'type -P sudo'
     cmd: >-
       $(grep -q Archxx /etc/*release*)
       && sudo pacman -Sy --noconfirm {{.DEPS_OS_ARCHLINUX}}
-      || ( echo "please manage deps manually" && exit 1)
+      || pacman -Sy --noconfirm {{.DEPS_OS_ARCHLINUX}}
   deps-python:
     silent: true
     deps: [deps-os]
