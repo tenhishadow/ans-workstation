@@ -1,1 +1,4 @@
-.venv
+.ansible/*
+.collections/*
+.task/*
+.venv/*

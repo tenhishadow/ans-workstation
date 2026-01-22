@@ -1,6 +1,7 @@
 ---
 motd_message: o_O
 issue_message: o_O
+ansible_managed: o_O
 
 journald_config:
   storage: persistent

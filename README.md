@@ -5,13 +5,18 @@
 Special repository for configuring workstation with Ansible
 Only Archlinux is supported
 
+
+## Deps-os
+
+```bash
+pacman -Sy --noconfirm go-task git
+```
+
 ```bash
 
 _INSTALL_DIR="$HOME/.ans-workstation" \
-  && yay -Sy --noconfirm python-pipenv python-setuptools \
   && git clone https://github.com/tenhishadow/ans-workstation.git $_INSTALL_DIR \
   && cd $_INSTALL_DIR \
-  && pipenv install \
-  && pipenv run install
+  && go-task
 
 ```

@@ -24,7 +24,7 @@ repos:
     rev: v1.38.0
     hooks:
       - id: yamllint
-        args: ["-c", "dotfiles/.yamllint"]
+        args: ["-c", ".yamllint"]
   - repo: https://github.com/shellcheck-py/shellcheck-py
     rev: v0.11.0.1
     hooks:
@@ -39,12 +39,13 @@ repos:
     rev: v1.22.0
     hooks:
       - id: zizmor
-  - repo: local
-    hooks:
-      - id: yaml-prettier
-        name: run prettier
-        language: system
-        files: ^.*$
-        types_or: [yaml]
-        entry: |
-          bash -c 'prettier "${@}" --write'
+        args: ["-c", ".zizmor.yml"]
+  # - repo: local
+  #   hooks:
+  #     - id: yaml-prettier
+  #       name: run prettier
+  #       language: system
+  #       files: ^.*$
+  #       types_or: [yaml]
+  #       entry: |
+  #         bash -c 'prettier "${@}" --write'

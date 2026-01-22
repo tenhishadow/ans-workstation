@@ -9,3 +9,6 @@ skip_list:
   - latest[git]
   - no-changed-when
   - command-instead-of-shell
+exclude_paths:
+  - .collections/
+  - .collections/**/*
