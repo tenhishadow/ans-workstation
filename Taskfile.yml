@@ -10,18 +10,22 @@ vars:
 tasks:
   deps-os:
     status:
-      - sh -c 'type -P uv'
-      - sh -c 'type -P git'
-      - sh -c 'type -P sudo'
+      - $SHELL -c 'type -P uv'
+      - $SHELL -c 'type -P git'
+      - $SHELL -c 'type -P sudo'
     cmd: >-
-      $(grep -q Archxx /etc/*release*)
-      && sudo pacman -Sy --noconfirm {{.DEPS_OS_ARCHLINUX}}
+      sudo pacman -Sy --noconfirm {{.DEPS_OS_ARCHLINUX}}
       || pacman -Sy --noconfirm {{.DEPS_OS_ARCHLINUX}}
   deps-python:
     silent: true
     deps: [deps-os]
-    cmds:
-      - uv sync --locked --quiet
+    cmd: >-
+      uv sync
+      --locked
+      --no-build
+      --no-install-project
+      --no-dev
+      --managed-python
   deps-galaxy:
     silent: true
     deps: [deps-python]
@@ -30,6 +34,7 @@ tasks:
   deps-upgrade:
     cmds:
       - uv sync --upgrade
+
   lint:
     deps: [deps-python]
     cmds:
