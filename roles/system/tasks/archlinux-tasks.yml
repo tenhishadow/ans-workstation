@@ -1,7 +1,7 @@
 ---
 - name: configure | pacman
   become: true
-  template:
+  ansible.builtin.template:
     src: templates/pacman.conf.j2
     dest: /etc/pacman.conf
     owner: "{{ configs.owner }}"
@@ -10,7 +10,7 @@
 
 - name: remove cron reflector job
   become: true
-  cron:
+  ansible.builtin.cron:
     state: absent
     user: root
     name: reflector
@@ -21,7 +21,7 @@
 
 - name: reflector | config
   become: true
-  template:
+  ansible.builtin.template:
     src: templates/reflector.conf.j2
     dest: /etc/xdg/reflector/reflector.conf
     owner: "{{ configs.owner }}"
@@ -30,7 +30,7 @@
 
 - name: reflector | configure timer
   become: true
-  systemd_service:
+  ansible.builtin.systemd_service:
     name: reflector.timer
     state: started
     enabled: true

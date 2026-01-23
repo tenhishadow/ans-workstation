@@ -1,20 +1,20 @@
 ---
 - name: restart journald
   become: true
-  service:
+  ansible.builtin.service:
     name: systemd-journald
     state: restarted
 
 - name: restart_sshd
   become: true
-  service:
+  ansible.builtin.service:
     name: sshd
     state: restarted
     enabled: true
 
 - name: restart_ntp
   become: true
-  service:
+  ansible.builtin.service:
     name: "{{ ntp_service }}"
     state: restarted
     enabled: true
@@ -23,14 +23,14 @@
 
 - name: systemd-vconsole-setup
   become: true
-  service:
+  ansible.builtin.service:
     name: systemd-vconsole-setup.service
     state: restarted
   when:
     - lookup('env', 'CI') != 'true'
 
 - name: sshd_agent_user
-  systemd:
+  ansible.builtin.systemd:
     scope: user
     name: ssh-agent.service
     state: restarted

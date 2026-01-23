@@ -1,7 +1,7 @@
 ---
 - name: locale | configure gen
   become: true
-  template:
+  ansible.builtin.template:
     backup: true
     src: templates/locale.gen.j2
     dest: /etc/locale.gen
@@ -13,7 +13,7 @@
 
 - name: locale | configure
   become: true
-  template:
+  ansible.builtin.template:
     backup: true
     src: templates/locale.conf.j2
     dest: /etc/locale.conf
@@ -25,14 +25,14 @@
 
 - name: locale | generate
   become: true
-  command: locale-gen
+  ansible.builtin.command: locale-gen
   changed_when: false
   when:
     - lookup('env', 'CI') != 'true'
 
 - name: vconsole | configure
   become: true
-  template:
+  ansible.builtin.template:
     backup: true
     src: templates/vconsole.conf.j2
     dest: /etc/vconsole.conf
@@ -44,7 +44,7 @@
 
 - name: configure | /etc/motd
   become: true
-  template:
+  ansible.builtin.template:
     backup: true
     src: templates/motd.j2
     dest: /etc/motd
@@ -54,7 +54,7 @@
 
 - name: configure /etc/issue
   become: true
-  template:
+  ansible.builtin.template:
     backup: true
     src: templates/issue.j2
     dest: /etc/issue
@@ -64,7 +64,7 @@
 
 - name: start/enable cron
   become: true
-  systemd_service:
+  ansible.builtin.systemd_service:
     state: started
     daemon_reload: true
     name: "{{ cron_package }}"
@@ -75,7 +75,7 @@
 
 - name: configure | sysctl
   become: true
-  sysctl:
+  ansible.builtin.sysctl:
     name: "{{ item.key }}"
     value: "{{ item.value }}"
     sysctl_set: true
@@ -90,7 +90,7 @@
 
 - name: configure | systemd-journald
   become: true
-  template:
+  ansible.builtin.template:
     backup: true
     src: templates/journald.conf.j2
     dest: /etc/systemd/journald.conf
@@ -103,7 +103,7 @@
 
 - name: configure sshd
   become: true
-  lineinfile:
+  ansible.builtin.lineinfile:
     backup: true
     path: /etc/ssh/sshd_config
     regexp: ^{{ item.key }}

@@ -1,19 +1,19 @@
 ---
 - name: tzdata | Ensure tzdata package is installed
   become: true
-  package:
+  ansible.builtin.package:
     name: "{{ tzdata_package }}"
     state: present
 
 - name: tzdata | set timezone to {{ common_timezone }}
   become: true
-  timezone:
+  ansible.builtin.timezone:
     name: "{{ common_timezone }}"
 
 - name: ntp | disable old daemons
   become: true
   ignore_errors: true # because this service could be not presented
-  systemd_service:
+  ansible.builtin.systemd_service:
     name: "{{ item }}"
     state: stopped
     masked: true
@@ -23,7 +23,7 @@
 
 - name: ntp | configure timesyncd
   become: true
-  template:
+  ansible.builtin.template:
     backup: true
     src: templates/timesyncd.conf.j2
     dest: /etc/systemd/timesyncd.conf
@@ -35,7 +35,7 @@
 
 - name: ntp | start and enable during play
   become: true
-  service:
+  ansible.builtin.service:
     name: "{{ ntp_service }}"
     state: started
     enabled: true

@@ -1,13 +1,13 @@
 ---
 - name: Ensure docker group exists
   become: true
-  group:
+  ansible.builtin.group:
     name: docker
     state: present
 
 - name: create docker conf dir
   become: true
-  file:
+  ansible.builtin.file:
     path: "{{ docker_conf_dir }}"
     state: directory
     owner: "{{ configs.owner }}"
@@ -16,7 +16,7 @@
 
 - name: configure docker
   become: true
-  template:
+  ansible.builtin.template:
     backup: true
     src: templates/docker.json.j2
     dest: "{{ docker_conf_dir }}/daemon.json"
@@ -26,7 +26,7 @@
 
 - name: Add current user to docker group
   become: true
-  user:
+  ansible.builtin.user:
     name: "{{ ansible_facts.user_id }}"
     groups: docker
     append: true
