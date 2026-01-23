@@ -7,7 +7,7 @@
 
 - name: tzdata | set timezone to {{ common_timezone }}
   become: true
-  ansible.builtin.timezone:
+  community.general.timezone:
     name: "{{ common_timezone }}"
 
 - name: ntp | disable old daemons

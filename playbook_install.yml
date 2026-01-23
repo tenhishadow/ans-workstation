@@ -5,20 +5,20 @@
     - system
   tasks:
     - name: dotfiles | check already presented
-      stat:
+      ansible.builtin.stat:
         path: "{{ ansible_facts.user_dir }}/.dotfiles"
       register: dotfiles
       # FIXME add place a file to notify it's installed e.g. ~/.dotfiles_installed
 
     - name: dotfiles | clone
-      git:
+      ansible.builtin.git:
         repo: https://github.com/tenhishadow/dotfiles.git
         dest: "{{ ansible_facts.user_dir }}/.dotfiles"
       when:
         - not dotfiles.stat.exists
 
     - name: dotfiles | install
-      shell:
+      ansible.builtin.shell:
         cmd: go-task
         chdir: "{{ ansible_facts.user_dir }}/.dotfiles"
       when:

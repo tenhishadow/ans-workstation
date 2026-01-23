@@ -12,6 +12,12 @@
     state: restarted
     enabled: true
 
+- name: restart docker
+  become: true
+  ansible.builtin.service:
+    name: docker
+    state: restarted
+
 - name: restart_ntp
   become: true
   ansible.builtin.service:
@@ -28,6 +34,7 @@
     state: restarted
   when:
     - lookup('env', 'CI') != 'true'
+    - ansible_service_mgr == "systemd"
 
 - name: sshd_agent_user
   ansible.builtin.systemd:

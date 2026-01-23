@@ -23,6 +23,7 @@
     owner: "{{ configs.owner }}"
     group: "{{ configs.group }}"
     mode: "{{ configs.mode }}"
+  notify: restart docker
 
 - name: Add current user to docker group
   become: true
