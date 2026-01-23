@@ -26,6 +26,7 @@
     enabled: true
   when:
     - lookup('env', 'CI') != 'true'
+    - ansible_virtualization_type != "docker"
 
 - name: systemd-vconsole-setup
   become: true
@@ -35,6 +36,7 @@
   when:
     - lookup('env', 'CI') != 'true'
     - ansible_service_mgr == "systemd"
+    - ansible_virtualization_type != "docker"
 
 - name: sshd_agent_user
   ansible.builtin.systemd:

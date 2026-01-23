@@ -34,12 +34,15 @@ Architecture = auto
 Color
 #NoProgressBar
 CheckSpace
-#VerbosePkgLists
-ParallelDownloads = 10
+VerbosePkgLists
+ParallelDownloads = 5
+DownloadUser = alpm
+#DisableSandboxFilesystem
+#DisableSandboxSyscalls
 
 # By default, pacman accepts packages signed by keys that its local keyring
 # trusts (see pacman-key and its man page), as well as unsigned packages.
-SigLevel    = Required DatabaseOptional
+SigLevel    = Required DatabaseOptional TrustedOnly
 LocalFileSigLevel = Optional
 #RemoteFileSigLevel = Required
 

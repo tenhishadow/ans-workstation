@@ -8,6 +8,7 @@
     owner: "{{ configs.owner }}"
     group: "{{ configs.group }}"
     mode: "{{ configs.mode }}"
+  register: locale_gen_config
   notify:
     - systemd-vconsole-setup
 
@@ -23,12 +24,25 @@
   notify:
     - systemd-vconsole-setup
 
+- name: locale | list generated
+  ansible.builtin.command: locale -a
+  register: locale_list
+  changed_when: false
+
 - name: locale | generate
   become: true
   ansible.builtin.command: locale-gen
-  changed_when: false
+  vars:
+    desired_locales: >-
+      {{ locales
+         | map('regex_replace', '$', '.utf8')
+         | map('lower')
+         | list }}
+    current_locales: "{{ locale_list.stdout_lines | map('lower') | list }}"
+    missing_locales: "{{ desired_locales | difference(current_locales) }}"
   when:
     - lookup('env', 'CI') != 'true'
+    - locale_gen_config.changed or missing_locales | length > 0
 
 - name: vconsole | configure
   become: true

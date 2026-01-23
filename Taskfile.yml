@@ -3,7 +3,7 @@
 version: "3"
 
 vars:
-  RUN_PLAYBOOK: "uv run ansible-playbook playbook_install.yml {{.CLI_ARGS}}"
+  RUN_PLAYBOOK: "uv run ansible-playbook playbook_install.yml --diff {{.CLI_ARGS}}"
   DEPS_OS_ARCHLINUX: "uv git sudo"
   MITOGEN_VARS: "ANSIBLE_STRATEGY=serverscom.mitogen.mitogen_linear"
 
@@ -49,3 +49,9 @@ tasks:
   default:
     deps: [deps-galaxy]
     cmd: "{{.MITOGEN_VARS}} {{.RUN_PLAYBOOK}}"
+  test:
+    cmd: >-
+      docker run --rm -it
+      -v "$(pwd):/.ans-workstation:ro"
+      archlinux:latest
+      bash -c 'cd .ans-workstation && ./.test/exec.sh'

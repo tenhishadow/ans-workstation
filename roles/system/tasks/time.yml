@@ -41,3 +41,5 @@
     enabled: true
   when:
     - lookup('env', 'CI') != 'true'
+    - ansible_facts.service_mgr == "systemd"
+    - ansible_virtualization_type != "docker"
