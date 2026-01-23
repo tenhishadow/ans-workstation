@@ -9,7 +9,7 @@ Only Archlinux is supported
 ## Deps-os
 
 ```bash
-pacman -Sy --noconfirm go-task git
+pacman -Sy --noconfirm --needed go-task git
 ```
 
 ```bash

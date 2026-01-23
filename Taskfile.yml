@@ -4,7 +4,7 @@ version: "3"
 
 vars:
   RUN_PLAYBOOK: "uv run ansible-playbook playbook_install.yml --diff {{.CLI_ARGS}}"
-  DEPS_OS_ARCHLINUX: "uv git sudo"
+  DEPS_OS_ARCHLINUX: "pacman -Sy --noconfirm --needed uv git sudo"
   MITOGEN_VARS: "ANSIBLE_STRATEGY=serverscom.mitogen.mitogen_linear"
 
 tasks:
@@ -14,8 +14,8 @@ tasks:
       - $SHELL -c 'type -P git'
       - $SHELL -c 'type -P sudo'
     cmd: >-
-      sudo pacman -Sy --noconfirm {{.DEPS_OS_ARCHLINUX}}
-      || pacman -Sy --noconfirm {{.DEPS_OS_ARCHLINUX}}
+      sudo {{.DEPS_OS_ARCHLINUX}}
+      || {{.DEPS_OS_ARCHLINUX}}
   deps-python:
     silent: true
     deps: [deps-os]
@@ -26,6 +26,7 @@ tasks:
       --no-install-project
       --no-dev
       --managed-python
+      --quiet
   deps-galaxy:
     silent: true
     deps: [deps-python]
@@ -52,7 +53,7 @@ tasks:
     cmd: >-
       docker run --rm -i
       -v "$(pwd):/.ans-workstation:ro"
-      archlinux:latest
+      archlinux:multilib-devel
       bash -c 'cd .ans-workstation && ./.test/exec.sh'
       && docker system prune --volumes --force
   list:
