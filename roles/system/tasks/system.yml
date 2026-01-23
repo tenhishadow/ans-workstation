@@ -1,4 +1,23 @@
 ---
+- name: locale | check definitions
+  ansible.builtin.stat:
+    path: "{{ item.1 }}/{{ item.0 }}"
+  loop: "{{ locales | product(locale_definition_dirs) | list }}"
+  register: locale_defs
+  changed_when: false
+
+- name: locale | set locale definition lists
+  ansible.builtin.set_fact:
+    locale_available: "{{ _locale_available }}"
+    locale_missing_defs: "{{ locales | difference(_locale_available) }}"
+  vars:
+    _locale_available: >-
+      {{ locale_defs.results
+         | selectattr('stat.exists')
+         | map(attribute='item.0')
+         | unique
+         | list }}
+
 - name: locale | configure gen
   become: true
   ansible.builtin.template:
@@ -8,7 +27,6 @@
     owner: "{{ configs.owner }}"
     group: "{{ configs.group }}"
     mode: "{{ configs.mode }}"
-  register: locale_gen_config
   notify:
     - systemd-vconsole-setup
 
@@ -25,6 +43,7 @@
     - systemd-vconsole-setup
 
 - name: locale | list generated
+  become: true
   ansible.builtin.command: locale -a
   register: locale_list
   changed_when: false
@@ -34,7 +53,7 @@
   ansible.builtin.command: locale-gen
   vars:
     desired_locales: >-
-      {{ locales
+      {{ locale_available
          | map('regex_replace', '$', '.utf8')
          | map('lower')
          | list }}
@@ -42,7 +61,7 @@
     missing_locales: "{{ desired_locales | difference(current_locales) }}"
   when:
     - lookup('env', 'CI') != 'true'
-    - locale_gen_config.changed or missing_locales | length > 0
+    - missing_locales | length > 0
 
 - name: vconsole | configure
   become: true
@@ -86,6 +105,7 @@
   when:
     - lookup('env', 'CI') != 'true'
     - ansible_facts.service_mgr == "systemd"
+    - (ansible_facts.virtualization_type | default('')) not in ["docker", "podman", "container", "lxc", "lxd"]
 
 - name: configure | sysctl
   become: true

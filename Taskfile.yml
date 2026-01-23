@@ -34,7 +34,6 @@ tasks:
   deps-upgrade:
     cmds:
       - uv sync --upgrade
-
   lint:
     deps: [deps-python]
     cmds:
@@ -51,7 +50,10 @@ tasks:
     cmd: "{{.MITOGEN_VARS}} {{.RUN_PLAYBOOK}}"
   test:
     cmd: >-
-      docker run --rm -it
+      docker run --rm -i
       -v "$(pwd):/.ans-workstation:ro"
       archlinux:latest
       bash -c 'cd .ans-workstation && ./.test/exec.sh'
+      && docker system prune --volumes --force
+  list:
+    cmd: "uv run ansible-playbook --list-tasks playbook_install.yml"

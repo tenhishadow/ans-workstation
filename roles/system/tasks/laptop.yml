@@ -37,3 +37,4 @@
     daemon_reload: true
   when:
     - lookup('env', 'CI') != 'true'
+    - ansible_facts['virtualization_type'] != 'docker'

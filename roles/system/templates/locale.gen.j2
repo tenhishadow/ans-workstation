@@ -1,5 +1,6 @@
 # {{ ansible_managed }}
 # vim:ft=conf
+{% set missing = locale_missing_defs | default([]) %}
 {% for item in locales %}
-{{ item }}.UTF-8 UTF-8
+{% if item in missing %}# {% endif %}{{ item }}.UTF-8 UTF-8
 {% endfor %}

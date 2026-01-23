@@ -1,4 +1,12 @@
 ---
+- name: packages | install base and base-devel
+  become: true
+  ansible.builtin.package:
+    name:
+      - base
+      - base-devel
+    state: present
+
 - name: configure | pacman
   become: true
   ansible.builtin.template:
@@ -19,6 +27,12 @@
   ignore_errors: true # if cron not presented
   no_log: true # it doesnt matter
 
+- name: reflector | install
+  become: true
+  ansible.builtin.package:
+    name: "reflector"
+    state: present
+
 - name: reflector | config
   become: true
   ansible.builtin.template:
@@ -34,6 +48,9 @@
     name: reflector.timer
     state: started
     enabled: true
+  when:
+    - ansible_facts.service_mgr == "systemd"
+    - (ansible_facts.virtualization_type | default('')) not in ["docker", "podman", "container", "lxc", "lxd"]
 # - name: yay | check if installed
 #   stat:
 #     path: /usr/bin/yay

@@ -73,7 +73,6 @@ packages:
   - pigz
   - reflector
   - remmina
-  - tzdata
   # - salt # moved to AUR :(
   - screen
   - scrot
@@ -81,7 +80,6 @@ packages:
   - tigervnc
   - whois
   - gawk
-  - base-devel
   - "{{ cron_package }}"
   - imagemagick
   - hwinfo

@@ -28,6 +28,10 @@ locales:
   - fr_FR
   - C
 
+locale_definition_dirs:
+  - /usr/local/share/i18n/locales
+  - /usr/share/i18n/locales
+
 configs:
   owner: root
   group: root

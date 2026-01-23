@@ -27,9 +27,9 @@
   tags:
     - pkg
 
-- name: Time | configure
-  ansible.builtin.include_tasks:
-    file: time.yml
+# - name: Time | configure
+#   ansible.builtin.include_tasks:
+#     file: time.yml
 
 - name: OS-common configuration
   ansible.builtin.include_tasks:
