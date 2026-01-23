@@ -1,3 +1,16 @@
+- name: Assert | Arch Linux only
+  ansible.builtin.assert:
+    that:
+      - (ansible_facts.os_family | default('') | lower) == "archlinux"
+      - (ansible_facts.distribution | default('') | lower) == "archlinux"
+    fail_msg: >-
+      This role supports Arch Linux only.
+      Detected os_family={{ ansible_facts.os_family | default('unknown') }},
+      distribution={{ ansible_facts.distribution | default('unknown') }}.
+    quiet: true
+  tags:
+    - always
+
 - name: Vars | include for {{ ansible_facts.os_family | lower }}
   ansible.builtin.include_vars: "{{ item }}"
   loop:
