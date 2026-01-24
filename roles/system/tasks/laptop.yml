@@ -15,7 +15,7 @@
     mode: u=rwx,g-,o-
 
 - name: Create user systemd service for ssh-agent
-  become: true
+  become: false
   ansible.builtin.template:
     src: templates/ssh-agent.service.j2
     dest: "{{ ansible_facts.user_dir }}/.config/systemd/user/ssh-agent.service"
