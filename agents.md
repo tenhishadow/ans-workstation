@@ -1,15 +1,16 @@
 # agents.md
 
-## Где запускать
-- Всегда из корня репозитория.
+## Where to run
+- Always from the repository root.
 
-## Тесты (Arch Linux)
-- Полный прогон: `go-task test`
-  - Запускает контейнер `archlinux:latest` и выполняет `./.test/exec.sh`.
-  - Внутри выполняется второй прогон `go-task` для проверки идемпотентности.
-- Линтер: `go-task lint`
-- Быстрый прогон плейбука: `go-task`
+## Tests (Arch Linux)
+- Full run: `go-task test`
+  - Starts the `archlinux:latest` container and runs `./.test/exec.sh`.
+  - A second `go-task` run happens inside to verify idempotency.
+- Linter: `go-task lint`
+- Quick playbook run: `go-task`
 
-## Важно
-- На Arch Linux использовать именно `go-task` (не `task`).
-- `go-task test` требует Docker (или совместимый рантайм).
+## Important
+- On Arch Linux, use `go-task` (not `task`).
+- `go-task test` requires Docker (or a compatible runtime).
+- After any changes, обязательно run `go-task lint` and `go-task test`.

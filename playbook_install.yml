@@ -14,9 +14,9 @@
         dest: "{{ ansible_facts.user_dir }}/.dotfiles"
       when:
         - not dotfiles.stat.exists
-    - name: dotfiles | install
-      ansible.builtin.shell:
-        cmd: go-task
-        chdir: "{{ ansible_facts.user_dir }}/.dotfiles"
-      when:
-        - not dotfiles.stat.exists
+    # - name: dotfiles | install
+    #   ansible.builtin.shell:
+    #     cmd: go-task
+    #     chdir: "{{ ansible_facts.user_dir }}/.dotfiles"
+    #   when:
+    #     - not dotfiles.stat.exists

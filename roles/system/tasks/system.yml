@@ -134,6 +134,7 @@
   notify: restart journald
   when:
     - ansible_facts.service_mgr == "systemd"
+    - ansible_facts.virtualization_type != 'docker'
 
 - name: configure sshd
   become: true
