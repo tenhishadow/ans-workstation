@@ -5,7 +5,7 @@
     name: docker
     state: present
 
-- name: create docker conf dir
+- name: Create docker conf dir
   become: true
   ansible.builtin.file:
     path: "{{ system_docker_conf_dir }}"
@@ -14,7 +14,7 @@
     group: "{{ system_configs.group }}"
     mode: "{{ system_configs.mode }}"
 
-- name: configure docker
+- name: Configure docker
   become: true
   ansible.builtin.template:
     backup: true
@@ -23,7 +23,7 @@
     owner: "{{ system_configs.owner }}"
     group: "{{ system_configs.group }}"
     mode: "{{ system_configs.mode }}"
-  notify: restart docker
+  notify: RestartDocker
 
 - name: Add current user to docker group
   become: true

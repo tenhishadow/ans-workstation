@@ -1,14 +1,15 @@
 ---
-- hosts: this_host
+- name: Configure Workstation
+  hosts: this_host
   gather_facts: true
   roles:
     - system
   tasks:
-    - name: dotfiles | check already presented
+    - name: Dotfiles | Check already present
       ansible.builtin.stat:
         path: "{{ ansible_facts.user_dir }}/.dotfiles"
       register: dotfiles
-    - name: dotfiles | clone
+    - name: Dotfiles | Clone
       ansible.builtin.git:
         repo: https://github.com/tenhishadow/dotfiles.git
         dest: "{{ ansible_facts.user_dir }}/.dotfiles"

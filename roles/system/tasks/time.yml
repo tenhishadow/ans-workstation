@@ -1,16 +1,16 @@
 ---
-- name: tzdata | Ensure tzdata package is installed
+- name: Tzdata | Ensure tzdata package is installed
   become: true
   ansible.builtin.package:
     name: "{{ system_tzdata_package }}"
     state: present
 
-- name: tzdata | set timezone to {{ system_common_timezone }}
+- name: Tzdata | Set timezone to {{ system_common_timezone }}
   become: true
   community.general.timezone:
     name: "{{ system_common_timezone }}"
 
-- name: ntp | disable old daemons
+- name: NTP | Disable old daemons
   become: true
   ignore_errors: true # because this service could be not presented
   ansible.builtin.systemd_service:
@@ -21,7 +21,7 @@
     - ntpd
     - chronie
 
-- name: ntp | configure timesyncd
+- name: NTP | Configure timesyncd
   become: true
   ansible.builtin.template:
     backup: true
@@ -31,9 +31,9 @@
     group: "{{ system_configs.group }}"
     mode: "{{ system_configs.mode }}"
   notify:
-    - restart_ntp
+    - RestartNtp
 
-- name: ntp | start and enable during play
+- name: NTP | Start and enable during play
   become: true
   ansible.builtin.service:
     name: "{{ system_ntp_service }}"

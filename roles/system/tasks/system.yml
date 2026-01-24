@@ -1,12 +1,12 @@
 ---
-- name: locale | check definitions
+- name: Locale | Check definitions
   ansible.builtin.stat:
     path: "{{ item.1 }}/{{ item.0 }}"
   loop: "{{ system_locales | product(system_locale_definition_dirs) | list }}"
   register: system_locale_defs
   changed_when: false
 
-- name: locale | set locale definition lists
+- name: Locale | Set locale definition lists
   ansible.builtin.set_fact:
     system_locale_available: "{{ system_locale_available_tmp }}"
     system_locale_missing_defs: "{{ system_locales | difference(system_locale_available_tmp) }}"
@@ -18,7 +18,7 @@
          | unique
          | list }}
 
-- name: locale | configure gen
+- name: Locale | Configure gen
   become: true
   ansible.builtin.template:
     backup: true
@@ -28,9 +28,9 @@
     group: "{{ system_configs.group }}"
     mode: "{{ system_configs.mode }}"
   notify:
-    - systemd-vconsole-setup
+    - SystemdVconsoleSetup
 
-- name: locale | configure
+- name: Locale | Configure
   become: true
   ansible.builtin.template:
     backup: true
@@ -40,15 +40,15 @@
     group: "{{ system_configs.group }}"
     mode: "{{ system_configs.mode }}"
   notify:
-    - systemd-vconsole-setup
+    - SystemdVconsoleSetup
 
-- name: locale | list generated
+- name: Locale | List generated
   become: true
   ansible.builtin.command: locale -a
   register: system_locale_list
   changed_when: false
 
-- name: locale | generate
+- name: Locale | Generate
   become: true
   ansible.builtin.command: locale-gen
   vars:
@@ -63,7 +63,7 @@
     - lookup('env', 'CI') != 'true'
     - missing_locales | length > 0
 
-- name: vconsole | configure
+- name: Vconsole | Configure
   become: true
   ansible.builtin.template:
     backup: true
@@ -73,9 +73,9 @@
     group: "{{ system_configs.group }}"
     mode: "{{ system_configs.mode }}"
   notify:
-    - systemd-vconsole-setup
+    - SystemdVconsoleSetup
 
-- name: configure | /etc/motd
+- name: Configure | /etc/motd
   become: true
   ansible.builtin.template:
     backup: true
@@ -85,7 +85,7 @@
     group: "{{ system_configs.group }}"
     mode: "{{ system_configs.mode }}"
 
-- name: configure /etc/issue
+- name: Configure /etc/issue
   become: true
   ansible.builtin.template:
     backup: true
@@ -95,7 +95,7 @@
     group: "{{ system_configs.group }}"
     mode: "{{ system_configs.mode }}"
 
-- name: start/enable cron
+- name: Start/enable cron
   become: true
   ansible.builtin.systemd_service:
     state: started
@@ -107,7 +107,7 @@
     - ansible_facts.service_mgr == "systemd"
     - (ansible_facts.virtualization_type | default('')) not in ["docker", "podman", "container", "lxc", "lxd"]
 
-- name: configure | sysctl
+- name: Configure | Sysctl
   become: true
   ansible.posix.sysctl:
     name: "{{ item.key }}"
@@ -122,7 +122,7 @@
     - ansible_facts.virtualization_type != 'docker'
     - lookup('env', 'CI') != 'true'
 
-- name: configure | systemd-journald
+- name: Configure | Systemd-journald
   become: true
   ansible.builtin.template:
     backup: true
@@ -131,12 +131,12 @@
     owner: "{{ system_configs.owner }}"
     group: "{{ system_configs.group }}"
     mode: "{{ system_configs.mode }}"
-  notify: restart journald
+  notify: RestartJournald
   when:
     - ansible_facts.service_mgr == "systemd"
     - ansible_facts.virtualization_type != 'docker'
 
-- name: configure sshd
+- name: Configure sshd
   become: true
   ansible.builtin.lineinfile:
     backup: true
@@ -152,5 +152,5 @@
   when:
     - ansible_facts.virtualization_type != 'docker'
     - lookup('env', 'CI') != 'true' # for CirleCI
-  notify: restart_sshd
+  notify: RestartSshd
   tags: sshd

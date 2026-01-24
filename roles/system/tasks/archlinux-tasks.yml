@@ -1,5 +1,5 @@
 ---
-- name: packages | install base and base-devel
+- name: Packages | Install base and base-devel
   become: true
   ansible.builtin.package:
     name:
@@ -7,7 +7,7 @@
       - base-devel
     state: present
 
-- name: configure | pacman
+- name: Configure | Pacman
   become: true
   ansible.builtin.template:
     src: templates/pacman.conf.j2
@@ -16,7 +16,13 @@
     group: "{{ system_configs.group }}"
     mode: "{{ system_configs.mode }}"
 
-- name: remove cron reflector job
+- name: Cron | Check crontab presence
+  ansible.builtin.stat:
+    path: /usr/bin/crontab
+  register: system_crontab_bin
+  changed_when: false
+
+- name: Remove cron reflector job
   become: true
   ansible.builtin.cron:
     state: absent
@@ -26,14 +32,16 @@
     special_time: daily
   ignore_errors: true # if cron not presented
   no_log: true # it doesnt matter
+  when:
+    - system_crontab_bin.stat.exists | default(false)
 
-- name: reflector | install
+- name: Reflector | Install
   become: true
   ansible.builtin.package:
     name: "reflector"
     state: present
 
-- name: reflector | config
+- name: Reflector | Config
   become: true
   ansible.builtin.template:
     src: templates/reflector.conf.j2
@@ -42,7 +50,7 @@
     group: "{{ system_configs.group }}"
     mode: "{{ system_configs.mode }}"
 
-- name: reflector | configure timer
+- name: Reflector | Configure timer
   become: true
   ansible.builtin.systemd_service:
     name: reflector.timer
