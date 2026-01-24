@@ -1,3 +1,3 @@
 ---
-cron_package: cronie
-docker_conf_dir: /etc/docker
+system_cron_package: cronie
+system_docker_conf_dir: /etc/docker

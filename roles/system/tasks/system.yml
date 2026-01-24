@@ -2,17 +2,17 @@
 - name: locale | check definitions
   ansible.builtin.stat:
     path: "{{ item.1 }}/{{ item.0 }}"
-  loop: "{{ locales | product(locale_definition_dirs) | list }}"
-  register: locale_defs
+  loop: "{{ system_locales | product(system_locale_definition_dirs) | list }}"
+  register: system_locale_defs
   changed_when: false
 
 - name: locale | set locale definition lists
   ansible.builtin.set_fact:
-    locale_available: "{{ _locale_available }}"
-    locale_missing_defs: "{{ locales | difference(_locale_available) }}"
+    system_locale_available: "{{ system_locale_available_tmp }}"
+    system_locale_missing_defs: "{{ system_locales | difference(system_locale_available_tmp) }}"
   vars:
-    _locale_available: >-
-      {{ locale_defs.results
+    system_locale_available_tmp: >-
+      {{ system_locale_defs.results
          | selectattr('stat.exists')
          | map(attribute='item.0')
          | unique
@@ -24,9 +24,9 @@
     backup: true
     src: templates/locale.gen.j2
     dest: /etc/locale.gen
-    owner: "{{ configs.owner }}"
-    group: "{{ configs.group }}"
-    mode: "{{ configs.mode }}"
+    owner: "{{ system_configs.owner }}"
+    group: "{{ system_configs.group }}"
+    mode: "{{ system_configs.mode }}"
   notify:
     - systemd-vconsole-setup
 
@@ -36,16 +36,16 @@
     backup: true
     src: templates/locale.conf.j2
     dest: /etc/locale.conf
-    owner: "{{ configs.owner }}"
-    group: "{{ configs.group }}"
-    mode: "{{ configs.mode }}"
+    owner: "{{ system_configs.owner }}"
+    group: "{{ system_configs.group }}"
+    mode: "{{ system_configs.mode }}"
   notify:
     - systemd-vconsole-setup
 
 - name: locale | list generated
   become: true
   ansible.builtin.command: locale -a
-  register: locale_list
+  register: system_locale_list
   changed_when: false
 
 - name: locale | generate
@@ -53,11 +53,11 @@
   ansible.builtin.command: locale-gen
   vars:
     desired_locales: >-
-      {{ locale_available
+      {{ system_locale_available
          | map('regex_replace', '$', '.utf8')
          | map('lower')
          | list }}
-    current_locales: "{{ locale_list.stdout_lines | map('lower') | list }}"
+    current_locales: "{{ system_locale_list.stdout_lines | map('lower') | list }}"
     missing_locales: "{{ desired_locales | difference(current_locales) }}"
   when:
     - lookup('env', 'CI') != 'true'
@@ -69,9 +69,9 @@
     backup: true
     src: templates/vconsole.conf.j2
     dest: /etc/vconsole.conf
-    owner: "{{ configs.owner }}"
-    group: "{{ configs.group }}"
-    mode: "{{ configs.mode }}"
+    owner: "{{ system_configs.owner }}"
+    group: "{{ system_configs.group }}"
+    mode: "{{ system_configs.mode }}"
   notify:
     - systemd-vconsole-setup
 
@@ -81,9 +81,9 @@
     backup: true
     src: templates/motd.j2
     dest: /etc/motd
-    owner: "{{ configs.owner }}"
-    group: "{{ configs.group }}"
-    mode: "{{ configs.mode }}"
+    owner: "{{ system_configs.owner }}"
+    group: "{{ system_configs.group }}"
+    mode: "{{ system_configs.mode }}"
 
 - name: configure /etc/issue
   become: true
@@ -91,16 +91,16 @@
     backup: true
     src: templates/issue.j2
     dest: /etc/issue
-    owner: "{{ configs.owner }}"
-    group: "{{ configs.group }}"
-    mode: "{{ configs.mode }}"
+    owner: "{{ system_configs.owner }}"
+    group: "{{ system_configs.group }}"
+    mode: "{{ system_configs.mode }}"
 
 - name: start/enable cron
   become: true
   ansible.builtin.systemd_service:
     state: started
     daemon_reload: true
-    name: "{{ cron_package }}"
+    name: "{{ system_cron_package }}"
     enabled: true
   when:
     - lookup('env', 'CI') != 'true'
@@ -128,9 +128,9 @@
     backup: true
     src: templates/journald.conf.j2
     dest: /etc/systemd/journald.conf
-    owner: "{{ configs.owner }}"
-    group: "{{ configs.group }}"
-    mode: "{{ configs.mode }}"
+    owner: "{{ system_configs.owner }}"
+    group: "{{ system_configs.group }}"
+    mode: "{{ system_configs.mode }}"
   notify: restart journald
   when:
     - ansible_facts.service_mgr == "systemd"
@@ -144,8 +144,8 @@
     regexp: ^{{ item.key }}
     line: "{{ item.key }} {{ item.value }}"
     state: present
-    owner: "{{ configs.owner }}"
-    group: "{{ configs.group }}"
+    owner: "{{ system_configs.owner }}"
+    group: "{{ system_configs.group }}"
     mode: "0600"
     validate: /usr/sbin/sshd -T -f %s
   with_dict: "{{ sshd_config }}"

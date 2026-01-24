@@ -1,24 +1,24 @@
 ---
-tzdata_package: tzdata
+system_tzdata_package: tzdata
 
-common_timezone: Europe/Warsaw
+system_common_timezone: Europe/Warsaw
 
-ntp_service: systemd-timesyncd
+system_ntp_service: systemd-timesyncd
 
-ntp_main:
+system_ntp_main:
   - 2.europe.pool.ntp.org
   - 3.europe.pool.ntp.org
   - 1.lu.pool.ntp.org
   - 2.ch.pool.ntp.org
   - 3.ch.pool.ntp.org
-ntp_fallback:
+system_ntp_fallback:
   - pool.ntp.org
   - 2.arch.pool.ntp.org
   - 0.arch.pool.ntp.org
   - 3.arch.pool.ntp.org
   - 1.arch.pool.ntp.org
 
-locales:
+system_locales:
   - en_US
   - pl_PL
   - ru_RU
@@ -28,11 +28,11 @@ locales:
   - fr_FR
   - C
 
-locale_definition_dirs:
+system_locale_definition_dirs:
   - /usr/local/share/i18n/locales
   - /usr/share/i18n/locales
 
-configs:
+system_configs:
   owner: root
   group: root
   mode: u=rw,g=rw,o=r

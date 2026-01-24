@@ -15,8 +15,8 @@
 # See timesyncd.conf(5) for details.
 
 [Time]
-NTP={{ ntp_main | join(' ') }}
-FallbackNTP={{ ntp_fallback | join(' ') }}
+NTP={{ system_ntp_main | join(' ') }}
+FallbackNTP={{ system_ntp_fallback | join(' ') }}
 #RootDistanceMaxSec=5
 #PollIntervalMinSec=32
 #PollIntervalMaxSec=2048

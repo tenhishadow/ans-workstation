@@ -8,21 +8,21 @@
 - name: create docker conf dir
   become: true
   ansible.builtin.file:
-    path: "{{ docker_conf_dir }}"
+    path: "{{ system_docker_conf_dir }}"
     state: directory
-    owner: "{{ configs.owner }}"
-    group: "{{ configs.group }}"
-    mode: "{{ configs.mode }}"
+    owner: "{{ system_configs.owner }}"
+    group: "{{ system_configs.group }}"
+    mode: "{{ system_configs.mode }}"
 
 - name: configure docker
   become: true
   ansible.builtin.template:
     backup: true
     src: templates/docker.json.j2
-    dest: "{{ docker_conf_dir }}/daemon.json"
-    owner: "{{ configs.owner }}"
-    group: "{{ configs.group }}"
-    mode: "{{ configs.mode }}"
+    dest: "{{ system_docker_conf_dir }}/daemon.json"
+    owner: "{{ system_configs.owner }}"
+    group: "{{ system_configs.group }}"
+    mode: "{{ system_configs.mode }}"
   notify: restart docker
 
 - name: Add current user to docker group

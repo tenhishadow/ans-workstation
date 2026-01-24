@@ -22,7 +22,7 @@
 - name: Packages | install
   become: true
   ansible.builtin.package:
-    name: "{{ packages }}"
+    name: "{{ system_packages }}"
     state: present
   tags:
     - pkg

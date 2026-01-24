@@ -21,7 +21,7 @@
 - name: restart_ntp
   become: true
   ansible.builtin.service:
-    name: "{{ ntp_service }}"
+    name: "{{ system_ntp_service }}"
     state: restarted
     enabled: true
   when:

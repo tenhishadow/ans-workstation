@@ -12,9 +12,9 @@
   ansible.builtin.template:
     src: templates/pacman.conf.j2
     dest: /etc/pacman.conf
-    owner: "{{ configs.owner }}"
-    group: "{{ configs.group }}"
-    mode: "{{ configs.mode }}"
+    owner: "{{ system_configs.owner }}"
+    group: "{{ system_configs.group }}"
+    mode: "{{ system_configs.mode }}"
 
 - name: remove cron reflector job
   become: true
@@ -38,9 +38,9 @@
   ansible.builtin.template:
     src: templates/reflector.conf.j2
     dest: /etc/xdg/reflector/reflector.conf
-    owner: "{{ configs.owner }}"
-    group: "{{ configs.group }}"
-    mode: "{{ configs.mode }}"
+    owner: "{{ system_configs.owner }}"
+    group: "{{ system_configs.group }}"
+    mode: "{{ system_configs.mode }}"
 
 - name: reflector | configure timer
   become: true

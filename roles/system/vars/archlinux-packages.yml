@@ -1,7 +1,7 @@
 ---
 # vim::foldmethod=marker
 
-packages:
+system_packages:
   # : media {{{
   - feh
   # : }}}
@@ -80,7 +80,7 @@ packages:
   - tigervnc
   - whois
   - gawk
-  - "{{ cron_package }}"
+  - "{{ system_cron_package }}"
   - imagemagick
   - hwinfo
   - nvme-cli
