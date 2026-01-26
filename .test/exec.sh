@@ -8,8 +8,6 @@ export ANSIBLE_FORCE_COLOR='true'
 pacman --disable-sandbox -Sy --noconfirm --needed --noprogressbar reflector go-task git sudo >/dev/null
 
 go-task -- --skip-tags pkg
-# go-task
 
 # idempotency
 go-task -- --skip-tags pkg
-# go-task

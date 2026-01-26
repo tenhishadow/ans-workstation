@@ -1,9 +1,6 @@
 # this is just a comment
 skip_list:
-  # - name[play]
   - ignore-errors
-  # - name[casing]
-  # - var-naming[no-role-prefix]
   - latest[git]
   - no-changed-when
   - command-instead-of-shell
