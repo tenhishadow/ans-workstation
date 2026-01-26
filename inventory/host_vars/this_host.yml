@@ -21,7 +21,7 @@ sshd_config:
   PermitRootLogin: "prohibit-password"
   PubkeyAuthentication: "yes"
   IgnoreRhosts: "yes"
-  PasswordAuthentication: "yes"
+  PasswordAuthentication: "yes" # pragma: allowlist secret
   PermitEmptyPasswords: "no"
   ClientAliveInterval: "300"
   AllowAgentForwarding: "yes"
@@ -42,3 +42,5 @@ sysctl_params:
   net.ipv6.conf.default.disable_ipv6: "1"
   net.ipv6.conf.lo.disable_ipv6: "1"
   net.ipv6.conf.all.disable_ipv6: "1"
+
+dotfiles_path: "{{ ansible_facts.user_dir }}/.dotfiles"
