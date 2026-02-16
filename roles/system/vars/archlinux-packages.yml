@@ -191,4 +191,7 @@ system_packages:
   - gitleaks
   - trivy
   - osv-scanner
+  - cilium-cli
+  - talhelper # A tool to help create Talos clusters in your GitOps repository
+  - talosctl # CLI for Talos - A modern OS for Kubernetes
   # : }}}

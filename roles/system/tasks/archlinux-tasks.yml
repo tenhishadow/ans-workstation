@@ -59,6 +59,18 @@
   when:
     - ansible_facts.service_mgr == "systemd"
     - (ansible_facts.virtualization_type | default('')) not in ["docker", "podman", "container", "lxc", "lxd"]
+
+- name: Systemd | Mask and Disable useless
+  become: true
+  ansible.builtin.systemd_service:
+    name: "{{ item }}"
+    state: stopped
+    enabled: false
+    masked: true
+  loop: "{{ system_mask_and_stop }}"
+  when:
+    - ansible_facts.service_mgr == "systemd"
+    - (ansible_facts.virtualization_type | default('')) not in ["docker", "podman", "container", "lxc", "lxd"]
 # - name: yay | check if installed
 #   stat:
 #     path: /usr/bin/yay

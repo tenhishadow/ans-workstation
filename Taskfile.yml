@@ -58,5 +58,12 @@ tasks:
       archlinux:multilib-devel
       bash -c 'cd .ans-workstation && ./.test/exec.sh'
       && docker system prune --volumes --force
+  test:ubuntu:
+    cmd: >-
+      docker run --rm -i
+      -v "$(pwd):/.ans-workstation:ro"
+      ubuntu:latest
+      bash -c 'cd .ans-workstation && ./.test/exec-ubuntu.sh'
+      && docker system prune --volumes --force
   list:
     cmd: "uv run ansible-playbook --list-tasks playbook_install.yml"
