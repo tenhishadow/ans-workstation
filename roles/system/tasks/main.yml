@@ -1,22 +1,34 @@
-- name: Vars | include for {{ ansible_facts.os_family | lower }}
+---
+- name: Assert | Supported OS
+  ansible.builtin.assert:
+    that:
+      - (ansible_facts.distribution | default('') | lower) is in system_supported_os
+    fail_msg: >-
+      This role does not support this distribution
+      distribution={{ ansible_facts.distribution | default('unknown') }}.
+    quiet: true
+  tags:
+    - always
+
+- name: Vars | include for {{ ansible_facts.distribution | lower }}
   ansible.builtin.include_vars: "{{ item }}"
   loop:
-    - "{{ ansible_facts.os_family | lower }}.yml"
-    - "{{ ansible_facts.os_family | lower }}-packages.yml"
+    - "{{ ansible_facts.distribution | lower }}.yml"
+    - "{{ ansible_facts.distribution | lower }}-packages.yml"
   tags:
     - pkg
 
 - name: Packages | install
   become: true
   ansible.builtin.package:
-    name: "{{ packages }}"
+    name: "{{ system_packages }}"
     state: present
   tags:
     - pkg
 
-- name: Time | configure
-  ansible.builtin.include_tasks:
-    file: time.yml
+# - name: Time | configure
+#   ansible.builtin.include_tasks:
+#     file: time.yml
 
 - name: OS-common configuration
   ansible.builtin.include_tasks:
@@ -24,15 +36,15 @@
 
 - name: OS-related configuration
   ansible.builtin.include_tasks:
-    file: "{{ ansible_facts.os_family | lower }}-tasks.yml"
+    file: "{{ ansible_facts.distribution | lower }}-tasks.yml"
 
-- name: docker config
+- name: Docker config
   ansible.builtin.include_tasks:
     file: docker.yml
   when:
     - ansible_facts['virtualization_type'] != 'docker'
     - lookup('env', 'CI') != 'true' # for CirleCI
 
-- name: laptop-related configuration
+- name: Laptop-related configuration
   ansible.builtin.include_tasks:
     file: laptop.yml

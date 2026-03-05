@@ -1,36 +1,45 @@
 ---
-- name: restart journald
+- name: RestartJournald
   become: true
-  service:
+  ansible.builtin.service:
     name: systemd-journald
     state: restarted
 
-- name: restart_sshd
+- name: RestartSshd
   become: true
-  service:
+  ansible.builtin.service:
     name: sshd
     state: restarted
     enabled: true
 
-- name: restart_ntp
+- name: RestartDocker
   become: true
-  service:
-    name: "{{ ntp_service }}"
+  ansible.builtin.service:
+    name: docker
+    state: restarted
+
+- name: RestartNtp
+  become: true
+  ansible.builtin.service:
+    name: "{{ system_ntp_service }}"
     state: restarted
     enabled: true
   when:
     - lookup('env', 'CI') != 'true'
+    - ansible_virtualization_type != "docker"
 
-- name: systemd-vconsole-setup
+- name: SystemdVconsoleSetup
   become: true
-  service:
+  ansible.builtin.service:
     name: systemd-vconsole-setup.service
     state: restarted
   when:
     - lookup('env', 'CI') != 'true'
+    - ansible_service_mgr == "systemd"
+    - ansible_virtualization_type != "docker"
 
-- name: sshd_agent_user
-  systemd:
+- name: SshdAgentUser
+  ansible.builtin.systemd:
     scope: user
     name: ssh-agent.service
     state: restarted

@@ -1,22 +1,22 @@
 ---
-- name: blacklist camera
+- name: Blacklist camera
   become: true
-  kernel_blacklist:
+  community.general.kernel_blacklist:
     name: uvcvideo
     state: present
   failed_when: false
 
-- name: create dir for systemd unitfile
-  file:
+- name: Create dir for systemd unitfile
+  ansible.builtin.file:
     path: "{{ ansible_facts.user_dir }}/.config/systemd/user/"
     state: directory
     owner: "{{ ansible_facts.user_id }}"
     group: "{{ ansible_facts.user_id }}"
     mode: u=rwx,g-,o-
 
-- name: create user systemd service for ssh-agent
-  become: true
-  template:
+- name: Create user systemd service for ssh-agent
+  become: false
+  ansible.builtin.template:
     src: templates/ssh-agent.service.j2
     dest: "{{ ansible_facts.user_dir }}/.config/systemd/user/ssh-agent.service"
     backup: true
@@ -25,11 +25,12 @@
     mode: u=rw,g=r,o-
   when:
     - ansible_facts.service_mgr == "systemd"
+    - ansible_facts['virtualization_type'] != 'docker'
   notify:
-    - sshd_agent_user
+    - SshdAgentUser
 
-- name: start/enable in playbook
-  systemd:
+- name: Start/enable in playbook
+  ansible.builtin.systemd:
     scope: user
     name: ssh-agent.service
     state: started
@@ -37,3 +38,4 @@
     daemon_reload: true
   when:
     - lookup('env', 'CI') != 'true'
+    - ansible_facts['virtualization_type'] != 'docker'
