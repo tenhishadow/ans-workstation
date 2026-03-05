@@ -77,6 +77,7 @@
     - >-
       (ansible_facts.virtualization_type | default('')) not in
       ["docker", "podman", "container", "lxc", "lxd"]
+
 # - name: yay | check if installed
 #   stat:
 #     path: /usr/bin/yay
