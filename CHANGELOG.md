@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.0.4](https://github.com/tenhishadow/ans-workstation/compare/v1.0.3...v1.0.4) (2026-03-05)
+
+
+### Features
+
+* **ansible:** enable role-level profiling callback ([f5d7c8d](https://github.com/tenhishadow/ans-workstation/commit/f5d7c8db1ffc2bea69ca1be3b242fa3fc7d9535d))
+* **archlinux:** harden pacman/reflector setup and mask unwanted services ([f5d7c8d](https://github.com/tenhishadow/ans-workstation/commit/f5d7c8db1ffc2bea69ca1be3b242fa3fc7d9535d))
+* **packages:** reorganize Arch package groups and add new tooling ([f5d7c8d](https://github.com/tenhishadow/ans-workstation/commit/f5d7c8db1ffc2bea69ca1be3b242fa3fc7d9535d))
+* **security:** tighten host hardening defaults ([f5d7c8d](https://github.com/tenhishadow/ans-workstation/commit/f5d7c8db1ffc2bea69ca1be3b242fa3fc7d9535d))
+* **system:** improve locale generation safety and service guards ([f5d7c8d](https://github.com/tenhishadow/ans-workstation/commit/f5d7c8db1ffc2bea69ca1be3b242fa3fc7d9535d))
+
+
+### Miscellaneous Chores
+
+* **taskfile:** improve bootstrap flow and add utility tasks ([f5d7c8d](https://github.com/tenhishadow/ans-workstation/commit/f5d7c8db1ffc2bea69ca1be3b242fa3fc7d9535d))
+
 ## [1.0.3](https://github.com/tenhishadow/ans-workstation/compare/v1.0.2...v1.0.3) (2026-01-22)
 
 
