@@ -4,7 +4,7 @@ version: 2.1
 jobs:
   ansible_exec:
     docker:
-      - image: archlinux:latest # checkov:skip=CKV_CIRCLECIPIPELINES_1
+      - image: archlinux:multilib-devel # checkov:skip=CKV_CIRCLECIPIPELINES_1
     environment:
       ANSIBLE_FORCE_COLOR: "True"
     steps:
@@ -12,8 +12,14 @@ jobs:
       - run:
           name: deps | system | install
           command: >-
-            pacman -Sy --noconfirm
-            go-task uv git
+            pacman -Sy --noconfirm --needed
+            go-task uv git reflector
+      - run:
+          name: deps | system | configure mirrors
+          command: >-
+            reflector --protocol https --fastest 3 --threads 3
+            --completion-percent 30 --score 3
+            --save /etc/pacman.d/mirrorlist
       - run:
           name: exec
           command: go-task
