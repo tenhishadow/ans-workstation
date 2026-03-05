@@ -28,10 +28,12 @@
     state: absent
     user: root
     name: reflector
-    job: reflector --protocol https --latest 10 --sort rate --save /etc/pacman.d/mirrorlist >/dev/null 2>/dev/null
+    job: >-
+      reflector --protocol https --latest 10 --sort rate --save
+      /etc/pacman.d/mirrorlist >/dev/null 2>/dev/null
     special_time: daily
   ignore_errors: true # if cron not presented
-  no_log: true # it doesnt matter
+  no_log: true # it doesn't matter
   when:
     - system_crontab_bin.stat.exists | default(false)
 
@@ -58,7 +60,9 @@
     enabled: true
   when:
     - ansible_facts.service_mgr == "systemd"
-    - (ansible_facts.virtualization_type | default('')) not in ["docker", "podman", "container", "lxc", "lxd"]
+    - >-
+      (ansible_facts.virtualization_type | default('')) not in
+      ["docker", "podman", "container", "lxc", "lxd"]
 
 - name: Systemd | Mask and Disable useless
   become: true
@@ -70,7 +74,9 @@
   loop: "{{ system_mask_and_stop }}"
   when:
     - ansible_facts.service_mgr == "systemd"
-    - (ansible_facts.virtualization_type | default('')) not in ["docker", "podman", "container", "lxc", "lxd"]
+    - >-
+      (ansible_facts.virtualization_type | default('')) not in
+      ["docker", "podman", "container", "lxc", "lxd"]
 # - name: yay | check if installed
 #   stat:
 #     path: /usr/bin/yay
@@ -88,7 +94,10 @@
 # #
 # - name: yay | define temp user for installing yay
 #   set_fact:
-#     yay_install_user: yay_install_usr_{{ lookup('password', '/dev/null chars=ascii_letters,digits length=15') }}
+#     yay_install_user: >-
+#       yay_install_usr_{{
+#         lookup('password', '/dev/null chars=ascii_letters,digits length=15')
+#       }}
 #   when: not yay_bin.stat.exists
 #
 # - name: yay | create a user for installing yay
