@@ -109,13 +109,8 @@ system_packages:
   - python-docker
   - buildah
   - skopeo
-  - kubectl
-  - kubeconform
   - sops
   - age
-  - helm
-  - helmfile
-  - k9s
   - make
   - cmake
   - jq
@@ -126,7 +121,6 @@ system_packages:
   - github-cli # github cli <3
   - git
   - aws-cli
-  - kustomize # Template-free customization of Kubernetes YAML manifests
   - pre-commit # https://pre-commit.com/#usage
   - terraform
   - packer
@@ -191,7 +185,28 @@ system_packages:
   - gitleaks
   - trivy
   - osv-scanner
+  # : }}}
+
+  # : kubernetes {{{
   - cilium-cli
+  - helm
+  - helmfile
+  - k9s
+  - kubeconform
+  - kubectl
+  - kustomize # Template-free customization of Kubernetes YAML manifests
   - talhelper # A tool to help create Talos clusters in your GitOps repository
   - talosctl # CLI for Talos - A modern OS for Kubernetes
+  # : }}}
+
+  # : lint {{{
+  - actionlint
+  - python-cfn-lint
+  - shellharden
+  - tombi
+  - vale
+  # : }}}
+
+  # : ai {{{
+  - gemini-cli
   # : }}}

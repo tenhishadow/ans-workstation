@@ -1,4 +1,7 @@
 ---
+system_supported_os:
+  - archlinux
+
 system_tzdata_package: tzdata
 
 system_common_timezone: Europe/Warsaw
