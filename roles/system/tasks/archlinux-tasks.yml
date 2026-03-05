@@ -1,12 +1,4 @@
 ---
-- name: Packages | Install base and base-devel
-  become: true
-  ansible.builtin.package:
-    name:
-      - base
-      - base-devel
-    state: present
-
 - name: Configure | Pacman
   become: true
   ansible.builtin.template:
@@ -15,6 +7,14 @@
     owner: "{{ system_configs.owner }}"
     group: "{{ system_configs.group }}"
     mode: "{{ system_configs.mode }}"
+
+- name: Packages | Install base and base-devel
+  become: true
+  ansible.builtin.package:
+    name:
+      - base
+      - base-devel
+    state: present
 
 - name: Cron | Check crontab presence
   ansible.builtin.stat:
