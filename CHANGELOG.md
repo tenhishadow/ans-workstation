@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.0.5](https://github.com/tenhishadow/ans-workstation/compare/v1.0.4...v1.0.5) (2026-03-05)
+
+
+### Features
+
+* **archlinux:** configure pacman before base packages, increase parallel downloads, and enable DownloadUser ([516a05e](https://github.com/tenhishadow/ans-workstation/commit/516a05e437afd78f9532a12e7bab45af81c48558))
+* **ci:** improvements ([#61](https://github.com/tenhishadow/ans-workstation/issues/61)) ([516a05e](https://github.com/tenhishadow/ans-workstation/commit/516a05e437afd78f9532a12e7bab45af81c48558))
+* **ci:** refresh mirrorlist with fastest HTTPS mirrors before task run ([516a05e](https://github.com/tenhishadow/ans-workstation/commit/516a05e437afd78f9532a12e7bab45af81c48558))
+* **ci:** use archlinux:multilib-devel and install reflector ([516a05e](https://github.com/tenhishadow/ans-workstation/commit/516a05e437afd78f9532a12e7bab45af81c48558))
+
 ## [1.0.4](https://github.com/tenhishadow/ans-workstation/compare/v1.0.3...v1.0.4) (2026-03-05)
 
 
