@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/tenhishadow/ans-workstation/compare/v1.0.5...v1.1.0) (2026-04-21)
+
+
+### Features
+
+* **workstation:** expand tooling and migrate AGENTS docs ([#66](https://github.com/tenhishadow/ans-workstation/issues/66)) ([a7dbf07](https://github.com/tenhishadow/ans-workstation/commit/a7dbf070d9baa38f827e73bb4d1f18d7f75b132f))
+
 ## [1.0.5](https://github.com/tenhishadow/ans-workstation/compare/v1.0.4...v1.0.5) (2026-03-05)
 
 
