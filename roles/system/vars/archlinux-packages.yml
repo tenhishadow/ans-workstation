@@ -145,7 +145,7 @@ system_packages:
   - qrencode
   - vault
   - dos2unix
-  - dnsperf
+  # - dnsperf # AUR
   - prettier
   - bash-language-server
   - ansible-language-server
