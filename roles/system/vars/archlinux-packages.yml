@@ -161,7 +161,6 @@ system_packages:
   - lua-language-server
   - arduino-language-server
   - eslint-language-server
- # - systemd-language-server
   - python-lsp-server
   - python-pip
   - python-pipx
