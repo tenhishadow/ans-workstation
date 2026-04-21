@@ -19,7 +19,8 @@ sudo reflector \
   --download-timeout 2 \
   --save /etc/pacman.d/mirrorlist
 
-go-task -- --skip-tags pkg
+# go-task -- --skip-tags pkg
+go-task
 
 # idempotency
-go-task -- --skip-tags pkg
+# go-task -- --skip-tags pkg

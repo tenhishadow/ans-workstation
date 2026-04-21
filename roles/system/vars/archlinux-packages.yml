@@ -22,6 +22,8 @@ system_packages:
   - nmon
   - lsof
   - btop
+  - duf
+  - dust
   # : }}}
 
   # : network {{{
@@ -29,12 +31,15 @@ system_packages:
   - ca-certificates-mozilla
   - ca-certificates-utils
   - curl
+  - doggo
+  - httpie
   - iodine # Tunnel IPv4 data through a DNS server
   - ptunnel # http://www.cs.uit.no/~daniels/PingTunnel/
   - sstp-client
   - strongswan
   - thunderbird
   - wget
+  - xh
   - openssh
   - openbsd-netcat
   # : }}}
@@ -88,6 +93,7 @@ system_packages:
   - mono
   - irqbalance
   - tuned
+  - eza
   # : }}}
 
   # : utils {{{
@@ -101,8 +107,12 @@ system_packages:
   - neovim
   - python-pynvim
   - code
-  - task
+  # - task
   - tea
+  - ast-grep
+  - bat
+  - cosign
+  - direnv
   - docker
   - docker-compose
   - docker-buildx
@@ -120,7 +130,9 @@ system_packages:
   - xclip # command line interface to X selections (clipboard)
   - github-cli # github cli <3
   - git
+  - git-delta
   - aws-cli
+  - just
   - pre-commit # https://pre-commit.com/#usage
   - terraform
   - packer
@@ -133,7 +145,7 @@ system_packages:
   - qrencode
   - vault
   - dos2unix
-  - dnsperf
+  # - dnsperf # AUR
   - prettier
   - bash-language-server
   - ansible-language-server
@@ -149,7 +161,6 @@ system_packages:
   - lua-language-server
   - arduino-language-server
   - eslint-language-server
-  - systemd-language-server
   - python-lsp-server
   - python-pip
   - python-pipx
@@ -185,16 +196,23 @@ system_packages:
   - gitleaks
   - trivy
   - osv-scanner
+  - syft
+  - zoxide
   # : }}}
 
   # : kubernetes {{{
+  - argocd
   - cilium-cli
   - helm
   - helmfile
   - k9s
+  - krew
   - kubeconform
   - kubectl
+  - kubectx
   - kustomize # Template-free customization of Kubernetes YAML manifests
+  - popeye
+  - stern
   - talhelper # A tool to help create Talos clusters in your GitOps repository
   - talosctl # CLI for Talos - A modern OS for Kubernetes
   # : }}}
