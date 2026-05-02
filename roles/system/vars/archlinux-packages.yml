@@ -148,7 +148,6 @@ system_packages:
   # - dnsperf # AUR
   - prettier
   - bash-language-server
-  - ansible-language-server
   - pyright
   - gopls
   - go
